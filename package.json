@@ -1,0 +1,63 @@
+{
+  "author": "Lucas Belfanti",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lhbelfanti/binarizer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lhbelfanti/binarizer/issues"
+  },
+  "homepage": "https://github.com/lhbelfanti/binarizer#readme",
+  "name": "binarizer",
+  "version": "1.0.0",
+  "description": "Tool for manual creation of a dataset to be used in a binary classification algorithm",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=production npm run ts:build",
+    "start:server": "checksumEnabled=false NODE_ENV=development NODE_HTTPS=true nodemon",
+    "start:client": "NODE_ENV=development webpack --watch --config webpack.config.js",
+    "start-dev": "npm-run-all --parallel start:server start:client",
+    "debug": "NODE_ENV=development nodemon --inspect --inspect-brk ./src/index.ts",
+    "build": "NODE_ENV=development webpack --config webpack.config.js",
+    "watch": "NODE_ENV=development webpack --watch --config webpack.config.js",
+    "dist": "NODE_ENV=production webpack --config webpack.config.js",
+    "lint": "npm run lint:ts && npm run lint:css",
+    "lint:ts": "eslint index.ts 'src/**/*.{ts,tsx}'",
+    "lint:ts:fix": "eslint 'src/**/*.{js,ts,tsx}' --ignore-path=.gitignore --quiet --fix",
+    "lint:css": "sass-lint 'src/app/**/*.scss' -v -q",
+    "ts:build": "tsc -p tsconfig.build.json && node -r tsconfig-paths/register ./build",
+    "ts:watch": "tsc -w"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.6",
+    "@babel/node": "^7.22.6",
+    "@babel/plugin-transform-runtime": "^7.22.6",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.22.6",
+    "@babel/preset-typescript": "^7.22.5",
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.3.3",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@types/serve-static": "^1.15.2",
+    "@typescript-eslint/eslint-plugin": "^5.61.0",
+    "@typescript-eslint/parser": "^5.61.0",
+    "dotenv": "^16.3.1",
+    "eslint": "^8.44.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "npm-run-all": "^4.1.5",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6",
+    "typescript-eslint": "^0.0.1-alpha.0",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-hot-middleware": "^2.25.4",
+    "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.22.6",
+    "express": "^4.18.2"
+  }
+}
