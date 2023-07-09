@@ -1,9 +1,8 @@
 /**
  * Module dependencies
  */
-const webpack = require('webpack');
-const createConfig = require('./webpack/createConfig');
-const entryPoint = require('./webpack/entryPoint');
+const { createConfig, entryPoint, resolveAliases } = require('./webpack');
+const classicPreset = require('./webpack/presets');
 const path = require('path');
 const glob = require('glob');
 
@@ -49,12 +48,23 @@ const entryPointsFamilies = generateLegacyBundles(entrypoints);
 /**
  * Create webpack config
  */
-const config = createConfig(webpack, [
+const config = createConfig([
   entryPoint({
     ...entryPointsFamilies.polyfilled,
     ...entryPointsFamilies.nonPolyfilled,
     ...entryPointsFamilies.nonJsAssets,
   }, NODE_ENV),
+  classicPreset({
+    buildPath: 'build',
+    publicPath: `https://myAssetsURL`,
+    imagesPath: 'src/app/assets/images',
+  }),
+  resolveAliases({
+    '@components': path.resolve(__dirname, 'src/app/components'),
+    '@app': path.resolve(__dirname, 'src/app'),
+    '@pages': path.resolve(__dirname, 'src/app/pages'),
+    '@app-types': path.resolve(__dirname, 'src/types'),
+  }),
 ]);
 
 

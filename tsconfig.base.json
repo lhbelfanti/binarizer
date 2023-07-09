@@ -2,6 +2,12 @@
     "include": ["src/**/*"],
     "compilerOptions": {     
       "baseUrl": "./src",
+      "paths": {
+        "@components/*": ["app/components/*"],
+        "@app/*": ["app/*"],
+        "@pages/*": ["app/pages/*"],
+        "@app-types/*": ["types/*"],
+      },
       "outDir": "./dist",
       "moduleResolution": "node",
       "module": "es2015",
