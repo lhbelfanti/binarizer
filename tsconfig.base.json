@@ -3,10 +3,12 @@
     "compilerOptions": {     
       "baseUrl": "./src",
       "paths": {
-        "@components/*": ["app/components/*"],
         "@app/*": ["app/*"],
-        "@pages/*": ["app/pages/*"],
         "@app-types/*": ["types/*"],
+        "@components/*": ["app/components/*"],
+        "@http/*": ["http/*"],
+        "@pages/*": ["app/pages/*"],
+        "@services/*": ["services/*"],
       },
       "outDir": "./dist",
       "moduleResolution": "node",

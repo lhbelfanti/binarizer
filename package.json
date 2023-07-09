@@ -21,7 +21,7 @@
     "debug": "NODE_ENV=development nodemon --inspect --inspect-brk ./src/index.ts",
     "build": "NODE_ENV=development webpack --config webpack.config.js",
     "watch": "NODE_ENV=development webpack --watch --config webpack.config.js",
-    "prod-build": "NODE_ENV=production webpack --config webpack.config.js",
+    "dist": "NODE_ENV=production webpack --config webpack.config.js",
     "lint": "npm run lint:ts && npm run lint:css",
     "lint:ts": "eslint index.ts 'src/**/*.{ts,tsx}'",
     "lint:ts:fix": "eslint 'src/**/*.{js,ts,tsx}' --ignore-path=.gitignore --quiet --fix",
@@ -84,12 +84,15 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.22.6",
+    "axios": "^1.4.0",
     "express": "^4.18.2"
   },
   "_moduleAliases": {
-    "@components": "src/app/components",
     "@app": "src/app",
+    "@app-types": "src/types",
+    "@components": "src/app/components",
+    "@http": "src/http",
     "@pages": "src/app/pages",
-    "@app-types": "src/types"
+    "@services": "src/services"
   }
 }

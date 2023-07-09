@@ -60,10 +60,12 @@ const config = createConfig([
     imagesPath: 'src/app/assets/images',
   }),
   resolveAliases({
-    '@components': path.resolve(__dirname, 'src/app/components'),
     '@app': path.resolve(__dirname, 'src/app'),
-    '@pages': path.resolve(__dirname, 'src/app/pages'),
     '@app-types': path.resolve(__dirname, 'src/types'),
+    '@components': path.resolve(__dirname, 'src/app/components'),
+    '@http': path.resolve(__dirname, 'src/http'),
+    '@pages': path.resolve(__dirname, 'src/app/pages'),
+    '@services': path.resolve(__dirname, 'src/services')
   }),
 ]);
 

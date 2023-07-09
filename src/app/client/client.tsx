@@ -10,7 +10,6 @@ const RenderView = (Component, options: any = {}) => {
     ...options,
   };
 
-
   hydrateRoot(
     document.getElementById('root-app'), 
     <Component {...fullProps} />

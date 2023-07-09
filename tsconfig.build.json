@@ -1,5 +1,12 @@
 {
     "extends": "./tsconfig.base.json",
-    "exclude": ["node_modules", "**/__tests__/**/*", "package.json", "tsconfig.json", "webpack"]
+    "exclude": [
+      "node_modules",
+      "webpack", 
+      "media",
+      "**/__tests__/**/*", 
+      "package.json", 
+      "tsconfig.json"
+    ]
   }
   

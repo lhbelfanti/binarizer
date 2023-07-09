@@ -1,13 +1,6 @@
-import express, { Express, Request, Response } from "express";
+import { router } from '@http/server';
+import user from './user';
 
-const port = 8000;
+router.use('/login', user);
 
-const app: Express = express();
-
-app.get("/", (req: Request, res: Response) => {
-   res.send("Entering to the page") 
-});
-
-app.listen(port, () => {
-    console.log(`now listening on port ${port}`);
-});
+export default router;
