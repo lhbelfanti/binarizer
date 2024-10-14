@@ -16,6 +16,9 @@ export default {
           '"Noto Color Emoji"',
         ],
       },
+      backgroundImage: {
+        'title-gradient': 'linear-gradient(to right, rgb(205, 233, 182), rgb(234, 56, 123))',
+      },
     },
   },
   plugins: [],
