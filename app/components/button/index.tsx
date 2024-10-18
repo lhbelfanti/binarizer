@@ -2,7 +2,7 @@ import { LinksFunction } from '@remix-run/node';
 import { Link } from '@remix-run/react';
 
 import type { ButtonProps } from './types';
-import styles from './styles.css';
+import styles from './styles.css?url';
 
 const Button = (props: ButtonProps) => {
 	const {to, type, disabled, children} = props;
