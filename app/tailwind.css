@@ -10,18 +10,3 @@ body {
     color-scheme: dark;
   }
 }
-
-.button-gradient {
-  background-image: linear-gradient(to right, #3b82f6, #8b5cf6);
-  background-size: 100% 100%;
-  transition: background-position 0.3s, transform 0.3s;
-}
-
-.button-gradient:hover {
-  background-position: 100% 50%;
-  transform: scale(1.05);
-}
-
-.button-gradient:active {
-  transform: scale(0.95);
-}

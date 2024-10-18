@@ -1,6 +1,5 @@
 import {
   Links,
-  LiveReload,
   Meta,
   Outlet,
   Scripts,
@@ -35,7 +34,6 @@ const Document = ({title, children}: DocumentProps) => {
 
   const disableJS = matches.some(match => match.handle?.disableJS);
 
-
   return (
     <html lang="en">
       <head>
@@ -49,7 +47,6 @@ const Document = ({title, children}: DocumentProps) => {
         {children}
         <ScrollRestoration />
         { !disableJS && <Scripts/> }
-        <LiveReload/>
       </body>
     </html>
   );
