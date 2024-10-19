@@ -6,7 +6,7 @@ import { links as buttonLinks } from '~/components/button';
 
 const LoginPage = () => {
 	return (
-		<div className="flex items-center justify-center h-screen bg-white dark:bg-gray-950">
+		<div className="flex items-center justify-center h-screen">
 			<div className="transform translate-y-[-20%]">
 				<AuthForm/>
 			</div>

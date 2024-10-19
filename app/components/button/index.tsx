@@ -6,7 +6,7 @@ import styles from './styles.css?url';
 
 const Button = (props: ButtonProps) => {
 	const {to, type, disabled, children} = props;
-	const buttonClass = "mt-4 w-96 p-2 button-gradient text-white text-xl rounded-md hover:button-animate focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-blue-600 dark:hover:bg-blue-700";
+	const buttonClass = "mt-4 w-96 p-2 button-gradient text-white text-xl rounded-md hover:button-animate focus:outline-none focus:ring-2 focus:ring-blue-400 bg-blue-600 hover:bg-blue-700";
 
 	if (to) {
 		return (

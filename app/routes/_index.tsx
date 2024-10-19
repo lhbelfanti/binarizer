@@ -12,7 +12,7 @@ const MainPage = () => {
 						<img
 							src="/binarizer-logo-dark.png"
 							alt="Binarizer"
-							className="w-full dark:block"
+							className="w-full block"
 						/>
 					</div>
 					<h1 className="leading-tight text-7xl font-bold text-transparent bg-clip-text bg-title-gradient shadow-lg">

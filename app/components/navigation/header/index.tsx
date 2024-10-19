@@ -17,7 +17,7 @@ const Header = () => {
 	};
 
 	return (
-		<header className="flex items-center justify-between p-4 bg-white dark:bg-gray-900">
+		<header className="flex items-center justify-between p-4 border-b-2 border-b-gray-800">
 			<div className="flex items-center gap-4">
 				<div className="h-[30px] w-[30px]">
 					<img
@@ -26,30 +26,31 @@ const Header = () => {
 						className="w-full"
 					/>
 				</div>
-				<h1 className="text-xl font-bold text-gray-800 dark:text-white">
+				<h1 className="text-xl font-bold text-white">
 					Binarizer
 				</h1>
 			</div>
-			<nav className="flex items-center">
-				{!isLoggedIn && (
-					<Link to="/login" className="flex items-center text-blue-600 dark:text-blue-400 hover:underline mr-4">
-						<FaSignInAlt className="h-6 w-6 mr-1" />
+			<nav className="flex items-center gap-4">
+				{ !isLoggedIn && (
+					<Link to="/login" className="flex items-center text-blue-400 hover:underline mr-4">
+						<FaSignInAlt className="h-6 w-6 mr-1"/>
 						Login
 					</Link>
-				)}
-				{isLoggedIn && (
+				) }
+				{ isLoggedIn && (
 					<>
 						<button
-							onClick={handleLogout}
-							className="flex items-center text-red-600 dark:text-red-400 hover:underline mr-4"
+							onClick={ handleLogout }
+							className="flex items-center text-red-400 hover:underline mr-4"
 						>
-							<FaSignOutAlt className="h-6 w-6 mr-1" /> {/* Logout icon */}
+							<FaSignOutAlt className="h-6 w-6 mr-1"/> {/* Logout icon */ }
 							Logout
 						</button>
 					</>
-				)}
-				<Link to="/" className="flex items-center text-blue-600 dark:text-blue-400 hover:underline">
-					<FaHome className="h-6 w-6 mr-1" />
+				) }
+				<Link to="/" className="flex items-center text-blue-400 hover:underline">
+					<FaHome className="h-6 w-6 mr-1"/>
+					Home
 				</Link>
 			</nav>
 		</header>
