@@ -1,0 +1,35 @@
+{
+  "page": {
+    "app": {
+      "sections": {
+        "left": {
+          "description": "El tweet no expresa que el usuario consuma drogas ilícitas.",
+          "extra": "Esta sección también contempla:",
+          "points": [
+            "Noticias respecto a drogas ilícitas",
+            "Noticias con información sobre las drogas ilícitas",
+            "Tweets que habland de otra cosa que no sean el tópico en cuestión"
+          ]
+        },
+        "middle": {
+          "description": "No se puede definir de que habla el tweet, o es inentendible.",
+          "extra": "Ejemplos:",
+          "points": [
+            "Tweets sin sentido",
+            "Tweets en otros idiomas que no sean español",
+            "Tweets en los que falte contexto, ya sea por respuesta a otro tweet o por ser parte de algún hilo (thread)"
+          ]
+        },
+        "right": {
+          "description": "El tweet expresa un consumo de drogas ilícitas por parte del usuario.",
+          "extra": "Esta sección contempla :",
+          "points": [
+            "Usuarios que hablen de cómo o qué tipo de drogas ilícitas están consumiendo",
+            "Usuarios que expresen una necesidad de consumir drogas ilícitas, ya sea por abstinencia o gusto",
+            "Usuarios que añoren consumir drogas ilícitas"
+          ]
+        }
+      }
+    }
+  }
+}

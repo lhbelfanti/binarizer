@@ -33,7 +33,7 @@ const AuthForm = () => {
 					<input
 						type="text"
 						id="username"
-						className="mt-1 p-2 border font-thin rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500 bg-gray-800 border-gray-700 text-gray-100"
+						className="mt-1 p-2 border font-thin rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500 bg-gray-700 border-gray-700 text-gray-100"
 						placeholder="Enter your username"
 						required
 					/>
@@ -45,7 +45,7 @@ const AuthForm = () => {
 					<input
 						type="password"
 						id="password"
-						className="mt-1 p-2 border font-thin rounded-md shadow-sm focus:outline-none focus:ring focus:ring-purple-400 bg-gray-800 border-gray-700 text-gray-100"
+						className="mt-1 p-2 border font-thin rounded-md shadow-sm focus:outline-none focus:ring focus:ring-purple-400 bg-gray-700 border-gray-700 text-gray-100"
 						placeholder="Enter your password"
 						required
 					/>

@@ -1,0 +1,14 @@
+{
+  "tweet1": {
+    "content": "ahora quieren normalizar tomar merca tambien",
+    "images": ["https://pbs.twimg.com/media/Fl46QBfWYAIWBB_?format=jpg&name=small", "https://pbs.twimg.com/media/Fl46QBfWYAIWBB_?format=jpg&name=small", "https://pbs.twimg.com/media/Fl46QBfWYAIWBB_?format=jpg&name=small", "https://pbs.twimg.com/media/Fl46QBfWYAIWBB_?format=jpg&name=small"],
+    "quote": {
+      "content": "Todos miran la moneda menos Maradona, que mira al capitán rival. ¿Cómo no vas a salir campeón?",
+      "images": ["https://pbs.twimg.com/media/ER9pESAWsAA_wlK?format=jpg&name=small", "https://pbs.twimg.com/media/ER9pESAWsAA_wlK?format=jpg&name=small", "https://pbs.twimg.com/media/ER9pESAWsAA_wlK?format=jpg&name=small", "https://pbs.twimg.com/media/ER9pESAWsAA_wlK?format=jpg&name=small"]
+    }
+  },
+  "tweet2": {
+    "content": "ahora quieren normalizar tomar merca tambien",
+    "images": ["https://pbs.twimg.com/media/Fl46QBfWYAIWBB_?format=jpg&name=small", "https://pbs.twimg.com/media/Fl46QBfWYAIWBB_?format=jpg&name=small", "https://pbs.twimg.com/media/Fl46QBfWYAIWBB_?format=jpg&name=small", "https://pbs.twimg.com/media/Fl46QBfWYAIWBB_?format=jpg&name=small"]
+  }
+}
