@@ -21,7 +21,7 @@ const Header = () => {
 			<div className="flex items-center gap-4">
 				<div className="h-[30px] w-[30px]">
 					<img
-						src="/binarizer-logo-dark.png"
+						src="/binarizer-logo.png"
 						alt="Binarizer"
 						className="w-full"
 					/>
@@ -48,7 +48,7 @@ const Header = () => {
 						</button>
 					</>
 				) }
-				<Link to="/" className="flex items-center text-blue-400 hover:underline">
+				<Link to="/q" className="flex items-center text-blue-400 hover:underline">
 					<FaHome className="h-6 w-6 mr-1"/>
 					Home
 				</Link>

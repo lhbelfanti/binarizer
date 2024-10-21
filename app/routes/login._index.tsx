@@ -1,7 +1,7 @@
 import { LinksFunction } from '@remix-run/node';
 
-import AuthForm from '~/components/auth/form';
-import { links as buttonLinks } from '~/components/button';
+import AuthForm from 'app/components/Form';
+import { links as buttonLinks } from 'app/components/Button';
 
 
 const LoginPage = () => {

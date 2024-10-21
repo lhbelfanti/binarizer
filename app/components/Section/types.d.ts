@@ -1,7 +1,7 @@
 export interface SectionProps {
-	description: string;
-	extra: string;
-	points: string[];
+	description: string | null;
+	extra: string | null;
+	points: string[] | null;
 	borderColor: string;
 	onHoverBackgroundColor: string;
 	onHoverTextColor: string;

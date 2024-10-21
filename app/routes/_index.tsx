@@ -1,7 +1,7 @@
 import { LinksFunction } from '@remix-run/node';
 
-import Button from 'app/components/button';
-import { links as buttonLinks } from '~/components/button';
+import Button from 'app/components/Button';
+import { links as buttonLinks } from 'app/components/Button';
 
 const MainPage = () => {
 	return (
@@ -10,7 +10,7 @@ const MainPage = () => {
 				<header className="flex items-center gap-9 mb-16">
 					<div className="h-[150px] w-[150px]">
 						<img
-							src="/binarizer-logo-dark.png"
+							src="/binarizer-logo.png"
 							alt="Binarizer"
 							className="w-full block"
 						/>

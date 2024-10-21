@@ -13,7 +13,7 @@
         },
         "middle": {
           "description": "No se puede definir de que habla el tweet, o es inentendible.",
-          "extra": "Ejemplos:",
+          "extra": null,
           "points": [
             "Tweets sin sentido",
             "Tweets en otros idiomas que no sean español",

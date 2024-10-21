@@ -1,7 +1,7 @@
 import { Form, useActionData, useNavigation } from '@remix-run/react';
 
-import { ValidationErrors } from '~/components/auth/form/types';
-import Button from 'app/components/button';
+import { ValidationErrors } from '~/components/Form/types';
+import Button from 'app/components/Button';
 
 const AuthForm = () => {
 	const navigation = useNavigation()

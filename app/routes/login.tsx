@@ -1,6 +1,6 @@
 import { Outlet } from '@remix-run/react';
 
-import Header from '~/components/navigation/header';
+import Header from 'app/components/Header';
 
 const LoginLayout = () => {
 	return (
