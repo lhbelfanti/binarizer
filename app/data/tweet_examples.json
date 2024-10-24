@@ -1,5 +1,6 @@
 {
   "tweet1": {
+    "isAReply": true,
     "content": "ahora quieren normalizar tomar merca tambien",
     "images": [
       "https://pbs.twimg.com/media/ER9pESAWsAA_wlK?format=jpg&name=small",
@@ -16,16 +17,33 @@
       "https://pbs.twimg.com/media/Fl46QBfWYAIWBB_?format=jpg&name=small",
       "https://pbs.twimg.com/media/Fl46QBfWYAIWBB_?format=jpg&name=small"],
     "quote": {
+      "isAReply": true,
       "content": "Todos miran la moneda menos Maradona, que mira al capitán rival. ¿Cómo no vas a salir campeón?",
       "images": ["https://pbs.twimg.com/media/ER9pESAWsAA_wlK?format=jpg&name=small", "https://pbs.twimg.com/media/ER9pESAWsAA_wlK?format=jpg&name=small", "https://pbs.twimg.com/media/ER9pESAWsAA_wlK?format=jpg&name=small", "https://pbs.twimg.com/media/ER9pESAWsAA_wlK?format=jpg&name=small"]
     }
   },
   "tweet2": {
+    "isAReply": false,
     "content": "Vamos a tomar una linea — Tomar\uD83E\uDD14 https://t/438317775?1524990439…",
     "images": ["https://pbs.twimg.com/media/DnP4OjKWwAAZCJv?format=jpg&name=small"]
   },
   "tweet3": {
+    "isAReply": true,
     "content": "#PorElTarifazoTuveQue acordarme qué colectivo tomé, para tomar una línea distinta y que la @SUBE me haga el descuento.",
     "images": []
+  },
+  "tweet4": {
+    "isAReply": false,
+    "content": "ahora quieren normalizar tomar merca tambien",
+    "images": [
+      "https://pbs.twimg.com/media/ER9pESAWsAA_wlK?format=jpg&name=small",
+      "https://pbs.twimg.com/media/ER9pESAWsAA_wlK?format=jpg&name=small",
+      "https://pbs.twimg.com/media/Fl46QBfWYAIWBB_?format=jpg&name=small",
+      "https://pbs.twimg.com/media/Fl46QBfWYAIWBB_?format=jpg&name=small"],
+    "quote": {
+      "isAReply": false,
+      "content": "Todos miran la moneda menos Maradona, que mira al capitán rival. ¿Cómo no vas a salir campeón?",
+      "images": ["https://pbs.twimg.com/media/ER9pESAWsAA_wlK?format=jpg&name=small", "https://pbs.twimg.com/media/ER9pESAWsAA_wlK?format=jpg&name=small"]
+    }
   }
 }

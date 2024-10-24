@@ -3,7 +3,7 @@ import { LinksFunction } from '@remix-run/node';
 import Button, { links as buttonLinks } from 'app/components/Button';
 import { links as XLogoLinks } from 'app/components/XLogo';
 import Section from 'app/components/Section';
-import Tweet from 'app/components/Tweet';
+import TweetCard from 'app/components/TweetCard';
 import variables from '~/data/variables.json'
 import example from '~/data/tweet_examples.json'
 
@@ -36,10 +36,10 @@ const AppPage = () => {
 				/>
 
 				<div className="flex flex-col items-center justify-center h-[350px] w-[700px]">
-					<Tweet tweet={ example.tweet3 }/>
+					<TweetCard tweet={ example.tweet1 }/>
 				</div>
 				<Button disabled={false}>
-					Obtener más tweets
+					Get more tweets
 				</Button>
 			</div>
 
