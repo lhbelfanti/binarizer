@@ -5,6 +5,7 @@ export interface TweetProps {
 }
 
 export interface Tweet {
+	id: string;
 	isAReply: boolean;
 	content: string;
 	images?: string[];

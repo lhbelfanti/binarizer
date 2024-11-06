@@ -1,4 +1,5 @@
 import { LinksFunction } from '@remix-run/node';
+import { DragEvent } from 'react';
 
 import Button, { links as buttonLinks } from 'app/components/Button';
 import { links as XLogoLinks } from 'app/components/XLogo';
@@ -9,6 +10,27 @@ import example from '~/data/tweet_examples.json'
 
 const AppPage = () => {
 	const sections = variables.page.app.sections
+
+	const handleOnDrop = (event: DragEvent<HTMLDivElement>, section: string) => {
+		event.preventDefault();
+
+		const tweetID = event.dataTransfer.getData("id");
+
+		switch (section) {
+			case 'left':
+				// call left section handler
+				console.log(`Left handler: tweet: ${tweetID}`)
+				break;
+			case 'middle':
+				// call middle section handler
+				console.log(`Middle handler: tweet: ${tweetID}`)
+				break;
+			case 'right':
+				// call right section handler
+				console.log(`Right handler: tweet: ${tweetID}`)
+				break;
+		}
+	}
 
 	return (
 		<div className="flex gap-4 p-1 h-[90vh]">
@@ -21,6 +43,7 @@ const AppPage = () => {
 				onHoverTextColor="#e63b7a"
 				width="w-[300px]"
 				height="h-full"
+				onDropHandler={(event: DragEvent<HTMLDivElement>) => handleOnDrop(event, "left")}
 			/>
 
 			<div className="flex flex-col justify-between items-center w-full">
@@ -33,6 +56,7 @@ const AppPage = () => {
 					onHoverTextColor="#a16bce"
 					width="w-full"
 					height="h-auto"
+					onDropHandler={(event: DragEvent<HTMLDivElement>) => handleOnDrop(event, "middle")}
 				/>
 
 				<div className="flex flex-col items-center justify-center h-[350px] w-[700px]">
@@ -52,6 +76,7 @@ const AppPage = () => {
 				onHoverTextColor="#4f7b29"
 				width="w-[300px]"
 				height="h-full"
+				onDropHandler={(event: DragEvent<HTMLDivElement>) => handleOnDrop(event, "right")}
 			/>
 		</div>
 	)
