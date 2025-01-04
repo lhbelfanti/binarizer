@@ -6,6 +6,9 @@ export interface TweetProps {
 
 export interface Tweet {
 	id: string;
+	author: string;
+	avatar: string;
+	postedAt: string;
 	isAReply: boolean;
 	content: string;
 	images?: string[];

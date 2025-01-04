@@ -1,4 +1,4 @@
-import { TextHighlighterProps } from '~/components/TextHighlighter/types';
+import { TextHighlighterProps } from '~/components/TweetCard/TextHighlighter/types';
 
 const TextHighlighter = (props: TextHighlighterProps) => {
 	const { text } = props;
@@ -18,7 +18,7 @@ const TextHighlighter = (props: TextHighlighterProps) => {
 			} else if (part.startsWith('@')) {
 				return (<span key={index} className="text-blue-500"> {part} </span>);
 			} else {
-				return <span className="text-black"> {part} </span>;
+				return (<span key={index}  className="text-black"> {part} </span>);
 			}
 		});
 	};

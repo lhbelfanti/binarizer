@@ -1,14 +1,13 @@
-import Carousel from 'app/components/Carousel';
 import DraggableElement from '~/components/DraggableElement';
-import TextHighlighter from '~/components/TextHighlighter';
 import TweetQuote from '~/components/TweetCard/TweetQuote';
+
 import { TweetProps } from '~/components/TweetCard/types';
-import XLogo from '~/components/XLogo/';
+import TweetHeader from "~/components/TweetCard/TweetHeader";
+import TweetBody from "~/components/TweetCard/TweetBody";
 
 const TweetCard = (props: TweetProps) => {
 	const { tweet } = props;
-	const { id, isAReply, content, images, quote } = tweet;
-
+	const { id, author, avatar, postedAt, isAReply, content, images, quote } = tweet;
 
 	return (
 		<DraggableElement id={id}>
@@ -20,32 +19,11 @@ const TweetCard = (props: TweetProps) => {
 						</div>
 					)}
 
-					<div className="flex justify-between items-center mb-3">
-						<div className="flex items-center">
-							<img
-								src="https://via.placeholder.com/48"
-								alt="Profile"
-								className="rounded-full w-12 h-12"
-							/>
-							<div className="ml-3">
-								<span className="text-black font-bold block">Anonymous User</span>
-								<span className="text-gray-500 text-sm">@anonymous_user</span>
-							</div>
-						</div>
-						<XLogo/>
-					</div>
+					<TweetHeader user="User" author={author} avatar={avatar} postedAt={postedAt} />
 
 					<div className="m-8"/>
 
-					<div className="mb-3">
-						<TextHighlighter text={ content }/>
-
-						<div className="m-8"/>
-
-						{ images && images.length > 0 && (
-							<Carousel images={ images }></Carousel>
-						) }
-					</div>
+					<TweetBody content={content} images={images} />
 				</div>
 				{ !!quote && (
 					<div className="flex items-center gap-2">

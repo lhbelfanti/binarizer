@@ -1,12 +1,9 @@
 import { useMemo, useState } from 'react';
+
 import { CarouselProps } from '~/components/Carousel/types';
 
 const Carousel = (props: CarouselProps) => {
 	const { images } = props;
-
-	if (images.length === 0) {
-		return null;
-	}
 
 	const [scrollIndex, setScrollIndex] = useState(1);
 
@@ -17,7 +14,7 @@ const Carousel = (props: CarouselProps) => {
 
 	const elements = useMemo(() => {
 		let even: string[] = [];
-		let odd: string[] = [];
+		const odd: string[] = [];
 
 		if (images.length <= visibleCountPerRow) {
 			even = images;
@@ -33,7 +30,7 @@ const Carousel = (props: CarouselProps) => {
 		});
 
 		return {even, odd}
-	}, images);
+	}, [images]);
 
 	const rows = elements.odd.length > 0 ? 2 : 1;
 

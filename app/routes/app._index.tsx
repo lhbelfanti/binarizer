@@ -2,7 +2,7 @@ import { LinksFunction } from '@remix-run/node';
 import { DragEvent } from 'react';
 
 import Button, { links as buttonLinks } from 'app/components/Button';
-import { links as XLogoLinks } from 'app/components/XLogo';
+import { links as XLogoLinks } from 'app/components/TweetCard/XLogo';
 import Section from 'app/components/Section';
 import TweetCard from 'app/components/TweetCard';
 import variables from '~/data/variables.json'

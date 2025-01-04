@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import DroppableElement from '~/components/DroppableElement';
+
 import { SectionProps } from '~/components/Section/types';
 
 const Section = (props: SectionProps) => {
