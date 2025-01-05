@@ -10,8 +10,11 @@ const StatsBlock = (props: StatsBlockProps) => {
     return (
         <div className="flex items-center gap-4">
             <div className="flex flex-col items-center text-xs font-semibold">
-                <span>{topic} </span>
-                <span>Overview</span>
+                {topic.split(" ").map((word, index) => (
+                    <span key={index} className="mr-1">
+                        {word}
+                    </span>
+                ))}
             </div>
             <SlArrowRightCircle className="text-gray-400"/>
             <div className="flex flex-col items-end text-white text-[10px] max-h-[90px] overflow-hidden space-y-0.5">

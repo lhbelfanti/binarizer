@@ -1,4 +1,7 @@
 {
+  "header": {
+    "description": "Creación de un corpus sobre el consumo de drogas ilícitas"
+  },
   "page": {
     "app": {
       "sections": {
@@ -8,7 +11,7 @@
           "points": [
             "Noticias respecto a drogas ilícitas",
             "Noticias con información sobre las drogas ilícitas",
-            "Tweets que habland de otra cosa que no sean el tópico en cuestión"
+            "Tweets que hablan de otra cosa que no sean el tópico en cuestión"
           ]
         },
         "middle": {
