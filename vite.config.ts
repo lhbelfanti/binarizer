@@ -19,4 +19,10 @@ export default defineConfig({
     }),
     tsconfigPaths(),
   ],
+  ssr: {
+    noExternal: ["remix-i18next"]
+  },
+  optimizeDeps: {
+    exclude: ['i18next-fs-backend'],
+  }
 });

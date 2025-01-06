@@ -1,7 +1,7 @@
 import { LinksFunction } from '@remix-run/node';
 
-import Button from 'app/components/Button';
-import { links as buttonLinks } from 'app/components/Button';
+import Button, { links as buttonLinks } from 'app/components/Button';
+import {Trans} from "react-i18next";
 
 const MainPage = () => {
 	return (
@@ -15,8 +15,8 @@ const MainPage = () => {
 							className="w-full block"
 						/>
 					</div>
-					<h1 className="leading-tight text-7xl font-bold text-transparent bg-clip-text bg-title-gradient shadow-lg">
-						Binarizer: A binary <br/> dataset creator
+					<h1 className="leading-tight text-7xl font-bold text-transparent bg-clip-text bg-title-gradient">
+						<Trans i18nKey="title" components={{ br: <br /> }}/>
 					</h1>
 				</header>
 
