@@ -10,9 +10,14 @@ import Backend from "i18next-http-backend";
 import { getInitialNamespaces } from "remix-i18next/client";
 
 async function hydrate() {
+    // Wait for route modules to be available
+    while (typeof window.__reactRouterRouteModules === "undefined") {
+        await new Promise((resolve) => setTimeout(resolve, 10)); // Poll every 10ms
+    }
+
     await i18next
         .use(initReactI18next) // Tell i18next to use the react-i18next plugin
-        .use(LanguageDetector) // Setup a client-side language detector
+        .use(LanguageDetector) // Set up a client-side language detector
         .use(Backend) // Setup your backend
         .init({
             ...i18n, // spread the configuration
