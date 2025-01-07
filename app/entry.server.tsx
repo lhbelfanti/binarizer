@@ -7,11 +7,11 @@ import { Response } from "@remix-run/web-fetch";
 import { RemixServer } from "@remix-run/react";
 import { isbot } from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
-
-import { createInstance } from "i18next";
-import i18next from "~/localization/i18n.server";
 import { I18nextProvider, initReactI18next } from "react-i18next";
 import Backend from "i18next-fs-backend";
+import { createInstance } from "i18next";
+
+import i18next from "~/localization/i18n.server";
 import i18n from "~/localization/i18n";
 
 

@@ -1,13 +1,13 @@
-import { RemixBrowser } from "@remix-run/react";
 import { startTransition, StrictMode } from "react";
 import { hydrateRoot } from "react-dom/client";
+import { RemixBrowser } from "@remix-run/react";
+import { getInitialNamespaces } from "remix-i18next/client";
+import LanguageDetector from "i18next-browser-languagedetector";
+import { I18nextProvider, initReactI18next } from "react-i18next";
+import i18next from "i18next";
+import Backend from "i18next-http-backend";
 
 import i18n from "~/localization/i18n";
-import i18next from "i18next";
-import { I18nextProvider, initReactI18next } from "react-i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
-import Backend from "i18next-http-backend";
-import { getInitialNamespaces } from "remix-i18next/client";
 
 async function hydrate() {
     // Wait for route modules to be available

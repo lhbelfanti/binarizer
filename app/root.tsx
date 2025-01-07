@@ -1,10 +1,9 @@
 import type { ReactNode } from 'react';
-
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, useMatches, useLoaderData } from "@remix-run/react";
 import { LinksFunction, MetaFunction, LoaderFunctionArgs } from '@remix-run/node';
-
 import { useTranslation } from "react-i18next";
 import { useChangeLanguage } from "remix-i18next/react";
+
 import i18next from "~/localization/i18n.server";
 
 import styles from './tailwind.css?url';

@@ -1,7 +1,7 @@
 import { LinksFunction } from '@remix-run/node';
+import { Trans } from "react-i18next";
 
 import Button, { links as buttonLinks } from 'app/components/Button';
-import { Trans } from "react-i18next";
 
 const MainPage = () => {
 	return (

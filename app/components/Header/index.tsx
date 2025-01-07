@@ -1,8 +1,10 @@
 import { Link, useLocation } from '@remix-run/react';
 import { useState, useEffect } from 'react';
 import { FaHome, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
+import { Trans } from "react-i18next";
 
 import AnalysisOverview from "~/components/AnalysisOverview";
+
 import variables from '~/data/variables.json'
 
 const Header = () => {
@@ -14,6 +16,7 @@ const Header = () => {
 
 	useEffect(() => {
 		const userLoggedIn = location.pathname !== '/login';
+		console.log(userLoggedIn);
 		setIsLoggedIn(userLoggedIn);
 	}, [location]);
 
@@ -54,20 +57,20 @@ const Header = () => {
 				{!isLoggedIn && (
 					<Link to="/login" className="flex items-center text-blue-400 hover:underline mr-4">
 						<FaSignInAlt className="h-6 w-6 mr-1"/>
-						Login
+						<Trans i18nKey="top_bar_login_button" />
 					</Link>
 				)}
 				{isLoggedIn && (
 					<>
 						<button onClick={handleLogout} className="flex items-center text-red-400 hover:underline mr-4">
 							<FaSignOutAlt className="h-6 w-6 mr-1"/>
-							Logout
+							<Trans i18nKey="top_bar_logout_button" />
 						</button>
 					</>
 				)}
 				<Link to="/" className="flex items-center text-blue-400 hover:underline">
 					<FaHome className="h-6 w-6 mr-1"/>
-					Home
+					<Trans i18nKey="top_bar_home_button" />
 				</Link>
 			</nav>
 		</header>

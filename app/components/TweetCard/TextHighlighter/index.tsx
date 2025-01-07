@@ -1,4 +1,4 @@
-import { TextHighlighterProps } from '~/components/TweetCard/TextHighlighter/types';
+import { TextHighlighterProps } from './types';
 
 const TextHighlighter = (props: TextHighlighterProps) => {
 	const { text } = props;

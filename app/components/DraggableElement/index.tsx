@@ -1,6 +1,6 @@
 import { DragEvent } from 'react';
 
-import { DraggableElementProps } from '~/components/DraggableElement/types';
+import { DraggableElementProps } from './types';
 
 const DraggableElement = (props: DraggableElementProps) => {
 	const { id, children } = props;

@@ -1,6 +1,6 @@
 import { DragEvent, useState } from 'react';
 
-import { DroppableElementProps } from '~/components/DroppableElement/types';
+import { DroppableElementProps } from './types';
 
 const DroppableElement = (props: DroppableElementProps) => {
 	const { onDropHandler, onDragOver, onDragLeave, children } = props;

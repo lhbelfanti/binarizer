@@ -1,6 +1,12 @@
 {
   "landing_title": "Binarizer: Un creador<1/> de datasets binarios",
   "landing_enter_button": "Ingresar",
+  "top_bar_login_button": "Iniciar sesión",
+  "top_bar_logout_button": "Cerrar sesión",
+  "top_bar_home_button": "Inicio",
+  "top_bar_analysis_overview_search_criteria": "Criterio de <1/> búsqueda",
+  "top_bar_analysis_overview_search_criteria_in_analysis": "Criterio de búsqueda en análisis: ",
+  "top_bar_analysis_overview_tweets": "Tweets",
   "login_title": "¡Bienvenido de nuevo!",
   "login_description": "Por favor, ingrese su usuario y contraseña",
   "login_username": "Usuario",
@@ -8,5 +14,10 @@
   "login_password": "Contraseña",
   "login_password_placeholder": "Ingrese su contraseña",
   "login_button": "Iniciar sesión",
-  "login_button_authenticating_state": "Autenticando..."
+  "login_button_authenticating_state": "Autenticando...",
+  "app_tweet_card_tweet_is_a_reply": "Este tweet es una respuesta a otro tweet",
+  "app_tweet_card_quote": "Cita >",
+  "app_tweet_card_quote_is_a_reply": "Este tweet citado es una respuesta a otro tweet",
+  "app_tweet_card_quoted_tweet": "Tweet citado",
+  "app_get_more_tweets_button": "Obtener más tweets"
 }

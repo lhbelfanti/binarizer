@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 
-import { CarouselProps } from '~/components/Carousel/types';
+import { CarouselProps } from './types';
 
 const Carousel = (props: CarouselProps) => {
 	const { images } = props;

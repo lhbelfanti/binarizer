@@ -1,7 +1,7 @@
 import TextHighlighter from "~/components/TweetCard/TextHighlighter";
 import Carousel from "~/components/Carousel";
 
-import { TweetBodyProps } from "~/components/TweetCard/TweetBody/types";
+import { TweetBodyProps } from "./types";
 
 const TweetBody = (props: TweetBodyProps) => {
     const { content, images } = props;

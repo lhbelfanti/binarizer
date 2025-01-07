@@ -1,13 +1,18 @@
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
-import { DateDisplayProps } from "~/components/TweetCard/DateDisplay/types";
+import { DateDisplayProps } from "./types";
 
 const DateDisplay = (props: DateDisplayProps) => {
     const { postedAt } = props;
+    const { i18n } = useTranslation();
+
 
     const formattedDate = useMemo(() => {
+        const currentLanguage = i18n.language;
+
         const parsedDate = new Date(postedAt);
-        return parsedDate.toLocaleString('en-US', {
+        return parsedDate.toLocaleString(currentLanguage, {
             year: 'numeric',
             month: 'short',
             day: '2-digit',
@@ -16,7 +21,7 @@ const DateDisplay = (props: DateDisplayProps) => {
             second: '2-digit',
             hour12: true,
         });
-    }, [postedAt]);
+    }, [postedAt, i18n.language]);
 
     return (
         <div className="text-gray-400 text-xs mt-1">

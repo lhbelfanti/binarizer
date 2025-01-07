@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import DroppableElement from '~/components/DroppableElement';
 
-import { SectionProps } from '~/components/Section/types';
+import { SectionProps } from './types';
 
 const Section = (props: SectionProps) => {
 	const { description, extra, points, borderColor, onHoverBackgroundColor, onHoverTextColor, width, height, onDropHandler} = props;

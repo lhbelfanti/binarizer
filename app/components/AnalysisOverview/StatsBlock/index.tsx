@@ -1,6 +1,7 @@
 import { SlArrowRightCircle } from "react-icons/sl";
+import { Trans } from "react-i18next";
 
-import { StatsBlockProps } from "~/components/AnalysisOverview/StatsBlock/types";
+import { StatsBlockProps } from "./types";
 
 const StatsBlock = (props: StatsBlockProps) => {
     const { topic, total, analyzed } = props;
@@ -10,11 +11,7 @@ const StatsBlock = (props: StatsBlockProps) => {
     return (
         <div className="flex items-center gap-4">
             <div className="flex flex-col items-center text-xs font-semibold">
-                {topic.split(" ").map((word, index) => (
-                    <span key={index} className="mr-1">
-                        {word}
-                    </span>
-                ))}
+                <Trans i18nKey={topic} components={{ 1: <br /> }} />
             </div>
             <SlArrowRightCircle className="text-gray-400"/>
             <div className="flex flex-col items-end text-white text-[10px] max-h-[90px] overflow-hidden space-y-0.5">
