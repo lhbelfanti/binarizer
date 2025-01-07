@@ -1,7 +1,7 @@
 import { LinksFunction } from '@remix-run/node';
 
 import Button, { links as buttonLinks } from 'app/components/Button';
-import {Trans} from "react-i18next";
+import { Trans } from "react-i18next";
 
 const MainPage = () => {
 	return (
@@ -16,14 +16,14 @@ const MainPage = () => {
 						/>
 					</div>
 					<h1 className="leading-tight text-7xl font-bold text-transparent bg-clip-text bg-title-gradient">
-						<Trans i18nKey="title" components={{ br: <br /> }}/>
+						<Trans i18nKey="landing_title" components={{ 1: <br /> }}/>
 					</h1>
 				</header>
 
 				<div className="mt-8"/>
 
 				<Button to="/login" disabled={false}>
-					Go to login
+					<Trans i18nKey="landing_enter_button" />
 				</Button>
 			</div>
 		</div>

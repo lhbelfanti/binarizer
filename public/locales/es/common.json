@@ -1,3 +1,12 @@
 {
-  "title": "Binarizer: Un creador<br/> de datasets binarios"
+  "landing_title": "Binarizer: Un creador<1/> de datasets binarios",
+  "landing_enter_button": "Ingresar",
+  "login_title": "¡Bienvenido de nuevo!",
+  "login_description": "Por favor, ingrese su usuario y contraseña",
+  "login_username": "Usuario",
+  "login_username_placeholder": "Ingrese su usuario",
+  "login_password": "Contraseña",
+  "login_password_placeholder": "Ingrese su contraseña",
+  "login_button": "Iniciar sesión",
+  "login_button_authenticating_state": "Autenticando..."
 }
