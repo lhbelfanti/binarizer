@@ -1,7 +1,6 @@
 import { startTransition, StrictMode } from "react";
 import { hydrateRoot } from "react-dom/client";
 import { RemixBrowser } from "@remix-run/react";
-import { getInitialNamespaces } from "remix-i18next/client";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { I18nextProvider, initReactI18next } from "react-i18next";
 import i18next from "i18next";
@@ -10,11 +9,6 @@ import Backend from "i18next-http-backend";
 import i18n from "~/localization/i18n";
 
 async function hydrate() {
-    // Wait for route modules to be available
-    while (typeof window.__reactRouterRouteModules === "undefined") {
-        await new Promise((resolve) => setTimeout(resolve, 10)); // Poll every 10ms
-    }
-
     await i18next
         .use(initReactI18next) // Tell i18next to use the react-i18next plugin
         .use(LanguageDetector) // Set up a client-side language detector
@@ -22,7 +16,7 @@ async function hydrate() {
         .init({
             ...i18n, // spread the configuration
             // This function detects the namespaces your routes rendered while SSR use
-            ns: getInitialNamespaces(),
+            ns: ["common"],
             backend: { loadPath: "/locales/{{lng}}/{{ns}}.json" },
             detection: {
                 // Here only enable htmlTag detection, we'll detect the language only

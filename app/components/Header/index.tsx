@@ -16,7 +16,6 @@ const Header = () => {
 
 	useEffect(() => {
 		const userLoggedIn = location.pathname !== '/login';
-		console.log(userLoggedIn);
 		setIsLoggedIn(userLoggedIn);
 	}, [location]);
 
