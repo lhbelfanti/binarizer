@@ -39,7 +39,7 @@ const Section = (props: SectionProps) => {
 					<>
 						<div className="mb-2"/>
 						<ul className={ `${ textStyle } list-disc pl-4` } style={ dynamicTextStyles }>
-							{ points.map((bulletPoint: any) => (
+							{ points.map((bulletPoint: string) => (
 								<li key={ bulletPoint } className="mb-1 transition-transform duration-300 hover:translate-x-1">
 									{ bulletPoint }
 								</li>

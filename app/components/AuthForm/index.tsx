@@ -57,7 +57,7 @@ const AuthForm = () => {
 				</div>
 				{ validationErrors && (
 					<ul>
-						{ Object.values(validationErrors).map((error: any) => (
+						{ Object.values(validationErrors).map((error: string) => (
 							<li key={ error }>{ error }</li>
 						)) }
 					</ul>

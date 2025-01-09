@@ -9,6 +9,7 @@ import Backend from "i18next-http-backend";
 import i18n from "~/localization/i18n";
 
 async function hydrate() {
+    // eslint-disable-next-line import/no-named-as-default-member
     await i18next
         .use(initReactI18next) // Tell i18next to use the react-i18next plugin
         .use(LanguageDetector) // Set up a client-side language detector
