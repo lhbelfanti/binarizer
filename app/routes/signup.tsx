@@ -2,7 +2,7 @@ import { Outlet } from '@remix-run/react';
 
 import Header from 'app/components/Header';
 
-const LogInLayout = () => {
+const SignUpLayout = () => {
 	return (
 		<>
 			<Header />
@@ -11,4 +11,4 @@ const LogInLayout = () => {
 	);
 }
 
-export default LogInLayout;
+export default SignUpLayout;
