@@ -1,5 +1,7 @@
-export type ValidationErrors = {
-	[key: string]: string;
+export type AuthFormErrors = {
+	username?: string;
+	password?: string;
+	unexpected?: string;
 };
 
 export interface AuthFormCredentials {

@@ -3,26 +3,16 @@ import { Trans, useTranslation } from "react-i18next";
 
 import Button from 'app/components/Button';
 
-import { AuthFormProps, ValidationErrors } from './types';
-import { useEffect, useState } from "react";
+import { AuthFormProps, AuthFormErrors } from './types';
 
 const AuthForm = (props: AuthFormProps) => {
 	const { authType } = props;
 
 	const navigation = useNavigation()
 	const { t } = useTranslation();
-	const validationErrors = useActionData<ValidationErrors>();
-	const [usernameError, setUsernameError] = useState<string | undefined>();
-	const [passwordError, setPasswordError] = useState<string | undefined>();
+	const validationErrors = useActionData<AuthFormErrors>();
 
 	const isSubmitting: boolean = navigation.state !== 'idle';
-
-	useEffect(() => {
-		if (validationErrors) {
-			setUsernameError(validationErrors.username || undefined);
-			setPasswordError(validationErrors.password || undefined);
-		}
-	}, [validationErrors]);
 
 	return (
 		<div className="flex flex-col">
@@ -53,7 +43,7 @@ const AuthForm = (props: AuthFormProps) => {
 						placeholder={t("auth_username_placeholder")}
 						required
 					/>
-					{usernameError && <p className="text-sm text-red-500 mt-1">{usernameError}</p>}
+					{validationErrors?.username && <p className="text-sm text-red-500 mt-1">{validationErrors.username}</p>}
 				</div>
 				<div className="flex flex-col w-96">
 					<label htmlFor="password" className="text-gray-300 text-lg">
@@ -67,8 +57,9 @@ const AuthForm = (props: AuthFormProps) => {
 						placeholder={t("auth_password_placeholder")}
 						required
 					/>
-					{passwordError && <p className="text-sm text-red-500 mt-1">{passwordError}</p>}
+					{validationErrors?.password && <p className="text-sm text-red-500 mt-1">{validationErrors.password}</p>}
 				</div>
+				{validationErrors?.unexpected && <p className="text-sm text-red-500 mt-1">{validationErrors.unexpected}</p>}
 				<div className="form-actions">
 					<Button type="submit" disabled={ isSubmitting }>
 						{ isSubmitting ?

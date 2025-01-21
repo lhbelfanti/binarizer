@@ -24,22 +24,23 @@ export const action: ActionFunction = async ({ request }: ActionFunctionArgs) =>
 	const formData: FormData = await request.formData();
 	const username: string = formData.get("username") as string;
 	const password: string = formData.get("password") as string;
-	const credentials: AuthFormCredentials = {username: username, password: password};
+
+	const credentials: AuthFormCredentials = { username, password };
 
 	try {
 		validateCredentials(credentials);
-	} catch (error) {
-		return error;
+	} catch (authFormErrors) {
+		return authFormErrors;
 	}
 
 	try {
 		return await login(credentials);
 	} catch (error) {
 		if (error instanceof APIError) {
-			return { success: false, message: error.message, code: error.code };
+			return { unexpected: error.message };
 		}
 
-		return { success: false, message: "An unexpected error occurred." };
+		return { unexpected: "An unexpected error occurred." };
 	}
 };
 

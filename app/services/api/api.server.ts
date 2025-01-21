@@ -1,10 +1,29 @@
 import { APIResponse } from "./types.server";
 
-export const API_BASE_URL = process.env.AHBCC_API_URL ?? "http://localhost:3000/api";
+export const API_BASE_URL = process.env.AHBCC_API_URL ?? "http://localhost:3000";
 
 export async function fetchFromAPI<T = unknown>(endpoint: string, options: RequestInit): Promise<APIResponse<T>> {
+    console.log(`${API_BASE_URL}/${endpoint}`);
+
     const response = await fetch(`${API_BASE_URL}/${endpoint}`, options);
-    return await response.json();
+
+    const responseText = await response.text();
+
+    let responseBody: APIResponse<T>;
+    try {
+        responseBody = await response.json();
+    } catch (error) {
+        throw new APIError({
+            code: response.status,
+            message: `Invalid JSON response: ${responseText}`,
+        });
+    }
+
+    if (!response.ok) {
+        throw new APIError(responseBody);
+    }
+
+    return responseBody;
 }
 
 export class APIError extends Error {

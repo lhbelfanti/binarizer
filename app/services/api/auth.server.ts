@@ -6,11 +6,9 @@ import { redirect } from "@remix-run/node";
 
 
 export const signup = async (requestBody: SignUpRequestBodyDTO) => {
-    const response: APIResponse = await fetchFromAPI("auth/login", {
+    const response: APIResponse = await fetchFromAPI("auth/signup/v1", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(requestBody),
     });
 
@@ -18,15 +16,13 @@ export const signup = async (requestBody: SignUpRequestBodyDTO) => {
         throw new APIError(response);
     }
 
-    return redirect('/auth?mode=login');
+    return redirect('/login');
 }
 
 export const login = async (requestBody: LogInRequestBodyDTO) => {
-    const response: APIResponse<LogInResponseDTO> = await fetchFromAPI<LogInResponseDTO>("auth/login", {
+    const response: APIResponse<LogInResponseDTO> = await fetchFromAPI<LogInResponseDTO>("auth/login/v1", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(requestBody),
     });
 
@@ -34,13 +30,13 @@ export const login = async (requestBody: LogInRequestBodyDTO) => {
         throw new APIError(response);
     }
 
-    const res: LogInResponse = recursiveToCamel(response.data)
+    const res: LogInResponse = recursiveToCamel(response.data);
 
     return createAuthSession(res.data.token, res.data.expiresAt, '/app');
 }
 
 export const logout = async (request: Request, authToken: string) => {
-    const response: APIResponse = await fetchFromAPI("auth/logout", {
+    const response: APIResponse = await fetchFromAPI("auth/logout/v1", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
