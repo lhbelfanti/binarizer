@@ -6,8 +6,8 @@ export async function fetchFromAPI<T = unknown>(endpoint: string, options: Reque
     console.log(`${API_BASE_URL}/${endpoint}`);
 
     const response = await fetch(`${API_BASE_URL}/${endpoint}`, options);
-
-    const responseText = await response.text();
+    const clonedResponse = response.clone(); // Clone the response to avoid the consumption of the body
+    const responseText = await clonedResponse.text();
 
     let responseBody: APIResponse<T>;
     try {

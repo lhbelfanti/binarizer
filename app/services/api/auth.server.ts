@@ -32,7 +32,7 @@ export const login = async (requestBody: LogInRequestBodyDTO) => {
 
     const res: LogInResponse = recursiveToCamel(response.data);
 
-    return createAuthSession(res.data.token, res.data.expiresAt, '/app');
+    return createAuthSession(res.token, res.expiresAt, '/app');
 }
 
 export const logout = async (request: Request, authToken: string) => {
