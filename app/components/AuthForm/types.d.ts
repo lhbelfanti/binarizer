@@ -1,6 +1,3 @@
-export const SIGNUP: string = 'signup';
-export const LOGIN: string = 'login';
-
 export interface AuthFormActionResult {
    authType: string;
    success: boolean;
