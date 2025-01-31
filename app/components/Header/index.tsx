@@ -25,23 +25,25 @@ const Header = () => {
 
 	return (
 		<header className="flex items-center justify-between pt-2 pb-2 pr-3 pl-3 border-b-2 border-b-gray-700">
-			<div className="flex items-center gap-2">
-				<div className="h-[30px] w-[30px]">
-					<img
-						src="/binarizer-logo.png"
-						alt="Binarizer"
-						className="w-full"
-					/>
-				</div>
-				<div className="flex items-center gap-4 w-[150px]">
-					<div className="flex flex-col">
-						<h1 className="text-xl font-bold text-white">
-							Binarizer
-						</h1>
-						<span className="flex-shrink-0 text-[10px]">{header.description}</span>
+			<Link to="/" className="flex items-center">
+				<div className="flex items-center gap-2">
+					<div className="h-[30px] w-[30px]">
+						<img
+							src="/binarizer-logo.png"
+							alt="Binarizer"
+							className="w-full"
+						/>
+					</div>
+					<div className="flex items-center gap-4 w-[150px]">
+						<div className="flex flex-col">
+							<h1 className="text-xl font-bold text-white">
+								Binarizer
+							</h1>
+							<span className="flex-shrink-0 text-[10px]">{header.description}</span>
+						</div>
 					</div>
 				</div>
-			</div>
+			</Link>
 
 			{isLoggedIn && (
 				<AnalysisOverview

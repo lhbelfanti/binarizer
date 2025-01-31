@@ -3,14 +3,14 @@ import { Trans, useTranslation } from "react-i18next";
 
 import Button from 'app/components/Button';
 
-import { AuthFormProps, AuthFormErrors } from './types';
+import { AuthFormProps, AuthFormActionErrors } from './types';
 
 const AuthForm = (props: AuthFormProps) => {
 	const { authType } = props;
 
 	const navigation = useNavigation()
 	const { t } = useTranslation();
-	const validationErrors = useActionData<AuthFormErrors>();
+	const validationErrors = useActionData<AuthFormActionErrors>();
 
 	const isSubmitting: boolean = navigation.state !== 'idle';
 

@@ -1,4 +1,13 @@
-export type AuthFormErrors = {
+export const SIGNUP: string = 'signup';
+export const LOGIN: string = 'login';
+
+export interface AuthFormActionResult {
+   authType: string;
+   success: boolean;
+   errors: AuthFormActionErrors;
+}
+
+export type AuthFormActionErrors = {
 	username?: string;
 	password?: string;
 	unexpected?: string;

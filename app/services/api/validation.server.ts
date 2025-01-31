@@ -1,4 +1,4 @@
-import {AuthFormCredentials, AuthFormErrors} from "~/components/AuthForm/types";
+import {AuthFormCredentials, AuthFormActionErrors} from "~/components/AuthForm/types";
 
 const isValidUsername = (value: string) => {
     return value && value.trim().length >= 5;
@@ -9,7 +9,7 @@ const isValidPassword = (value: string) => {
 }
 
 export const validateCredentials = (input: AuthFormCredentials) => {
-    const authFormErrors: AuthFormErrors = {};
+    const authFormErrors: AuthFormActionErrors = {};
 
     if (!isValidUsername(input.username)) {
         authFormErrors.username = 'Invalid username. Must be at least 5 characters long.'
