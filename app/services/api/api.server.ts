@@ -3,8 +3,6 @@ import { APIResponse } from "./types.server";
 export const API_BASE_URL = process.env.AHBCC_API_URL ?? "http://localhost:3000";
 
 export async function fetchFromAPI<T = unknown>(endpoint: string, options: RequestInit): Promise<APIResponse<T>> {
-    console.log(`${API_BASE_URL}/${endpoint}`);
-
     const response = await fetch(`${API_BASE_URL}/${endpoint}`, options);
     const clonedResponse = response.clone(); // Clone the response to avoid the consumption of the body
     const responseText = await clonedResponse.text();
