@@ -1,4 +1,6 @@
-import {AuthFormCredentials, AuthFormActionErrors} from "~/components/AuthForm/types";
+import { AuthFormActionErrors, AuthFormCredentials } from "~/components/AuthForm/types";
+import i18next from '~/localization/i18n.server';
+import {ValidationError} from "~/components/AuthForm/errors";
 
 const isValidUsername = (value: string) => {
     return value && value.trim().length >= 5;
@@ -8,18 +10,21 @@ const isValidPassword = (value: string) => {
     return value && value.trim().length >= 7;
 }
 
-export const validateCredentials = (input: AuthFormCredentials) => {
-    const authFormErrors: AuthFormActionErrors = {};
+export const validateCredentials = async (input: AuthFormCredentials, locale: string): Promise<AuthFormActionErrors>  => {
+    const authFormActionErrors: AuthFormActionErrors = {};
+    const t = await i18next.getFixedT(locale);
 
     if (!isValidUsername(input.username)) {
-        authFormErrors.username = 'Invalid username. Must be at least 5 characters long.'
+        authFormActionErrors.username = t("auth_credentials_error_invalid_username", {quantity: 5})
     }
 
     if (!isValidPassword(input.password)) {
-        authFormErrors.password = 'Invalid password. Must be at least 7 characters long.'
+        authFormActionErrors.password = t("auth_credentials_error_invalid_password", {quantity: 7})
     }
 
-    if (Object.keys(authFormErrors).length > 0) {
-        throw authFormErrors;
+    if (Object.keys(authFormActionErrors).length > 0) {
+        throw new ValidationError(authFormActionErrors);
     }
+
+    return authFormActionErrors;
 }
