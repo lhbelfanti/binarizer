@@ -3,8 +3,6 @@ import { Links, Meta, Outlet, Scripts, ScrollRestoration, useMatches, useLoaderD
 import { LinksFunction, MetaFunction, LoaderFunctionArgs } from '@remix-run/node';
 import { useTranslation } from "react-i18next";
 import { useChangeLanguage } from "remix-i18next/react";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import i18next from "~/localization/i18n.server";
 
@@ -48,7 +46,7 @@ const Document = ({title, children}: DocumentProps) => {
   return (
     <html lang={locale} dir={i18n.dir()}>
       <head>
-        { title && <title>{ title }</title> }
+        <title>{ title }</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
@@ -71,7 +69,6 @@ const App = () => {
   return (
       <Document title={currentTitle || "Binarizer"} >
         <Outlet />
-        <ToastContainer />
       </Document>
   );
 }

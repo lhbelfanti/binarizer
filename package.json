@@ -25,7 +25,8 @@
     "react-i18next": "^15.4.0",
     "react-icons": "^5.3.0",
     "react-toastify": "^11.0.3",
-    "remix-i18next": "^7.0.2"
+    "remix-i18next": "^7.0.2",
+    "remix-utils": "^8.1.0"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.15.2",
