@@ -1,7 +1,6 @@
-import { LinksFunction } from '@remix-run/node';
 import { Trans } from "react-i18next";
 
-import Button, { links as buttonLinks } from 'app/components/Button';
+import Button from "~/components/Button";
 
 const MainPage = () => {
 	return (
@@ -31,7 +30,3 @@ const MainPage = () => {
 }
 
 export default MainPage;
-
-export const links: LinksFunction = () => {
-	return [...buttonLinks()];
-}

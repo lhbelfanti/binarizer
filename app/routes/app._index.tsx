@@ -2,7 +2,7 @@ import { LinksFunction } from '@remix-run/node';
 import { DragEvent } from 'react';
 import { Trans } from "react-i18next";
 
-import Button, { links as buttonLinks } from 'app/components/Button';
+import Button from 'app/components/Button';
 import { links as XLogoLinks } from 'app/components/TweetCard/XLogo';
 import Section from 'app/components/Section';
 import TweetCard from 'app/components/TweetCard';
@@ -87,5 +87,5 @@ const AppPage = () => {
 export default AppPage;
 
 export const links: LinksFunction = () => {
-	return [...buttonLinks(), ...XLogoLinks()];
+	return [...XLogoLinks()];
 }
