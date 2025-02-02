@@ -1,3 +1,3 @@
 export interface CarouselProps {
-	images: string[];
+  images: string[];
 }

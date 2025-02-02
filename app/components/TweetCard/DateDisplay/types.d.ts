@@ -1,3 +1,3 @@
-export interface DateDisplayProps{
-    postedAt: string;
+export interface DateDisplayProps {
+  postedAt: string;
 }

@@ -1,0 +1,23 @@
+{
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+  "printWidth": 100,
+  "arrowParens": "always",
+  "bracketSameLine": true,
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false,
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "importOrder": [
+    "^react$",
+    "^react-.*$",
+    "^@remix-run/.*$",
+    "<THIRD_PARTY_MODULES>",
+    "^@components/.*$",
+    "^@localization/.*$",
+    "^@services/.*$",
+    "^@/.*$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+}

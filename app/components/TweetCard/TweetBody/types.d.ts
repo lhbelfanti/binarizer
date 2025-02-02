@@ -1,4 +1,4 @@
 export interface TweetBodyProps {
-    content: string;
-    images?: string[];
+  content: string;
+  images?: string[];
 }

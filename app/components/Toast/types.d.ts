@@ -1,4 +1,4 @@
 export interface ToastProps {
-    message: string;
-    type:  'success' | 'warning' | 'error' | 'info';
+  message: string;
+  type: 'success' | 'warning' | 'error' | 'info';
 }

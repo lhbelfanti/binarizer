@@ -14,9 +14,13 @@
 </p>
 
 ---
+
 # Binarizer
+
 Tool for manual creation of a dataset to be used in a binary classification algorithm.
 
 ---
+
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)

@@ -1,22 +1,20 @@
-import TextHighlighter from "@components/TweetCard/TextHighlighter";
-import Carousel from "@components/Carousel";
+import Carousel from '@components/Carousel';
+import TextHighlighter from '@components/TweetCard/TextHighlighter';
 
-import { TweetBodyProps } from "./types";
+import { TweetBodyProps } from './types';
 
 const TweetBody = (props: TweetBodyProps) => {
-    const { content, images } = props;
+  const { content, images } = props;
 
-    return (
-        <div className="mb-3">
-            <TextHighlighter text={content}/>
+  return (
+    <div className="mb-3">
+      <TextHighlighter text={content} />
 
-            <div className="m-8"/>
+      <div className="m-8" />
 
-            {images && images.length > 0 && (
-                <Carousel images={images}></Carousel>
-            )}
-        </div>
-    );
+      {images && images.length > 0 && <Carousel images={images}></Carousel>}
+    </div>
+  );
 };
 
 export default TweetBody;
