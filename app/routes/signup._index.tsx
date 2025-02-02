@@ -1,11 +1,11 @@
-import { LinksFunction, ActionFunction, ActionFunctionArgs } from "@remix-run/node";
+import { ActionFunction, ActionFunctionArgs } from "@remix-run/node";
 import i18next from "~/localization/i18n.server";
 
 import { APIError } from "~/services/api/api.server";
 import { signup } from "~/services/api/auth.server";
 import { validateCredentials } from "~/services/api/validation.server";
 
-import AuthForm from 'app/components/AuthForm';
+import AuthForm from '~/components/AuthForm';
 import { SIGNUP } from "~/components/AuthForm/constants";
 import {ValidationError} from "~/components/AuthForm/errors";
 import {AuthFormActionResult, AuthFormCredentials} from "~/components/AuthForm/types";

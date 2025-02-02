@@ -2,10 +2,10 @@ import { LinksFunction } from '@remix-run/node';
 import { DragEvent } from 'react';
 import { Trans } from "react-i18next";
 
-import Button from 'app/components/Button';
-import { links as XLogoLinks } from 'app/components/TweetCard/XLogo';
-import Section from 'app/components/Section';
-import TweetCard from 'app/components/TweetCard';
+import Button from '~/components/Button';
+import { links as XLogoLinks } from '~/components/TweetCard/XLogo';
+import Section from '~/components/Section';
+import TweetCard from '~/components/TweetCard';
 
 import variables from '~/data/variables.json'
 import example from '~/data/tweet_examples.json'

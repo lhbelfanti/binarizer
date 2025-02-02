@@ -1,6 +1,6 @@
 import { Outlet } from '@remix-run/react';
 
-import Header from 'app/components/Header';
+import Header from '~/components/Header';
 
 const AppLayout = () => {
 	return (
