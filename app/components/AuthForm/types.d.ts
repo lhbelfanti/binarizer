@@ -7,6 +7,7 @@ export interface AuthFormActionResult {
 export type AuthFormActionErrors = {
 	username?: string;
 	password?: string;
+	api?: string;
 	unexpected?: string;
 };
 

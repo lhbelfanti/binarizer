@@ -26,7 +26,7 @@
   "login_description": "Por favor, ingrese su usuario y contraseña",
   "login_button": "Iniciar sesión",
   "login_success_toast_message": "¡Inicio de sessión exitoso!",
-  "login_error_toast_message": "El inicio de sesión falló. Por favor, intentelo nuevamente más tarde.",
+  "login_error_toast_message": "El inicio de sesión falló. Usuario y/o contraseña incorrectos.",
   "app_tweet_card_tweet_is_a_reply": "Este tweet es una respuesta a otro tweet",
   "app_tweet_card_quote": "Cita >",
   "app_tweet_card_quote_is_a_reply": "Este tweet citado es una respuesta a otro tweet",

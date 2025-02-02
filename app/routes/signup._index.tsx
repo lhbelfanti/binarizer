@@ -10,8 +10,6 @@ import { SIGNUP } from "~/components/AuthForm/constants";
 import {ValidationError} from "~/components/AuthForm/errors";
 import {AuthFormActionResult, AuthFormCredentials} from "~/components/AuthForm/types";
 
-import { links as buttonLinks } from 'app/components/Button';
-
 const SignUpPage = () => {
 	return (
 		<div className="flex items-center justify-center h-screen">
@@ -50,7 +48,7 @@ export const action: ActionFunction = async ({ request }: ActionFunctionArgs) =>
 			actionResponse.errors = error.authValidationErrors;
 			return actionResponse;
 		} else if (error instanceof APIError) {
-			actionResponse.errors.unexpected = error.message;
+			actionResponse.errors.api = error.message;
 			return actionResponse;
 		}
 
@@ -58,7 +56,3 @@ export const action: ActionFunction = async ({ request }: ActionFunctionArgs) =>
 		return actionResponse;
 	}
 };
-
-export const links: LinksFunction = () => {
-	return [...buttonLinks()];
-}

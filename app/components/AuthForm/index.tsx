@@ -1,18 +1,44 @@
-import { Form, useActionData, useNavigation } from '@remix-run/react';
+import { Form, useActionData, useNavigation, useNavigate, Link } from '@remix-run/react';
 import { Trans, useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
 
-import Button from 'app/components/Button';
+import { LOGIN, SIGNUP } from "~/components/AuthForm/constants";
+import Button from '~/components/Button';
+import Toast from "~/components/Toast";
+import { SUCCESS, ERROR } from "~/components/Toast/constants";
 
-import { AuthFormProps, AuthFormActionErrors } from './types';
+import { AuthFormActionResult, AuthFormProps } from './types';
 
 const AuthForm = (props: AuthFormProps) => {
 	const { authType } = props;
 
 	const navigation = useNavigation()
+	const navigate = useNavigate()
 	const { t } = useTranslation();
-	const validationErrors = useActionData<AuthFormActionErrors>();
+	const actionData = useActionData<AuthFormActionResult>();
 
+	const actionLink: string = `/${authType}?index`
 	const isSubmitting: boolean = navigation.state !== 'idle';
+	const showSignUpLink: boolean = authType === LOGIN;
+
+	useEffect(() => {
+		if (actionData?.authType === SIGNUP) {
+			if (actionData?.success) {
+				toast(<Toast message={t("signup_success_toast_message")} type={SUCCESS} />);
+				setTimeout(() => navigate('/login') , 2000);
+			} else {
+				toast(<Toast message={t("signup_error_toast_message")} type={ERROR} />);
+			}
+		} else if (actionData?.authType === LOGIN) {
+			if (actionData?.success) {
+				toast(<Toast message={t("login_success_toast_message")} type={SUCCESS} />);
+				setTimeout(() => navigate('/app'), 2000);
+			} else {
+				toast(<Toast message={t("login_error_toast_message")} type={ERROR} />);
+			}
+		}
+	}, [actionData, navigate, t]);
 
 	return (
 		<div className="flex flex-col">
@@ -30,7 +56,7 @@ const AuthForm = (props: AuthFormProps) => {
 				</div>
 			</div>
 
-			<Form method="post" action="/login?index" className="flex flex-col items-center gap-4 mt-4" id="auth-form">
+			<Form method="post" action={actionLink} className="flex flex-col items-center gap-4 mt-4" id="auth-form">
 				<div className="flex flex-col w-96">
 					<label htmlFor="username" className="text-gray-300 text-lg">
 						<Trans i18nKey="auth_username" />
@@ -43,7 +69,7 @@ const AuthForm = (props: AuthFormProps) => {
 						placeholder={t("auth_username_placeholder")}
 						required
 					/>
-					{validationErrors?.username && <p className="text-sm text-red-500 mt-1">{validationErrors.username}</p>}
+					{actionData?.errors?.username && <p className="text-sm text-red-500 mt-1">{actionData?.errors?.username}</p>}
 				</div>
 				<div className="flex flex-col w-96">
 					<label htmlFor="password" className="text-gray-300 text-lg">
@@ -57,9 +83,8 @@ const AuthForm = (props: AuthFormProps) => {
 						placeholder={t("auth_password_placeholder")}
 						required
 					/>
-					{validationErrors?.password && <p className="text-sm text-red-500 mt-1">{validationErrors.password}</p>}
+					{actionData?.errors?.password && <p className="text-sm text-red-500 mt-1">{actionData?.errors?.password}</p>}
 				</div>
-				{validationErrors?.unexpected && <p className="text-sm text-red-500 mt-1">{validationErrors.unexpected}</p>}
 				<div className="form-actions">
 					<Button type="submit" disabled={ isSubmitting }>
 						{ isSubmitting ?
@@ -69,6 +94,16 @@ const AuthForm = (props: AuthFormProps) => {
 					</Button>
 				</div>
 			</Form>
+
+			{ showSignUpLink ?
+				<div className="mt-4 text-center">
+					<p className="text-gray-300 text-sm">
+						<Link to="/signup" className="text-blue-500 underline hover:text-blue-300">
+							<Trans i18nKey="auth_signup_link_text" />
+						</Link>
+					</p>
+				</div> : null
+			}
 		</div>
 	);
 }
