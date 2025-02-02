@@ -1,5 +1,6 @@
 import { renderToPipeableStream } from 'react-dom/server';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
+import type { EntryContext as ReactRouterEntryContext }  from 'react-router';
 
 import { EntryContext, createReadableStreamFromReadable } from '@remix-run/node';
 import { RemixServer } from '@remix-run/react';
@@ -26,11 +27,11 @@ export default async function handleRequest(
   const callbackName = isbot(request.headers.get('user-agent')) ? 'onAllReady' : 'onShellReady';
   const instance = createInstance();
   const lng = await i18next.getLocale(request);
-  const ns = i18next.getRouteNamespaces(remixContext);
+  const ns = i18next.getRouteNamespaces(remixContext as ReactRouterEntryContext);
 
   await instance
     .use(initReactI18next) // Tell our instance to use react-i18next
-    .use(Backend) // Set up our backend
+    .use(Backend) // Setup our backend
     .init({
       ...i18n, // spread the configuration
       lng, // The locale we detected above

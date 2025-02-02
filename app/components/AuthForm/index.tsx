@@ -74,6 +74,7 @@ const AuthForm = (props: AuthFormProps) => {
             className="mt-1 p-2 border font-thin rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-500 bg-gray-700 border-gray-700 text-gray-100"
             placeholder={t('auth_username_placeholder')}
             required
+            autoComplete="username"
           />
           {actionData?.errors?.username && (
             <p className="text-sm text-red-500 mt-1">{actionData?.errors?.username}</p>
@@ -90,6 +91,7 @@ const AuthForm = (props: AuthFormProps) => {
             className="mt-1 p-2 border font-thin rounded-md shadow-sm focus:outline-none focus:ring focus:ring-purple-400 bg-gray-700 border-gray-700 text-gray-100"
             placeholder={t('auth_password_placeholder')}
             required
+            autoComplete={authType === LOGIN ? "current-password" : "new-password"}
           />
           {actionData?.errors?.password && (
             <p className="text-sm text-red-500 mt-1">{actionData?.errors?.password}</p>
