@@ -1,5 +1,5 @@
-import XLogo from "~/components/TweetCard/XLogo";
-import DateDisplay from "~/components/TweetCard/DateDisplay";
+import XLogo from "@components/TweetCard/XLogo";
+import DateDisplay from "@components/TweetCard/DateDisplay";
 
 import { TweetHeaderProps } from "./types";
 

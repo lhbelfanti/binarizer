@@ -1,5 +1,5 @@
-import { ToastProps } from "~/components/Toast/types";
-import { SUCCESS, WARNING, ERROR, INFO } from "~/components/Toast/constants";
+import { ToastProps } from "@components/Toast/types";
+import { SUCCESS, WARNING, ERROR, INFO } from "@components/Toast/constants";
 
 const Toast = (props: ToastProps) => {
     const { message, type } = props;

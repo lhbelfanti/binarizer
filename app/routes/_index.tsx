@@ -1,6 +1,6 @@
 import { Trans } from "react-i18next";
 
-import Button from "~/components/Button";
+import Button from "@components/Button";
 
 const MainPage = () => {
 	return (

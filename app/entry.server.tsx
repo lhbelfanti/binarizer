@@ -11,8 +11,8 @@ import { I18nextProvider, initReactI18next } from "react-i18next";
 import Backend from "i18next-fs-backend";
 import { createInstance } from "i18next";
 
-import i18next from "~/localization/i18n.server";
-import i18n from "~/localization/i18n";
+import i18next from "@localization/i18n.server";
+import i18n from "@localization/i18n";
 
 
 // Reject/cancel all pending promises after 5 seconds

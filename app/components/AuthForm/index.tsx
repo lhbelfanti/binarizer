@@ -3,10 +3,10 @@ import { Trans, useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 
-import { LOGIN, SIGNUP } from "~/components/AuthForm/constants";
-import Button from '~/components/Button';
-import Toast from "~/components/Toast";
-import { SUCCESS, ERROR } from "~/components/Toast/constants";
+import { LOGIN, SIGNUP } from "@components/AuthForm/constants";
+import Button from '@components/Button';
+import Toast from "@components/Toast";
+import { SUCCESS, ERROR } from "@components/Toast/constants";
 
 import { AuthFormActionResult, AuthFormProps } from './types';
 

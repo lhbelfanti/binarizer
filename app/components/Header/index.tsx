@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 import { FaHome, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 import { Trans } from "react-i18next";
 
-import AnalysisOverview from "~/components/AnalysisOverview";
+import AnalysisOverview from "@components/AnalysisOverview";
 
-import variables from '~/data/variables.json'
+import variables from 'app/data/variables.json'
 
 const Header = () => {
 	const { header } = variables;

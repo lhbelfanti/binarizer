@@ -1,6 +1,6 @@
-import { AuthFormActionErrors, AuthFormCredentials } from "~/components/AuthForm/types";
-import i18next from '~/localization/i18n.server';
-import {ValidationError} from "~/components/AuthForm/errors";
+import { AuthFormActionErrors, AuthFormCredentials } from "@components/AuthForm/types";
+import i18next from '@localization/i18n.server';
+import {ValidationError} from "@components/AuthForm/errors";
 
 const isValidUsername = (value: string) => {
     return value && value.trim().length >= 5;

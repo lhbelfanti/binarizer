@@ -1,12 +1,12 @@
 import { ActionFunction, ActionFunctionArgs } from "@remix-run/node";
-import i18next from '~/localization/i18n.server';
+import i18next from '@localization/i18n.server';
 
-import { APIError } from "~/services/api/api.server";
-import { login } from "~/services/api/auth.server";
+import { APIError } from "@services/api/api.server";
+import { login } from "@services/api/auth.server";
 
-import AuthForm from '~/components/AuthForm';
-import { LOGIN } from "~/components/AuthForm/constants";
-import { AuthFormCredentials, AuthFormActionResult } from "~/components/AuthForm/types";
+import AuthForm from '@components/AuthForm';
+import { LOGIN } from "@components/AuthForm/constants";
+import { AuthFormCredentials, AuthFormActionResult } from "@components/AuthForm/types";
 
 const LogInPage = () => {
 	return (

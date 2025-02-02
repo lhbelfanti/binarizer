@@ -1,4 +1,4 @@
-import { Quote } from '~/components/TweetCard/TweetQuote/types';
+import { Quote } from '@components/TweetCard/TweetQuote/types';
 
 export interface TweetProps {
 	tweet: Tweet

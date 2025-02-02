@@ -1,7 +1,7 @@
-import { createAuthSession, destroyAuthSession } from "~/services/api/session.server";
-import { APIError, fetchFromAPI } from "~/services/api/api.server";
-import { APIResponse, LogInRequestBodyDTO, LogInResponse, LogInResponseDTO, SignUpRequestBodyDTO } from "~/services/api/types.server";
-import { recursiveToCamel } from "~/services/utils/camelize";
+import { createAuthSession, destroyAuthSession } from "@services/api/session.server";
+import { APIError, fetchFromAPI } from "@services/api/api.server";
+import { APIResponse, LogInRequestBodyDTO, LogInResponse, LogInResponseDTO, SignUpRequestBodyDTO } from "@services/api/types.server";
+import { recursiveToCamel } from "@services/utils/camelize";
 import { redirect } from "@remix-run/node";
 
 

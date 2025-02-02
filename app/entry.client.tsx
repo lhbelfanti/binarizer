@@ -6,7 +6,7 @@ import { I18nextProvider, initReactI18next } from "react-i18next";
 import i18next from "i18next";
 import Backend from "i18next-http-backend";
 
-import i18n from "~/localization/i18n";
+import i18n from "@localization/i18n";
 
 async function hydrate() {
     // eslint-disable-next-line import/no-named-as-default-member

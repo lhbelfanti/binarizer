@@ -1,9 +1,9 @@
 import { Trans } from "react-i18next";
 
-import DraggableElement from '~/components/DraggableElement';
-import TweetQuote from '~/components/TweetCard/TweetQuote';
-import TweetHeader from "~/components/TweetCard/TweetHeader";
-import TweetBody from "~/components/TweetCard/TweetBody";
+import DraggableElement from '@components/DraggableElement';
+import TweetQuote from '@components/TweetCard/TweetQuote';
+import TweetHeader from "@components/TweetCard/TweetHeader";
+import TweetBody from "@components/TweetCard/TweetBody";
 
 import { TweetProps } from './types';
 

@@ -1,7 +1,7 @@
 import { Trans } from "react-i18next";
 
-import TweetHeader from "~/components/TweetCard/TweetHeader";
-import TweetBody from "~/components/TweetCard/TweetBody";
+import TweetHeader from "@components/TweetCard/TweetHeader";
+import TweetBody from "@components/TweetCard/TweetBody";
 
 import { TweetQuoteProps } from './types';
 

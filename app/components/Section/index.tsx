@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import DroppableElement from '~/components/DroppableElement';
+import DroppableElement from '@components/DroppableElement';
 
 import { SectionProps } from './types';
 

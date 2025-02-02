@@ -1,5 +1,5 @@
-import TextHighlighter from "~/components/TweetCard/TextHighlighter";
-import Carousel from "~/components/Carousel";
+import TextHighlighter from "@components/TweetCard/TextHighlighter";
+import Carousel from "@components/Carousel";
 
 import { TweetBodyProps } from "./types";
 
