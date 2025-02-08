@@ -41,7 +41,8 @@ export const action: ActionFunction = async ({ request }: ActionFunctionArgs) =>
 
   try {
     await validateCredentials(credentials, locale);
-    return await signup(credentials);
+    await signup(credentials);
+    return actionResponse;
   } catch (error) {
     actionResponse.success = false;
 

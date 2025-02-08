@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Trans, useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
@@ -17,6 +17,8 @@ const AuthForm = (props: AuthFormProps) => {
 
   const navigation = useNavigation();
   const navigate = useNavigate();
+  const [authSuccess, setAuthSuccess] = useState(false);
+
   const { t } = useTranslation();
   const actionData = useActionData<AuthFormActionResult>();
 
@@ -28,19 +30,23 @@ const AuthForm = (props: AuthFormProps) => {
     if (actionData?.authType === SIGNUP) {
       if (actionData?.success) {
         toast(<Toast message={t('signup_success_toast_message')} type={SUCCESS} />);
-        setTimeout(() => navigate('/login'), 2000);
+        setTimeout(() => navigate('/login'), 5000);
+        setAuthSuccess(true);
       } else {
-        toast(<Toast message={t('signup_error_toast_message')} type={ERROR} />);
+        if (!actionData?.errors.username && !actionData?.errors.password) {
+          toast(<Toast message={t('signup_error_toast_message')} type={ERROR} />);
+        }
       }
     } else if (actionData?.authType === LOGIN) {
       if (actionData?.success) {
         toast(<Toast message={t('login_success_toast_message')} type={SUCCESS} />);
-        setTimeout(() => navigate('/app'), 2000);
+        setTimeout(() => navigate('/app'), 5000);
+        setAuthSuccess(true);
       } else {
         toast(<Toast message={t('login_error_toast_message')} type={ERROR} />);
       }
     }
-  }, [actionData, navigate, t]);
+  }, [actionData, setAuthSuccess, navigate, t]);
 
   return (
     <div className="flex flex-col">
@@ -91,16 +97,18 @@ const AuthForm = (props: AuthFormProps) => {
             className="mt-1 p-2 border font-thin rounded-md shadow-sm focus:outline-none focus:ring focus:ring-purple-400 bg-gray-700 border-gray-700 text-gray-100"
             placeholder={t('auth_password_placeholder')}
             required
-            autoComplete={authType === LOGIN ? "current-password" : "new-password"}
+            autoComplete={authType === LOGIN ? 'current-password' : 'new-password'}
           />
           {actionData?.errors?.password && (
             <p className="text-sm text-red-500 mt-1">{actionData?.errors?.password}</p>
           )}
         </div>
         <div className="form-actions">
-          <Button type="submit" disabled={isSubmitting}>
+          <Button type="submit" disabled={isSubmitting || authSuccess}>
             {isSubmitting ? (
               <Trans i18nKey="auth_button_authenticating_state" />
+            ) : authSuccess ? (
+              <Trans i18nKey={`${authType}_button_success`} />
             ) : (
               <Trans i18nKey={`${authType}_button`} />
             )}

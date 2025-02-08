@@ -1,5 +1,3 @@
-import { redirect } from '@remix-run/node';
-
 import { APIError, fetchFromAPI } from '@services/api/api.server';
 import { createAuthSession, destroyAuthSession } from '@services/api/session.server';
 import {
@@ -12,21 +10,21 @@ import {
 import { recursiveToCamel } from '@services/utils/camelize';
 
 export const signup = async (requestBody: SignUpRequestBodyDTO) => {
-  const response: APIResponse = await fetchFromAPI('auth/signup/v1', {
+  const signUpAPIResponse: APIResponse = await fetchFromAPI('auth/signup/v1', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(requestBody),
   });
 
-  if (response.code >= 400) {
-    throw new APIError(response);
+  if (signUpAPIResponse.code >= 400) {
+    throw new APIError(signUpAPIResponse);
   }
 
-  return redirect('/login');
+  return signUpAPIResponse;
 };
 
-export const login = async (requestBody: LogInRequestBodyDTO) => {
-  const response: APIResponse<LogInResponseDTO> = await fetchFromAPI<LogInResponseDTO>(
+export const login = async (requestBody: LogInRequestBodyDTO): Promise<LogInResponseDTO> => {
+  const logInAPIResponse: APIResponse<LogInResponseDTO> = await fetchFromAPI<LogInResponseDTO>(
     'auth/login/v1',
     {
       method: 'POST',
@@ -35,13 +33,14 @@ export const login = async (requestBody: LogInRequestBodyDTO) => {
     }
   );
 
-  if (response.code >= 400 || !response.data) {
-    throw new APIError(response);
+  if (logInAPIResponse.code >= 400 || !logInAPIResponse.data) {
+    throw new APIError(logInAPIResponse);
   }
 
-  const res: LogInResponse = recursiveToCamel(response.data);
+  const logInResponse: LogInResponse = recursiveToCamel(logInAPIResponse.data);
+  await createAuthSession(logInResponse.token, logInResponse.expiresAt);
 
-  return createAuthSession(res.token, res.expiresAt, '/app');
+  return logInResponse;
 };
 
 export const logout = async (request: Request, authToken: string) => {

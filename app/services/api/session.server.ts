@@ -1,5 +1,7 @@
 import { createCookieSessionStorage, redirect } from '@remix-run/node';
 
+import { SessionData } from '@services/api/types.server';
+
 const SESSION_SECRET = process.env.SESSION_SECRET as string;
 const SESSION_REFRESH_THRESHOLD_MS: number = 5 * 60 * 1000; // 5 minutes
 const COOKIE_SESSION_STORAGE_MAX_AGE: number = 30 * 24 * 60 * 60; // 30 days
@@ -16,18 +18,14 @@ const sessionStorage = createCookieSessionStorage({
   },
 });
 
-export const createAuthSession = async (token: string, expiresAt: number, redirectPath: string) => {
+export const createAuthSession = async (token: string, expiresAt: number) => {
   const session = await sessionStorage.getSession();
   session.set('token', token);
   session.set('expiresAt', expiresAt);
-  return redirect(redirectPath, {
-    headers: {
-      'Set-Cookie': await sessionStorage.commitSession(session),
-    },
-  });
+  await sessionStorage.commitSession(session);
 };
 
-export const getDataFromSession = async (request: Request) => {
+export const getDataFromSession = async (request: Request): Promise<SessionData | null> => {
   const session = await sessionStorage.getSession(request.headers.get('Cookie'));
 
   if (!session.has('token') || !session.has('expiresAt')) {
@@ -46,12 +44,7 @@ export const getDataFromSession = async (request: Request) => {
 
 export const destroyAuthSession = async (request: Request) => {
   const session = await sessionStorage.getSession(request.headers.get('Cookie'));
-
-  return redirect('/', {
-    headers: {
-      'Set-Cookie': await sessionStorage.destroySession(session),
-    },
-  });
+  await sessionStorage.destroySession(session);
 };
 
 export const requiresAuthSession = async (request: Request) => {

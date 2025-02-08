@@ -38,7 +38,8 @@ export const action: ActionFunction = async ({ request }: ActionFunctionArgs) =>
   const t = await i18next.getFixedT(locale);
 
   try {
-    return await login(credentials);
+    await login(credentials);
+    return actionResponse;
   } catch (error) {
     actionResponse.success = false;
 

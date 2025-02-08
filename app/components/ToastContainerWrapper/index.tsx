@@ -10,7 +10,7 @@ const ToastContainerWrapper = () => {
         <ToastContainer
           theme="dark"
           position="bottom-center"
-          autoClose={2000}
+          autoClose={5000}
           hideProgressBar={false}
           newestOnTop={true}
           closeOnClick
@@ -28,6 +28,7 @@ const ToastContainerWrapper = () => {
             bottom: '0',
             padding: '0',
             margin: '0 0 1.5rem 0',
+            background: 'transparent',
           }}
         />
       )}

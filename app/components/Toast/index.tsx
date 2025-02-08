@@ -8,26 +8,14 @@ const Toast = (props: ToastProps) => {
   const getToastStyle = () => {
     switch (type) {
       case SUCCESS:
-        return {
-          background: 'linear-gradient(to right, #10b981, #059669)',
-          borderLeft: '4px solid #047857',
-        };
+        return { background: 'linear-gradient(to right, #10b981, #059669)' };
       case WARNING:
-        return {
-          background: 'linear-gradient(to right, #f59e0b, #d97706)',
-          borderLeft: '4px solid #b45309',
-        };
+        return { background: 'linear-gradient(to right, #f59e0b, #d97706)' };
       case ERROR:
-        return {
-          background: 'linear-gradient(to right, #ef4444, #dc2626)',
-          borderLeft: '4px solid #b91c1c',
-        };
+        return { background: 'linear-gradient(to right, #ef4444, #dc2626)' };
       case INFO:
       default:
-        return {
-          background: 'linear-gradient(to right, #3b82f6, #2563eb)',
-          borderLeft: '4px solid #1d4ed8',
-        };
+        return { background: 'linear-gradient(to right, #3b82f6, #2563eb)' };
     }
   };
 
@@ -35,7 +23,7 @@ const Toast = (props: ToastProps) => {
     <div
       style={{
         width: '100%',
-        padding: '0.75rem 1rem',
+        padding: '1rem',
         color: 'white',
         fontSize: '1rem',
         borderRadius: '0.375rem',

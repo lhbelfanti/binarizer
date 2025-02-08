@@ -1,6 +1,6 @@
 import { renderToPipeableStream } from 'react-dom/server';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
-import type { EntryContext as ReactRouterEntryContext }  from 'react-router';
+import type { EntryContext as ReactRouterEntryContext } from 'react-router';
 
 import { EntryContext, createReadableStreamFromReadable } from '@remix-run/node';
 import { RemixServer } from '@remix-run/react';
