@@ -9,7 +9,8 @@ export interface APIResponse<T = unknown> {
 // SessionData represents the information saved in the cookies
 export interface SessionData {
   token: string;
-  expiresAt: number;
+  hasTokenExpired: boolean;
+  justLoggedIn: boolean;
 }
 
 // LogInRequestBodyDTO represents the request body sent to the login endpoint
@@ -21,7 +22,8 @@ export type LogInRequestBodyDTO = {
 // LogInResponseDTO represents the data returned by the API upon successful login
 export type LogInResponseDTO = {
   token: string;
-  expires_at: number;
+  expires_at: string;
+  headers: Record<string, string>;
 };
 
 export type LogInResponse = Camelize<LogInResponseDTO>;

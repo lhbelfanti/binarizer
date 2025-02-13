@@ -1,4 +1,11 @@
-import { ActionFunction, ActionFunctionArgs } from '@remix-run/node';
+import {
+  ActionFunction,
+  ActionFunctionArgs,
+  LoaderFunction,
+  LoaderFunctionArgs,
+  redirect,
+  data,
+} from '@remix-run/node';
 
 import AuthForm from '@components/AuthForm';
 import { SIGNUP } from '@components/AuthForm/constants';
@@ -9,19 +16,23 @@ import i18next from '@localization/i18n.server';
 
 import { APIError } from '@services/api/api.server';
 import { signup } from '@services/api/auth.server';
+import { getDataFromSession } from '@services/api/session.server';
+import { SessionData } from '@services/api/types.server';
 import { validateCredentials } from '@services/api/validation.server';
 
-const SignUpPage = () => {
-  return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="transform translate-y-[-20%]">
-        <AuthForm authType={SIGNUP} />
-      </div>
-    </div>
-  );
-};
+export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) => {
+  const sessionData: SessionData | null = await getDataFromSession(request);
 
-export default SignUpPage;
+  console.log(`signup._index.tsx sessionData ${JSON.stringify(sessionData)}`);
+
+  if (!sessionData || sessionData?.hasTokenExpired || sessionData?.justLoggedIn) {
+    console.log(`login page return null hasTokenExpired - ${sessionData?.hasTokenExpired} -- justLoggedIn - ${sessionData?.justLoggedIn}`);
+    return null
+  }
+
+  console.log(`login page redirect to app`);
+  return redirect('/app');
+};
 
 export const action: ActionFunction = async ({ request }: ActionFunctionArgs) => {
   const formData: FormData = await request.formData();
@@ -42,19 +53,31 @@ export const action: ActionFunction = async ({ request }: ActionFunctionArgs) =>
   try {
     await validateCredentials(credentials, locale);
     await signup(credentials);
-    return actionResponse;
+    return data(actionResponse, { status: 200 });
   } catch (error) {
     actionResponse.success = false;
 
     if (error instanceof ValidationError) {
       actionResponse.errors = error.authValidationErrors;
-      return actionResponse;
+      return data(actionResponse, { status: 400 });
     } else if (error instanceof APIError) {
       actionResponse.errors.api = error.message;
-      return actionResponse;
+      return data(actionResponse, { status: 400 });
     }
 
     actionResponse.errors.unexpected = t('auth_unexpected_error_during_validation');
-    return actionResponse;
+    return data(actionResponse, { status: 500 });
   }
 };
+
+const SignUpPage = () => {
+  return (
+    <div className="flex items-center justify-center h-screen">
+      <div className="transform translate-y-[-20%]">
+        <AuthForm authType={SIGNUP} />
+      </div>
+    </div>
+  );
+};
+
+export default SignUpPage;

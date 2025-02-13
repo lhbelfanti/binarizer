@@ -6,7 +6,7 @@ import ToastContainerWrapper from '@components/ToastContainerWrapper';
 const SignUpLayout = () => {
   return (
     <>
-      <Header />
+      <Header isLoggedIn={false} />
       <Outlet />
       <ToastContainerWrapper />
     </>

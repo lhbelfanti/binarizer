@@ -31,6 +31,7 @@ async function hydrate() {
         // on the browser, so we disable it
         caches: [],
       },
+      lng: document.documentElement.lang || 'en',
     });
 
   startTransition(() => {

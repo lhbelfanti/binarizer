@@ -38,7 +38,8 @@ export const login = async (requestBody: LogInRequestBodyDTO): Promise<LogInResp
   }
 
   const logInResponse: LogInResponse = recursiveToCamel(logInAPIResponse.data);
-  await createAuthSession(logInResponse.token, logInResponse.expiresAt);
+  const { headers } = await createAuthSession(logInResponse.token, logInResponse.expiresAt);
+  logInResponse.headers = headers;
 
   return logInResponse;
 };

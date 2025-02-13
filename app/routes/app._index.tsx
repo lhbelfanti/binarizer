@@ -2,7 +2,7 @@ import { DragEvent } from 'react';
 
 import { Trans } from 'react-i18next';
 
-import { LinksFunction } from '@remix-run/node';
+import { LinksFunction, LoaderFunction, LoaderFunctionArgs, redirect } from '@remix-run/node';
 
 import example from 'app/data/tweet_examples.json';
 import variables from 'app/data/variables.json';
@@ -11,6 +11,21 @@ import Button from '@components/Button';
 import Section from '@components/Section';
 import TweetCard from '@components/TweetCard';
 import { links as XLogoLinks } from '@components/TweetCard/XLogo';
+
+import { getDataFromSession } from '@services/api/session.server';
+import { SessionData } from '@services/api/types.server';
+
+export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) => {
+  const sessionData: SessionData | null = await getDataFromSession(request);
+
+  console.log(`app._index.tsx sessionData ${JSON.stringify(sessionData)}`);
+  if (!sessionData || sessionData?.hasTokenExpired) {
+    console.log(`redirect to app hasTokenExpired - ${sessionData?.hasTokenExpired} -- justLoggedIn - ${sessionData?.justLoggedIn}`);
+    return redirect('/login');
+  }
+
+  return { isLoggedIn: true };
+};
 
 const AppPage = () => {
   const sections = variables.page.app.sections;

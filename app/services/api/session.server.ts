@@ -1,13 +1,15 @@
-import { createCookieSessionStorage, redirect } from '@remix-run/node';
+import { createCookieSessionStorage } from '@remix-run/node';
 
 import { SessionData } from '@services/api/types.server';
 
 const SESSION_SECRET = process.env.SESSION_SECRET as string;
 const SESSION_REFRESH_THRESHOLD_MS: number = 5 * 60 * 1000; // 5 minutes
+const LOG_IN_THRESHOLD_MS: number = 5 * 1000; // 5 seconds
 const COOKIE_SESSION_STORAGE_MAX_AGE: number = 30 * 24 * 60 * 60; // 30 days
 
 const sessionStorage = createCookieSessionStorage({
   cookie: {
+    name: '__session',
     secure: process.env.NODE_ENV === 'production',
     secrets: [SESSION_SECRET], // Secrets with which my cookies will be signed to avoid showing
     // them as plain text in the frontend
@@ -18,41 +20,45 @@ const sessionStorage = createCookieSessionStorage({
   },
 });
 
-export const createAuthSession = async (token: string, expiresAt: number) => {
+export const createAuthSession = async (token: string, expiresAt: string) => {
   const session = await sessionStorage.getSession();
   session.set('token', token);
   session.set('expiresAt', expiresAt);
-  await sessionStorage.commitSession(session);
+  session.set('loggedInAt', Date.now().toString())
+  return {
+    headers: {
+      'Set-Cookie': await sessionStorage.commitSession(session),
+    },
+  };
 };
 
 export const getDataFromSession = async (request: Request): Promise<SessionData | null> => {
   const session = await sessionStorage.getSession(request.headers.get('Cookie'));
 
-  if (!session.has('token') || !session.has('expiresAt')) {
+  if (!session.has('token') || !session.has('expiresAt') || !session.has('loggedInAt')) {
     return null;
   }
 
+  // Retrieve values from session
   const token: string = session.get('token');
-  const expiresAt: number = parseInt(session.get('expiresAt'));
-  const isTokenExpiringSoon: boolean = expiresAt - Date.now() < SESSION_REFRESH_THRESHOLD_MS;
-  if (isTokenExpiringSoon) {
-    return null;
-  }
+  const expiresAt: string = session.get('expiresAt');
+  const loggedInAt: string = session.get('loggedInAt');
 
-  return { token, expiresAt };
+  // Date now
+  const dateNow = Date.now();
+
+  // Evaluate hasTokenExpired
+  const expiresAtDate = new Date(expiresAt);
+  const hasTokenExpired: boolean = (expiresAtDate.getTime() - dateNow) < SESSION_REFRESH_THRESHOLD_MS;
+
+  // Evaluate justLoggedIn
+  const loggedInAtDate = parseInt(loggedInAt, 10)
+  const justLoggedIn: boolean = (dateNow - loggedInAtDate) < LOG_IN_THRESHOLD_MS;
+
+  return { token, hasTokenExpired, justLoggedIn };
 };
 
 export const destroyAuthSession = async (request: Request) => {
   const session = await sessionStorage.getSession(request.headers.get('Cookie'));
   await sessionStorage.destroySession(session);
-};
-
-export const requiresAuthSession = async (request: Request) => {
-  const sessionData = await getDataFromSession(request);
-
-  if (!sessionData?.token) {
-    throw redirect('/auth?mode=login');
-  }
-
-  return sessionData.token;
 };

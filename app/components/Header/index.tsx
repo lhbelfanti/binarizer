@@ -1,29 +1,17 @@
-import { useEffect, useState } from 'react';
-
 import { Trans } from 'react-i18next';
 import { FaHome, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 
-import { Link, useLocation } from '@remix-run/react';
+import { Link } from '@remix-run/react';
 
 import variables from 'app/data/variables.json';
 
 import AnalysisOverview from '@components/AnalysisOverview';
 
-const Header = () => {
+const Header = (props: HeaderProps) => {
+  const { isLoggedIn } = props;
   const { header } = variables;
 
-  const location = useLocation();
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const userLoggedIn: boolean = location.pathname !== '/login';
-    setIsLoggedIn(userLoggedIn);
-  }, [location]);
-
-  const handleLogout = () => {
-    setIsLoggedIn(false); // This should be replaced with actual logout logic
-  };
+  const handleLogout = () => {};
 
   return (
     <header className="flex items-center justify-between pt-2 pb-2 pr-3 pl-3 border-b-2 border-b-gray-700">

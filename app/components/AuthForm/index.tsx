@@ -27,10 +27,11 @@ const AuthForm = (props: AuthFormProps) => {
   const showSignUpLink: boolean = authType === LOGIN;
 
   useEffect(() => {
+    console.log(`actionData ${JSON.stringify(actionData)}`);
     if (actionData?.authType === SIGNUP) {
       if (actionData?.success) {
         toast(<Toast message={t('signup_success_toast_message')} type={SUCCESS} />);
-        setTimeout(() => navigate('/login'), 5000);
+        setTimeout(() => navigate('/login'), 3000);
         setAuthSuccess(true);
       } else {
         if (!actionData?.errors.username && !actionData?.errors.password) {
@@ -40,13 +41,13 @@ const AuthForm = (props: AuthFormProps) => {
     } else if (actionData?.authType === LOGIN) {
       if (actionData?.success) {
         toast(<Toast message={t('login_success_toast_message')} type={SUCCESS} />);
-        setTimeout(() => navigate('/app'), 5000);
         setAuthSuccess(true);
+        setTimeout(() => navigate('/app'), 3000);
       } else {
         toast(<Toast message={t('login_error_toast_message')} type={ERROR} />);
       }
     }
-  }, [actionData, setAuthSuccess, navigate, t]);
+  }, [t, actionData, navigate]);
 
   return (
     <div className="flex flex-col">
