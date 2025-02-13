@@ -1,6 +1,6 @@
 {
   "plugins": ["@trivago/prettier-plugin-sort-imports"],
-  "printWidth": 100,
+  "printWidth": 120,
   "arrowParens": "always",
   "bracketSameLine": true,
   "bracketSpacing": true,

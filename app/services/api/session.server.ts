@@ -24,7 +24,7 @@ export const createAuthSession = async (token: string, expiresAt: string) => {
   const session = await sessionStorage.getSession();
   session.set('token', token);
   session.set('expiresAt', expiresAt);
-  session.set('loggedInAt', Date.now().toString())
+  session.set('loggedInAt', Date.now().toString());
   return {
     headers: {
       'Set-Cookie': await sessionStorage.commitSession(session),
@@ -49,11 +49,11 @@ export const getDataFromSession = async (request: Request): Promise<SessionData 
 
   // Evaluate hasTokenExpired
   const expiresAtDate = new Date(expiresAt);
-  const hasTokenExpired: boolean = (expiresAtDate.getTime() - dateNow) < SESSION_REFRESH_THRESHOLD_MS;
+  const hasTokenExpired: boolean = expiresAtDate.getTime() - dateNow < SESSION_REFRESH_THRESHOLD_MS;
 
   // Evaluate justLoggedIn
-  const loggedInAtDate = parseInt(loggedInAt, 10)
-  const justLoggedIn: boolean = (dateNow - loggedInAtDate) < LOG_IN_THRESHOLD_MS;
+  const loggedInAtDate = parseInt(loggedInAt, 10);
+  const justLoggedIn: boolean = dateNow - loggedInAtDate < LOG_IN_THRESHOLD_MS;
 
   return { token, hasTokenExpired, justLoggedIn };
 };

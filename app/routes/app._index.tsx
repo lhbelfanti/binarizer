@@ -20,7 +20,9 @@ export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) =>
 
   console.log(`app._index.tsx sessionData ${JSON.stringify(sessionData)}`);
   if (!sessionData || sessionData?.hasTokenExpired) {
-    console.log(`redirect to app hasTokenExpired - ${sessionData?.hasTokenExpired} -- justLoggedIn - ${sessionData?.justLoggedIn}`);
+    console.log(
+      `redirect to app hasTokenExpired - ${sessionData?.hasTokenExpired} -- justLoggedIn - ${sessionData?.justLoggedIn}`
+    );
     return redirect('/login');
   }
 

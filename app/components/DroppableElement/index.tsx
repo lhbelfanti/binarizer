@@ -32,11 +32,7 @@ const DroppableElement = (props: DroppableElementProps) => {
   };
 
   return (
-    <div
-      style={dynamicDivStyles}
-      onDragOver={handleOnDragOver}
-      onDragLeave={handleOnDragLeave}
-      onDrop={handleOnDrop}>
+    <div style={dynamicDivStyles} onDragOver={handleOnDragOver} onDragLeave={handleOnDragLeave} onDrop={handleOnDrop}>
       {children}
     </div>
   );

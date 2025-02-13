@@ -65,11 +65,7 @@ const AuthForm = (props: AuthFormProps) => {
         </div>
       </div>
 
-      <Form
-        method="post"
-        action={actionLink}
-        className="flex flex-col items-center gap-4 mt-4"
-        id="auth-form">
+      <Form method="post" action={actionLink} className="flex flex-col items-center gap-4 mt-4" id="auth-form">
         <div className="flex flex-col w-96">
           <label htmlFor="username" className="text-gray-300 text-lg">
             <Trans i18nKey="auth_username" />
@@ -83,9 +79,7 @@ const AuthForm = (props: AuthFormProps) => {
             required
             autoComplete="username"
           />
-          {actionData?.errors?.username && (
-            <p className="text-sm text-red-500 mt-1">{actionData?.errors?.username}</p>
-          )}
+          {actionData?.errors?.username && <p className="text-sm text-red-500 mt-1">{actionData?.errors?.username}</p>}
         </div>
         <div className="flex flex-col w-96">
           <label htmlFor="password" className="text-gray-300 text-lg">
@@ -100,9 +94,7 @@ const AuthForm = (props: AuthFormProps) => {
             required
             autoComplete={authType === LOGIN ? 'current-password' : 'new-password'}
           />
-          {actionData?.errors?.password && (
-            <p className="text-sm text-red-500 mt-1">{actionData?.errors?.password}</p>
-          )}
+          {actionData?.errors?.password && <p className="text-sm text-red-500 mt-1">{actionData?.errors?.password}</p>}
         </div>
         <div className="form-actions">
           <Button type="submit" disabled={isSubmitting || authSuccess}>

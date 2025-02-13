@@ -4,7 +4,7 @@ import { Outlet, useLoaderData } from '@remix-run/react';
 import Header from '@components/Header';
 
 import { getDataFromSession } from '@services/api/session.server';
-import {SessionData} from "@services/api/types.server";
+import { SessionData } from '@services/api/types.server';
 
 export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) => {
   const sessionData: SessionData | null = await getDataFromSession(request);
@@ -16,7 +16,7 @@ export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) =>
 
 const AppLayout = () => {
   const { isLoggedIn } = useLoaderData<typeof loader>();
-  console.log(`Fetching useLoaderData on every render ${isLoggedIn}`)
+  console.log(`Fetching useLoaderData on every render ${isLoggedIn}`);
 
   return (
     <>

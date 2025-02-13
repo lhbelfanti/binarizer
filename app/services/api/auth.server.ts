@@ -24,14 +24,11 @@ export const signup = async (requestBody: SignUpRequestBodyDTO) => {
 };
 
 export const login = async (requestBody: LogInRequestBodyDTO): Promise<LogInResponseDTO> => {
-  const logInAPIResponse: APIResponse<LogInResponseDTO> = await fetchFromAPI<LogInResponseDTO>(
-    'auth/login/v1',
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(requestBody),
-    }
-  );
+  const logInAPIResponse: APIResponse<LogInResponseDTO> = await fetchFromAPI<LogInResponseDTO>('auth/login/v1', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(requestBody),
+  });
 
   if (logInAPIResponse.code >= 400 || !logInAPIResponse.data) {
     throw new APIError(logInAPIResponse);

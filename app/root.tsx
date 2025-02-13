@@ -3,15 +3,7 @@ import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { LinksFunction, LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
-import {
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useLoaderData,
-  useMatches,
-} from '@remix-run/react';
+import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData, useMatches } from '@remix-run/react';
 
 import { useChangeLanguage } from 'remix-i18next/react';
 
@@ -35,8 +27,7 @@ export const meta: MetaFunction = () => {
     { property: 'og:title', content: 'Binarizer: binary dataset creator' },
     {
       name: 'description',
-      content:
-        'Tool for manual creation of a dataset to be used in a binary classification algorithm.',
+      content: 'Tool for manual creation of a dataset to be used in a binary classification algorithm.',
     },
   ];
 };

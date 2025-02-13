@@ -47,9 +47,7 @@ const Header = (props: HeaderProps) => {
         )}
         {isLoggedIn && (
           <>
-            <button
-              onClick={handleLogout}
-              className="flex items-center text-red-400 hover:underline mr-4">
+            <button onClick={handleLogout} className="flex items-center text-red-400 hover:underline mr-4">
               <FaSignOutAlt className="h-6 w-6 mr-1" />
               <Trans i18nKey="top_bar_logout_button" />
             </button>

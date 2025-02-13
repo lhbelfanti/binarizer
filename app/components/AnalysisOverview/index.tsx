@@ -22,11 +22,7 @@ const AnalysisOverview = (props: AnalysisOverviewProps) => {
         <span className="font-semibold">&quot;{currentCriteria}&quot;</span>
       </div>
 
-      <StatsBlock
-        topic={'top_bar_analysis_overview_tweets'}
-        total={totalTweets}
-        analyzed={tweetsAnalyzed}
-      />
+      <StatsBlock topic={'top_bar_analysis_overview_tweets'} total={totalTweets} analyzed={tweetsAnalyzed} />
     </div>
   );
 };

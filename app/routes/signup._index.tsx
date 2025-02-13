@@ -3,8 +3,8 @@ import {
   ActionFunctionArgs,
   LoaderFunction,
   LoaderFunctionArgs,
-  redirect,
   data,
+  redirect,
 } from '@remix-run/node';
 
 import AuthForm from '@components/AuthForm';
@@ -26,8 +26,10 @@ export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) =>
   console.log(`signup._index.tsx sessionData ${JSON.stringify(sessionData)}`);
 
   if (!sessionData || sessionData?.hasTokenExpired || sessionData?.justLoggedIn) {
-    console.log(`login page return null hasTokenExpired - ${sessionData?.hasTokenExpired} -- justLoggedIn - ${sessionData?.justLoggedIn}`);
-    return null
+    console.log(
+      `login page return null hasTokenExpired - ${sessionData?.hasTokenExpired} -- justLoggedIn - ${sessionData?.justLoggedIn}`
+    );
+    return null;
   }
 
   console.log(`login page redirect to app`);
