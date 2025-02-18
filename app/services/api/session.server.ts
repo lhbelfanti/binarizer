@@ -4,12 +4,12 @@ import { SessionData } from '@services/api/types.server';
 
 const SESSION_SECRET = process.env.SESSION_SECRET as string;
 const SESSION_REFRESH_THRESHOLD_MS: number = 5 * 60 * 1000; // 5 minutes
-const LOG_IN_THRESHOLD_MS: number = 5 * 1000; // 5 seconds
+const LOG_IN_THRESHOLD_MS: number = 3 * 1000; // 3 seconds
 const COOKIE_SESSION_STORAGE_MAX_AGE: number = 30 * 24 * 60 * 60; // 30 days
 
 const sessionStorage = createCookieSessionStorage({
   cookie: {
-    name: '__session',
+    name: 'binarizer_session',
     secure: process.env.NODE_ENV === 'production',
     secrets: [SESSION_SECRET], // Secrets with which my cookies will be signed to avoid showing
     // them as plain text in the frontend
@@ -25,6 +25,7 @@ export const createAuthSession = async (token: string, expiresAt: string) => {
   session.set('token', token);
   session.set('expiresAt', expiresAt);
   session.set('loggedInAt', Date.now().toString());
+
   return {
     headers: {
       'Set-Cookie': await sessionStorage.commitSession(session),

@@ -17,24 +17,27 @@ import { APIError } from '@services/api/api.server';
 import { login } from '@services/api/auth.server';
 import { getDataFromSession } from '@services/api/session.server';
 import { LogInResponseDTO, SessionData } from '@services/api/types.server';
+import log from '@services/utils/logger';
 
 export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) => {
   const sessionData: SessionData | null = await getDataFromSession(request);
-
-  console.log(`login._index.tsx sessionData ${JSON.stringify(sessionData)}`);
+  log.loader('login._index.tsx', 'called', { sessionData: JSON.stringify(sessionData) });
 
   if (!sessionData || sessionData?.hasTokenExpired || sessionData?.justLoggedIn) {
-    console.log(
-      `login page return null hasTokenExpired - ${sessionData?.hasTokenExpired} -- justLoggedIn - ${sessionData?.justLoggedIn}`
-    );
+    log.loader('login._index.tsx', 'inside first condition', {
+      hasTokenExpired: sessionData?.hasTokenExpired,
+      justLoggedIn: sessionData?.justLoggedIn,
+    });
     return null;
   }
 
-  console.log(`login page redirect to app`);
+  log.redirection('/login', '/app');
   return redirect('/app');
 };
 
 export const action: ActionFunction = async ({ request }: ActionFunctionArgs) => {
+  log.action('login._index.tsx', 'called');
+
   const formData: FormData = await request.formData();
   const username: string = formData.get('username') as string;
   const password: string = formData.get('password') as string;
@@ -51,16 +54,24 @@ export const action: ActionFunction = async ({ request }: ActionFunctionArgs) =>
   const t = await i18next.getFixedT(locale);
 
   try {
+    log.action('login._index.tsx', 'login endpoint called');
     const logInResponse: LogInResponseDTO = await login(credentials);
+    log.action('login._index.tsx', 'return data', {
+      actionResponse: actionResponse,
+      logInResponse: JSON.stringify(logInResponse),
+      statusCode: 200,
+    });
     return data(actionResponse, { status: 200, headers: logInResponse.headers });
   } catch (error) {
     actionResponse.success = false;
 
     if (error instanceof APIError) {
       actionResponse.errors.api = error.message;
+      log.withError().action('login._index.tsx', 'api error', { actionResponse: actionResponse, statusCode: 400 });
       return data(actionResponse, { status: 400 });
     }
 
+    log.withError().action('login._index.tsx', 'unexpected error', { actionResponse: actionResponse, statusCode: 500 });
     actionResponse.errors.unexpected = t('auth_unexpected_error');
     return data(actionResponse, { status: 500 });
   }

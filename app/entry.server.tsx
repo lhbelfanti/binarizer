@@ -31,7 +31,7 @@ export default async function handleRequest(
 
   await instance
     .use(initReactI18next) // Tell our instance to use react-i18next
-    .use(Backend) // Setup our backend
+    .use(Backend) // Set up our backend
     .init({
       ...i18n, // spread the configuration
       lng, // The locale we detected above

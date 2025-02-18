@@ -5,18 +5,18 @@ import Header from '@components/Header';
 
 import { getDataFromSession } from '@services/api/session.server';
 import { SessionData } from '@services/api/types.server';
+import log from '@services/utils/logger';
 
 export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) => {
   const sessionData: SessionData | null = await getDataFromSession(request);
-
-  console.log(`app.tsx sessionData ${JSON.stringify(sessionData)}`);
-
+  log.loader('app.tsx', 'called', { sessionData: JSON.stringify(sessionData) });
+  log.loader('app.tsx', 'returns', { isLoggedIn: true });
   return { isLoggedIn: true };
 };
 
 const AppLayout = () => {
   const { isLoggedIn } = useLoaderData<typeof loader>();
-  console.log(`Fetching useLoaderData on every render ${isLoggedIn}`);
+  log.info('app.tsx -> useLoaderData', 'retrieving data', { isLoggedIn: isLoggedIn });
 
   return (
     <>

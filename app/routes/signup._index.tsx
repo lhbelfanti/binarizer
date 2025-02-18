@@ -19,24 +19,27 @@ import { signup } from '@services/api/auth.server';
 import { getDataFromSession } from '@services/api/session.server';
 import { SessionData } from '@services/api/types.server';
 import { validateCredentials } from '@services/api/validation.server';
+import log from '@services/utils/logger';
 
 export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) => {
   const sessionData: SessionData | null = await getDataFromSession(request);
-
-  console.log(`signup._index.tsx sessionData ${JSON.stringify(sessionData)}`);
+  log.loader('signup._index.tsx', 'called', { sessionData: JSON.stringify(sessionData) });
 
   if (!sessionData || sessionData?.hasTokenExpired || sessionData?.justLoggedIn) {
-    console.log(
-      `login page return null hasTokenExpired - ${sessionData?.hasTokenExpired} -- justLoggedIn - ${sessionData?.justLoggedIn}`
-    );
+    log.loader('signup._index.tsx', 'inside first condition', {
+      hasTokenExpired: sessionData?.hasTokenExpired,
+      justLoggedIn: sessionData?.justLoggedIn,
+    });
     return null;
   }
 
-  console.log(`login page redirect to app`);
+  log.redirection('/signup', '/app');
   return redirect('/app');
 };
 
 export const action: ActionFunction = async ({ request }: ActionFunctionArgs) => {
+  log.action('signup._index.tsx', 'called');
+
   const formData: FormData = await request.formData();
   const username: string = formData.get('username') as string;
   const password: string = formData.get('password') as string;
@@ -53,20 +56,30 @@ export const action: ActionFunction = async ({ request }: ActionFunctionArgs) =>
   const t = await i18next.getFixedT(locale);
 
   try {
+    log.action('signup._index.tsx', 'validate credentials called');
     await validateCredentials(credentials, locale);
+    log.action('signup._index.tsx', 'signup endpoint called');
     await signup(credentials);
+    log.action('signup._index.tsx', 'return data', { actionResponse: actionResponse, statusCode: 200 });
     return data(actionResponse, { status: 200 });
   } catch (error) {
     actionResponse.success = false;
 
     if (error instanceof ValidationError) {
       actionResponse.errors = error.authValidationErrors;
+      log
+        .withError()
+        .action('signup._index.tsx', 'validate credentials error', { actionResponse: actionResponse, statusCode: 400 });
       return data(actionResponse, { status: 400 });
     } else if (error instanceof APIError) {
       actionResponse.errors.api = error.message;
+      log.withError().action('signup._index.tsx', 'api error', { actionResponse: actionResponse, statusCode: 400 });
       return data(actionResponse, { status: 400 });
     }
 
+    log
+      .withError()
+      .action('signup._index.tsx', 'unexpected error', { actionResponse: actionResponse, statusCode: 500 });
     actionResponse.errors.unexpected = t('auth_unexpected_error_during_validation');
     return data(actionResponse, { status: 500 });
   }

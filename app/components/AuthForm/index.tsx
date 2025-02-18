@@ -10,6 +10,8 @@ import Button from '@components/Button';
 import Toast from '@components/Toast';
 import { ERROR, SUCCESS } from '@components/Toast/constants';
 
+import log from '@services/utils/logger';
+
 import { AuthFormActionResult, AuthFormProps } from './types';
 
 const AuthForm = (props: AuthFormProps) => {
@@ -27,7 +29,7 @@ const AuthForm = (props: AuthFormProps) => {
   const showSignUpLink: boolean = authType === LOGIN;
 
   useEffect(() => {
-    console.log(`actionData ${JSON.stringify(actionData)}`);
+    log.info('Action Data', 'useEffect', { actionData: JSON.stringify(actionData) });
     if (actionData?.authType === SIGNUP) {
       if (actionData?.success) {
         toast(<Toast message={t('signup_success_toast_message')} type={SUCCESS} />);
@@ -41,8 +43,8 @@ const AuthForm = (props: AuthFormProps) => {
     } else if (actionData?.authType === LOGIN) {
       if (actionData?.success) {
         toast(<Toast message={t('login_success_toast_message')} type={SUCCESS} />);
-        setAuthSuccess(true);
         setTimeout(() => navigate('/app'), 3000);
+        setAuthSuccess(true);
       } else {
         toast(<Toast message={t('login_error_toast_message')} type={ERROR} />);
       }
