@@ -1,7 +1,7 @@
 import { Trans } from 'react-i18next';
 import { FaHome, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 
-import { Link } from '@remix-run/react';
+import { Link, useSubmit } from '@remix-run/react';
 
 import variables from 'app/data/variables.json';
 
@@ -11,7 +11,11 @@ const Header = (props: HeaderProps) => {
   const { isLoggedIn } = props;
   const { header } = variables;
 
-  const handleLogout = () => {};
+  const submit = useSubmit();
+
+  const handleLogout = () => {
+    submit(null, { method: 'post', action: '/logout' });
+  };
 
   return (
     <header className="flex items-center justify-between pt-2 pb-2 pr-3 pl-3 border-b-2 border-b-gray-700">
