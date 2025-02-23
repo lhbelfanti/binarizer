@@ -61,5 +61,5 @@ export const getDataFromSession = async (request: Request): Promise<SessionData 
 
 export const destroyAuthSession = async (request: Request) => {
   const session = await sessionStorage.getSession(request.headers.get('Cookie'));
-  await sessionStorage.destroySession(session);
+  return await sessionStorage.destroySession(session);
 };

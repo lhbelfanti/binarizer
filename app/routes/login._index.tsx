@@ -36,44 +36,60 @@ export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) =>
 };
 
 export const action: ActionFunction = async ({ request }: ActionFunctionArgs) => {
-  log.action('login._index.tsx', 'called');
-
   const formData: FormData = await request.formData();
-  const username: string = formData.get('username') as string;
-  const password: string = formData.get('password') as string;
+  const flow: string = formData.get('flow') as string;
 
-  const credentials: AuthFormCredentials = { username, password };
+  log.action('login._index.tsx', 'called', { flow });
+  switch (flow) {
+    case 'login': {
+      const username: string = formData.get('username') as string;
+      const password: string = formData.get('password') as string;
 
-  const actionResponse: AuthFormActionResult = {
-    authType: LOGIN,
-    success: true,
-    errors: {},
-  };
+      const credentials: AuthFormCredentials = { username, password };
 
-  const locale = await i18next.getLocale(request);
-  const t = await i18next.getFixedT(locale);
+      const actionResponse: AuthFormActionResult = {
+        authType: LOGIN,
+        success: true,
+        errors: {},
+      };
 
-  try {
-    log.action('login._index.tsx', 'login endpoint called');
-    const logInResponse: LogInResponseDTO = await login(credentials);
-    log.action('login._index.tsx', 'return data', {
-      actionResponse: actionResponse,
-      logInResponse: JSON.stringify(logInResponse),
-      statusCode: 200,
-    });
-    return data(actionResponse, { status: 200, headers: logInResponse.headers });
-  } catch (error) {
-    actionResponse.success = false;
+      const locale = await i18next.getLocale(request);
+      const t = await i18next.getFixedT(locale);
 
-    if (error instanceof APIError) {
-      actionResponse.errors.api = error.message;
-      log.withError().action('login._index.tsx', 'api error', { actionResponse: actionResponse, statusCode: 400 });
-      return data(actionResponse, { status: 400 });
+      try {
+        log.action('login._index.tsx', 'login endpoint called');
+        const logInResponse: LogInResponseDTO = await login(credentials);
+        log.action('login._index.tsx', 'return data', {
+          actionResponse: actionResponse,
+          logInResponse: JSON.stringify(logInResponse),
+          statusCode: 200,
+        });
+        return data(actionResponse, { status: 200, headers: logInResponse.headers });
+      } catch (error) {
+        actionResponse.success = false;
+
+        if (error instanceof APIError) {
+          actionResponse.errors.api = error.message;
+          log.withError().action('login._index.tsx', 'api error', { actionResponse: actionResponse, statusCode: 400 });
+          return data(actionResponse, { status: 400 });
+        }
+
+        log.withError().action('login._index.tsx', 'unexpected error', {
+          actionResponse: actionResponse,
+          statusCode: 500,
+        });
+        actionResponse.errors.unexpected = t('auth_unexpected_error');
+        return data(actionResponse, { status: 500 });
+      }
     }
-
-    log.withError().action('login._index.tsx', 'unexpected error', { actionResponse: actionResponse, statusCode: 500 });
-    actionResponse.errors.unexpected = t('auth_unexpected_error');
-    return data(actionResponse, { status: 500 });
+    case 'login_success': {
+      const cookie: string = request.headers.get('Cookie') ?? '';
+      log.redirection('/login', '/app');
+      return redirect('/app', { headers: { 'Set-Cookie': cookie } });
+    }
+    default: {
+      break;
+    }
   }
 };
 

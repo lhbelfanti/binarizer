@@ -38,50 +38,61 @@ export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) =>
 };
 
 export const action: ActionFunction = async ({ request }: ActionFunctionArgs) => {
-  log.action('signup._index.tsx', 'called');
-
   const formData: FormData = await request.formData();
-  const username: string = formData.get('username') as string;
-  const password: string = formData.get('password') as string;
+  const flow: string = formData.get('flow') as string;
 
-  const credentials: AuthFormCredentials = { username, password };
+  log.action('signup._index.tsx', 'called', { flow });
+  switch (flow) {
+    case 'signup': {
+      const username: string = formData.get('username') as string;
+      const password: string = formData.get('password') as string;
 
-  const actionResponse: AuthFormActionResult = {
-    authType: SIGNUP,
-    success: true,
-    errors: {},
-  };
+      const credentials: AuthFormCredentials = { username, password };
 
-  const locale = await i18next.getLocale(request);
-  const t = await i18next.getFixedT(locale);
+      const actionResponse: AuthFormActionResult = {
+        authType: SIGNUP,
+        success: true,
+        errors: {},
+      };
 
-  try {
-    log.action('signup._index.tsx', 'validate credentials called');
-    await validateCredentials(credentials, locale);
-    log.action('signup._index.tsx', 'signup endpoint called');
-    await signup(credentials);
-    log.action('signup._index.tsx', 'return data', { actionResponse: actionResponse, statusCode: 200 });
-    return data(actionResponse, { status: 200 });
-  } catch (error) {
-    actionResponse.success = false;
+      const locale = await i18next.getLocale(request);
+      const t = await i18next.getFixedT(locale);
 
-    if (error instanceof ValidationError) {
-      actionResponse.errors = error.authValidationErrors;
-      log
-        .withError()
-        .action('signup._index.tsx', 'validate credentials error', { actionResponse: actionResponse, statusCode: 400 });
-      return data(actionResponse, { status: 400 });
-    } else if (error instanceof APIError) {
-      actionResponse.errors.api = error.message;
-      log.withError().action('signup._index.tsx', 'api error', { actionResponse: actionResponse, statusCode: 400 });
-      return data(actionResponse, { status: 400 });
+      try {
+        log.action('signup._index.tsx', 'validate credentials called');
+        await validateCredentials(credentials, locale);
+        log.action('signup._index.tsx', 'signup endpoint called');
+        await signup(credentials);
+        log.action('signup._index.tsx', 'return data', { actionResponse: actionResponse, statusCode: 200 });
+        return data(actionResponse, { status: 200 });
+      } catch (error) {
+        actionResponse.success = false;
+
+        if (error instanceof ValidationError) {
+          actionResponse.errors = error.authValidationErrors;
+          log.withError().action('signup._index.tsx', 'validate credentials error', {
+            actionResponse: actionResponse,
+            statusCode: 400,
+          });
+          return data(actionResponse, { status: 400 });
+        } else if (error instanceof APIError) {
+          actionResponse.errors.api = error.message;
+          log.withError().action('signup._index.tsx', 'api error', { actionResponse: actionResponse, statusCode: 400 });
+          return data(actionResponse, { status: 400 });
+        }
+
+        log
+          .withError()
+          .action('signup._index.tsx', 'unexpected error', { actionResponse: actionResponse, statusCode: 500 });
+        actionResponse.errors.unexpected = t('auth_unexpected_error_during_validation');
+        return data(actionResponse, { status: 500 });
+      }
     }
-
-    log
-      .withError()
-      .action('signup._index.tsx', 'unexpected error', { actionResponse: actionResponse, statusCode: 500 });
-    actionResponse.errors.unexpected = t('auth_unexpected_error_during_validation');
-    return data(actionResponse, { status: 500 });
+    case 'signup_success': {
+      const cookie: string = request.headers.get('Cookie') ?? '';
+      log.redirection('/signup', '/login');
+      return redirect('/login', { headers: { 'Set-Cookie': cookie } });
+    }
   }
 };
 

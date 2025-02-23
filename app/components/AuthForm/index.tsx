@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
-import { Form, Link, useActionData, useNavigate, useNavigation } from '@remix-run/react';
+import { Form, Link, useActionData, useNavigation, useSubmit } from '@remix-run/react';
 
 import { LOGIN, SIGNUP } from '@components/AuthForm/constants';
 import Button from '@components/Button';
@@ -18,7 +18,7 @@ const AuthForm = (props: AuthFormProps) => {
   const { authType } = props;
 
   const navigation = useNavigation();
-  const navigate = useNavigate();
+  const submit = useSubmit();
   const [authSuccess, setAuthSuccess] = useState(false);
 
   const { t } = useTranslation();
@@ -33,7 +33,11 @@ const AuthForm = (props: AuthFormProps) => {
     if (actionData?.authType === SIGNUP) {
       if (actionData?.success) {
         toast(<Toast message={t('signup_success_toast_message')} type={SUCCESS} />);
-        setTimeout(() => navigate('/login'), 3000);
+        setTimeout(() => {
+          const formData: FormData = new FormData();
+          formData.append('flow', 'signup_success');
+          submit(formData, { method: 'post', action: '/signup?index' });
+        }, 3000);
         setAuthSuccess(true);
       } else {
         if (!actionData?.errors.username && !actionData?.errors.password) {
@@ -43,13 +47,17 @@ const AuthForm = (props: AuthFormProps) => {
     } else if (actionData?.authType === LOGIN) {
       if (actionData?.success) {
         toast(<Toast message={t('login_success_toast_message')} type={SUCCESS} />);
-        setTimeout(() => navigate('/app'), 3000);
+        setTimeout(() => {
+          const formData: FormData = new FormData();
+          formData.append('flow', 'login_success');
+          submit(formData, { method: 'post', action: '/login?index' });
+        }, 3000);
         setAuthSuccess(true);
       } else {
         toast(<Toast message={t('login_error_toast_message')} type={ERROR} />);
       }
     }
-  }, [t, actionData, navigate]);
+  }, [t, actionData, submit]);
 
   return (
     <div className="flex flex-col">
@@ -68,6 +76,7 @@ const AuthForm = (props: AuthFormProps) => {
       </div>
 
       <Form method="post" action={actionLink} className="flex flex-col items-center gap-4 mt-4" id="auth-form">
+        <input type="hidden" name="flow" value={`${authType}`} />
         <div className="flex flex-col w-96">
           <label htmlFor="username" className="text-gray-300 text-lg">
             <Trans i18nKey="auth_username" />

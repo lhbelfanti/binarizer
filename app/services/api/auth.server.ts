@@ -57,6 +57,11 @@ export const login = async (requestBody: LogInRequestBodyDTO): Promise<LogInResp
 };
 
 export const logout = async (request: Request, authToken: string) => {
+  if (!authToken) {
+    log.api('logout', 'token not available');
+    return destroyAuthSession(request);
+  }
+
   const endpoint = 'auth/logout/v1';
   const requestOptions = {
     method: 'POST',
