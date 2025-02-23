@@ -9,7 +9,7 @@ const TweetHeader = (props: TweetHeaderProps) => {
   return (
     <div className="flex justify-between items-center mb-3">
       <div className="flex items-center">
-        <img src={avatar} alt={author} className="rounded-full w-12 h-12" />
+        <img src={avatar} alt={author} className="rounded-full w-12 h-12" draggable={false} />
         <div className="ml-3">
           <span className="text-black font-bold block">{user}</span>
           <span className="text-gray-500 text-sm">{author}</span>

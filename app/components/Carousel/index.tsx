@@ -50,7 +50,7 @@ const Carousel = (props: CarouselProps) => {
           style={{ transform: `translateX(-${translateX}px)` }}>
           {elements.even.map((image, index) => (
             <div key={`even${index}`} className={`w-[95px] h-[95px] object-cover`}>
-              <img src={image} alt={`image${index}`} className="w-full h-full rounded-xl" />
+              <img src={image} alt={`image${index}`} className="w-full h-full rounded-xl" draggable={false} />
             </div>
           ))}
         </div>
@@ -63,7 +63,7 @@ const Carousel = (props: CarouselProps) => {
             style={{ transform: `translateX(-${translateX}px)` }}>
             {elements.odd.map((image, index) => (
               <div key={`odd${index}`} className={`w-[95px] h-[95px] object-cover`}>
-                <img src={image} alt={`image${index}`} className="w-full h-full rounded-xl" />
+                <img src={image} alt={`image${index}`} className="w-full h-full rounded-xl" draggable={false} />
               </div>
             ))}
           </div>
