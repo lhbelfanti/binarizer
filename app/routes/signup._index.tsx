@@ -33,8 +33,8 @@ export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) =>
     return null;
   }
 
-  log.redirection('/signup', '/app');
-  return redirect('/app');
+  log.redirection('/signup', '/selection');
+  return redirect('/selection');
 };
 
 export const action: ActionFunction = async ({ request }: ActionFunctionArgs) => {

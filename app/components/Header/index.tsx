@@ -14,7 +14,8 @@ const Header = (props: HeaderProps) => {
   const submit = useSubmit();
   const location = useLocation();
 
-  const showLogInButton = location.pathname !== '/login';
+  const showLogInButton: boolean = location.pathname !== '/login';
+  const showAnalysisOverview: boolean = location.pathname !== '/selection';
 
   const handleLogout = () => {
     submit(null, { method: 'post', action: '/logout' });
@@ -36,7 +37,7 @@ const Header = (props: HeaderProps) => {
         </div>
       </Link>
 
-      {isLoggedIn && (
+      {isLoggedIn && showAnalysisOverview && (
         <AnalysisOverview
           currentCriteria="Criteria Name"
           totalCriteria={10}

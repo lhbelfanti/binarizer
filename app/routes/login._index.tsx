@@ -31,8 +31,8 @@ export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) =>
     return null;
   }
 
-  log.redirection('/login', '/app');
-  return redirect('/app');
+  log.redirection('/login', '/selection');
+  return redirect('/selection');
 };
 
 export const action: ActionFunction = async ({ request }: ActionFunctionArgs) => {
@@ -84,8 +84,8 @@ export const action: ActionFunction = async ({ request }: ActionFunctionArgs) =>
     }
     case 'login_success': {
       const cookie: string = request.headers.get('Cookie') ?? '';
-      log.redirection('/login', '/app');
-      return redirect('/app', { headers: { 'Set-Cookie': cookie } });
+      log.redirection('/login', '/selection');
+      return redirect('/selection', { headers: { 'Set-Cookie': cookie } });
     }
     default: {
       break;
