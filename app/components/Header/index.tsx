@@ -1,7 +1,7 @@
 import { Trans } from 'react-i18next';
 import { FaHome, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 
-import { Link, useSubmit } from '@remix-run/react';
+import { Link, useLocation, useSubmit } from '@remix-run/react';
 
 import variables from 'app/data/variables.json';
 
@@ -12,6 +12,9 @@ const Header = (props: HeaderProps) => {
   const { header } = variables;
 
   const submit = useSubmit();
+  const location = useLocation();
+
+  const showLogInButton = location.pathname !== '/login';
 
   const handleLogout = () => {
     submit(null, { method: 'post', action: '/logout' });
@@ -43,7 +46,7 @@ const Header = (props: HeaderProps) => {
         />
       )}
       <nav className="flex items-center gap-4">
-        {!isLoggedIn && (
+        {!isLoggedIn && showLogInButton && (
           <Link to="/login" className="flex items-center text-blue-400 hover:underline mr-4">
             <FaSignInAlt className="h-6 w-6 mr-1" />
             <Trans i18nKey="top_bar_login_button" />
