@@ -1,7 +1,8 @@
-import {ActionFunction, ActionFunctionArgs, LoaderFunction, LoaderFunctionArgs, redirect} from '@remix-run/node';
-import {SessionData} from "@services/api/types.server";
-import {getDataFromSession} from "@services/api/session.server";
-import log from "@services/utils/logger";
+import { ActionFunction, ActionFunctionArgs, LoaderFunction, LoaderFunctionArgs, redirect } from '@remix-run/node';
+
+import { getDataFromSession } from '@services/api/session.server';
+import { SessionData } from '@services/api/types.server';
+import log from '@services/utils/logger';
 
 export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) => {
   const sessionData: SessionData | null = await getDataFromSession(request);
