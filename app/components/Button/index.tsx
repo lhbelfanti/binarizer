@@ -3,35 +3,37 @@ import { Link } from '@remix-run/react';
 import type { ButtonProps } from './types';
 
 const Button = (props: ButtonProps) => {
-  const { to, type, disabled, children } = props;
-  const buttonGradient: string = `
+  const { to, type, style, disabled, children } = props;
+
+  const buttonClass: string = `
+    mt-4 
+    ${style?.width ? style.width : 'w-96'}
+    ${style?.padding ? style?.padding : 'p-2'} 
+    text-white 
+    ${style?.textSize ? style?.textSize : 'text-xl'} 
+    rounded-md 
     bg-[linear-gradient(to_right,#3b82f6,#8b5cf6)] 
-    bg-[100%_100%] 
+    bg-[100%_100%]
+    
     transition-[background-position] 
     duration-[0.3s,transform] 
     delay-[0.3s] 
+    
     hover:bg-[100%_50%] 
     hover:scale-105 
+    hover:button-animate
+    hover:bg-blue-700
+    
     active:scale-95;
+    
+    focus:outline-none 
+    focus:ring-2 
+    focus:ring-blue-400
+    
     disabled:bg-none
     disabled:bg-gray-400
     disabled:hover:scale-100
     disabled:hover:bg-[100%_100%]
-  `;
-  const buttonClass: string = `
-    mt-4 
-    w-96 
-    p-2 
-    ${buttonGradient}
-    text-white 
-    text-xl 
-    rounded-md 
-    hover:button-animate 
-    focus:outline-none 
-    focus:ring-2 
-    focus:ring-blue-400 
-    bg-blue-600 
-    hover:bg-blue-700
     disabled:opacity-75
     disabled:cursor-not-allowed
   `;
