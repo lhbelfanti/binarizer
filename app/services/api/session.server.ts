@@ -5,7 +5,6 @@ import log from '@services/utils/logger';
 
 const SESSION_SECRET = process.env.SESSION_SECRET as string;
 const SESSION_REFRESH_THRESHOLD_MS: number = 5 * 60 * 1000; // 5 minutes
-const LOG_IN_THRESHOLD_MS: number = 3 * 1000; // 3 seconds
 const COOKIE_SESSION_STORAGE_MAX_AGE: number = 30 * 24 * 60 * 60; // 30 days
 
 const sessionStorage = createCookieSessionStorage({
@@ -25,7 +24,6 @@ export const createAuthSession = async (token: string, expiresAt: string) => {
   const session = await sessionStorage.getSession();
   session.set('token', token);
   session.set('expiresAt', expiresAt);
-  session.set('loggedInAt', Date.now().toString());
 
   return {
     headers: {
@@ -37,14 +35,13 @@ export const createAuthSession = async (token: string, expiresAt: string) => {
 export const getDataFromSession = async (request: Request): Promise<SessionData | null> => {
   const session = await sessionStorage.getSession(request.headers.get('Cookie'));
 
-  if (!session.has('token') || !session.has('expiresAt') || !session.has('loggedInAt')) {
+  if (!session.has('token') || !session.has('expiresAt')) {
     return null;
   }
 
   // Retrieve values from session
   const token: string = session.get('token');
   const expiresAt: string = session.get('expiresAt');
-  const loggedInAt: string = session.get('loggedInAt');
 
   // Date now
   const dateNow = Date.now();
@@ -53,11 +50,7 @@ export const getDataFromSession = async (request: Request): Promise<SessionData 
   const expiresAtDate = new Date(expiresAt);
   const hasTokenExpired: boolean = expiresAtDate.getTime() - dateNow < SESSION_REFRESH_THRESHOLD_MS;
 
-  // Evaluate justLoggedIn
-  const loggedInAtDate = parseInt(loggedInAt, 10);
-  const justLoggedIn: boolean = dateNow - loggedInAtDate < LOG_IN_THRESHOLD_MS;
-
-  return { token, hasTokenExpired, justLoggedIn };
+  return { token, hasTokenExpired };
 };
 
 export const destroyAuthSession = async (request: Request) => {

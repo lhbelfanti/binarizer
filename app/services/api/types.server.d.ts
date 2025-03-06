@@ -10,7 +10,6 @@ export interface APIResponse<T = unknown> {
 export interface SessionData {
   token: string;
   hasTokenExpired: boolean;
-  justLoggedIn: boolean;
 }
 
 // LogInRequestBodyDTO represents the request body sent to the login endpoint
