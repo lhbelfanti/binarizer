@@ -32,7 +32,7 @@ const SelectionPage = () => {
     <div className="flex items-center justify-center mt-16">
       <div className="flex flex-col">
         <div className="flex flex-col items-center gap-4 mt-4">
-          <div className="flex flex-col">
+          <div className="flex flex-col items-center">
             <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
               <Trans i18nKey="selection_title" />
             </h2>
