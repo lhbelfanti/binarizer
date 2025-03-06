@@ -66,11 +66,9 @@ const AuthForm = (props: AuthFormProps) => {
           <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
             <Trans i18nKey={`${authType}_title`} />
           </h2>
-
           <p className="text-lg text-gray-300 mt-1 font-thin opacity-80">
             <Trans i18nKey={`${authType}_description`} />
           </p>
-
           <div className="mt-8" />
         </div>
       </div>
