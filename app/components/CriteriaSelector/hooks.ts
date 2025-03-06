@@ -26,19 +26,22 @@ export const useFilters = (criteria: Criteria[]) => {
   }, [criteria]);
 
   // getAvailableMonths returns all the available months of a given year
-  const getAvailableMonths = useCallback((year: number): number[] => {
-    return Array.from(
-      new Set(
-        criteria.flatMap((criteria: Criteria): number[] =>
-          criteria.years
-            .filter((yearData: CriteriaByYear) => year === 0 || yearData.year === year)
-            .flatMap((yearData: CriteriaByYear): number[] =>
-              yearData.months.map((monthData: CriteriaByMonth): number => monthData.month)
-            )
+  const getAvailableMonths = useCallback(
+    (year: number): number[] => {
+      return Array.from(
+        new Set(
+          criteria.flatMap((criteria: Criteria): number[] =>
+            criteria.years
+              .filter((yearData: CriteriaByYear) => year === 0 || yearData.year === year)
+              .flatMap((yearData: CriteriaByYear): number[] =>
+                yearData.months.map((monthData: CriteriaByMonth): number => monthData.month)
+              )
+          )
         )
-      )
-    ).sort((a: number, b: number): number => a - b);
-  }, [criteria]);
+      ).sort((a: number, b: number): number => a - b);
+    },
+    [criteria]
+  );
 
   // Handler to filter criteria based on the selected year and month
   const filterCriteria = useCallback((): Criteria[] => {
@@ -56,21 +59,23 @@ export const useFilters = (criteria: Criteria[]) => {
     }
 
     if (selected.month !== 0) {
-      filteredCriteria = filteredCriteria.map((criteria: Criteria): Criteria => {
-        return {
-          ...criteria,
-          years: criteria.years
-            .map((yearData: CriteriaByYear): CriteriaByYear => {
-              return {
-                ...yearData,
-                months: yearData.months.filter(
-                  (monthData: CriteriaByMonth): boolean => monthData.month === selected.month
-                ),
-              };
-            })
-            .filter((yearData: CriteriaByYear): boolean => yearData.months.length > 0),
-        };
-      }).filter((criteria: Criteria): boolean => criteria.years.length > 0);
+      filteredCriteria = filteredCriteria
+        .map((criteria: Criteria): Criteria => {
+          return {
+            ...criteria,
+            years: criteria.years
+              .map((yearData: CriteriaByYear): CriteriaByYear => {
+                return {
+                  ...yearData,
+                  months: yearData.months.filter(
+                    (monthData: CriteriaByMonth): boolean => monthData.month === selected.month
+                  ),
+                };
+              })
+              .filter((yearData: CriteriaByYear): boolean => yearData.months.length > 0),
+          };
+        })
+        .filter((criteria: Criteria): boolean => criteria.years.length > 0);
     }
 
     return filteredCriteria;

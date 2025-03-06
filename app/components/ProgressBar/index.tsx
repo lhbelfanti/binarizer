@@ -41,7 +41,8 @@ const ProgressBar = (props: ProgressBarProps) => {
       {!isHovered && (
         <>
           <div className={progressBarStyle} style={{ width: `${animatedProgress}%` }} />
-          <div className={`absolute inset-0 flex items-center justify-center text-sm font-medium text-white cursor-default`}>
+          <div
+            className={`absolute inset-0 flex items-center justify-center text-sm font-medium text-white cursor-default`}>
             {`${animatedProgress}%`}
           </div>
         </>
@@ -49,7 +50,8 @@ const ProgressBar = (props: ProgressBarProps) => {
       {isHovered && (
         <>
           <div className={progressBarStyle} style={{ width: `${animatedProgress}%` }} />
-          <div className={`absolute inset-0 flex items-center justify-center text-sm font-medium text-white cursor-default`}>
+          <div
+            className={`absolute inset-0 flex items-center justify-center text-sm font-medium text-white cursor-default`}>
             {`${currentValue}/${total}`}
           </div>
         </>

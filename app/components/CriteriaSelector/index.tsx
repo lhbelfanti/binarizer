@@ -9,8 +9,7 @@ import { CriteriaSelectorProps } from './types';
 
 const CriteriaSelector = (props: CriteriaSelectorProps) => {
   const { criteria } = props;
-  const { available, selected, filteredCriteria, selectYear, selectMonth, getAvailableMonths } =
-    useFilters(criteria);
+  const { available, selected, filteredCriteria, selectYear, selectMonth, getAvailableMonths } = useFilters(criteria);
 
   const [availableMonths, setAvailableMonths] = useState<number[]>(available.months);
 
