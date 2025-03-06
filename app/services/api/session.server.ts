@@ -1,6 +1,7 @@
 import { createCookieSessionStorage } from '@remix-run/node';
 
 import { SessionData } from '@services/api/types.server';
+import log from '@services/utils/logger';
 
 const SESSION_SECRET = process.env.SESSION_SECRET as string;
 const SESSION_REFRESH_THRESHOLD_MS: number = 5 * 60 * 1000; // 5 minutes
@@ -62,4 +63,18 @@ export const getDataFromSession = async (request: Request): Promise<SessionData 
 export const destroyAuthSession = async (request: Request) => {
   const session = await sessionStorage.getSession(request.headers.get('Cookie'));
   return await sessionStorage.destroySession(session);
+};
+
+export const isAuthenticated = async (request: Request, file: string): Promise<boolean> => {
+  const sessionData: SessionData | null = await getDataFromSession(request);
+  const sessionString: string = JSON.stringify(sessionData);
+  log.info(file, 'called', { sessionData: sessionString });
+
+  if (!sessionData || sessionData?.hasTokenExpired) {
+    log.info(file, 'not authenticated', { sessionData: sessionString });
+
+    return false;
+  }
+
+  return true;
 };

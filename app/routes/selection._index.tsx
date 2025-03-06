@@ -5,19 +5,12 @@ import { ActionFunction, ActionFunctionArgs, LoaderFunction, LoaderFunctionArgs,
 import CriteriaSelector from 'app/components/CriteriaSelector';
 import searchCriteria from 'app/data/search_criteria_examples.json';
 
-import { getDataFromSession } from '@services/api/session.server';
-import { SessionData } from '@services/api/types.server';
+import { isAuthenticated } from '@services/api/session.server';
 import log from '@services/utils/logger';
 
 export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) => {
-  const sessionData: SessionData | null = await getDataFromSession(request);
-  log.loader('selection._index.tsx', 'called', { sessionData: JSON.stringify(sessionData) });
-
-  if (!sessionData || sessionData?.hasTokenExpired) {
-    log.loader('selection._index.tsx', 'inside first condition', {
-      hasTokenExpired: sessionData?.hasTokenExpired,
-      justLoggedIn: sessionData?.justLoggedIn,
-    });
+  const authenticated: boolean = await isAuthenticated(request, 'selection._index.tsx');
+  if (!authenticated) {
     log.redirection('/selection', '/login');
     return redirect('/login');
   }

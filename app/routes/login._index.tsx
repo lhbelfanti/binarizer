@@ -15,24 +15,18 @@ import i18next from '@localization/i18n.server';
 
 import { APIError } from '@services/api/api.server';
 import { login } from '@services/api/auth.server';
-import { getDataFromSession } from '@services/api/session.server';
-import { LogInResponseDTO, SessionData } from '@services/api/types.server';
+import { isAuthenticated } from '@services/api/session.server';
+import { LogInResponseDTO } from '@services/api/types.server';
 import log from '@services/utils/logger';
 
 export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) => {
-  const sessionData: SessionData | null = await getDataFromSession(request);
-  log.loader('login._index.tsx', 'called', { sessionData: JSON.stringify(sessionData) });
-
-  if (!sessionData || sessionData?.hasTokenExpired || sessionData?.justLoggedIn) {
-    log.loader('login._index.tsx', 'inside first condition', {
-      hasTokenExpired: sessionData?.hasTokenExpired,
-      justLoggedIn: sessionData?.justLoggedIn,
-    });
-    return null;
+  const authenticated: boolean = await isAuthenticated(request, 'login._index.tsx');
+  if (authenticated) {
+    log.redirection('/login', '/selection');
+    return redirect('/selection');
   }
 
-  log.redirection('/login', '/selection');
-  return redirect('/selection');
+  return null;
 };
 
 export const action: ActionFunction = async ({ request }: ActionFunctionArgs) => {

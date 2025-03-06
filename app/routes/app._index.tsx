@@ -12,19 +12,12 @@ import Section from '@components/Section';
 import TweetCard from '@components/TweetCard';
 import { links as XLogoLinks } from '@components/TweetCard/XLogo';
 
-import { getDataFromSession } from '@services/api/session.server';
-import { SessionData } from '@services/api/types.server';
+import { isAuthenticated } from '@services/api/session.server';
 import log from '@services/utils/logger';
 
 export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) => {
-  const sessionData: SessionData | null = await getDataFromSession(request);
-  log.loader('app._index.tsx', 'called', { sessionData: JSON.stringify(sessionData) });
-
-  if (!sessionData || sessionData?.hasTokenExpired) {
-    log.loader('app._index.tsx', 'inside first condition', {
-      hasTokenExpired: sessionData?.hasTokenExpired,
-      justLoggedIn: sessionData?.justLoggedIn,
-    });
+  const authenticated: boolean = await isAuthenticated(request, 'app._index.tsx');
+  if (!authenticated) {
     log.redirection('/app', '/login');
     return redirect('/login');
   }

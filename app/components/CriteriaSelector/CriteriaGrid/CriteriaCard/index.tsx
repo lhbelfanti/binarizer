@@ -9,6 +9,8 @@ import { CriteriaCardProps, CriteriaStats } from './types';
 const CriteriaCard = (props: CriteriaCardProps) => {
   const { criteria, selectedYear, selectedMonth } = props;
 
+  const onCriteriaSelected = (): void => {};
+
   const calculateStats = (): CriteriaStats => {
     let totalTweets: number = 0;
     let analyzedTweets: number = 0;
