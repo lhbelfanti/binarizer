@@ -1,6 +1,7 @@
 [
   {
     "name": "Cocaine Search Criteria A",
+    "id": 1,
     "years": [
       {
         "year": 2006,
@@ -57,6 +58,7 @@
   },
   {
     "name": "Cocaine Search Criteria B",
+    "id": 2,
     "years": [
       {
         "year": 2006,
@@ -85,6 +87,7 @@
   },
   {
     "name": "Cocaine Search Criteria C",
+    "id": 3,
     "years": [
       {
         "year": 2006,
@@ -155,6 +158,7 @@
   },
   {
     "name": "Cocaine Search Criteria D",
+    "id": 4,
     "years": [
       {
         "year": 2010,
@@ -168,6 +172,7 @@
   },
   {
     "name": "Marijuana Search Criteria A",
+    "id": 5,
     "years": [
       {
         "year": 2006,
@@ -237,6 +242,7 @@
   },
   {
     "name": "Heroin Search Criteria A",
+    "id": 6,
     "years": [
       {
         "year": 2006,
@@ -290,6 +296,7 @@
   },
   {
     "name": "Ecstasy Search Criteria A",
+    "id": 7,
     "years": [
       {
         "year": 2006,

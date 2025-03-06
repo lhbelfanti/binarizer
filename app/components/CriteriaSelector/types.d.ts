@@ -4,6 +4,7 @@ export interface CriteriaSelectorProps {
 
 export interface Criteria {
   name: string;
+  id: number;
   years: CriteriaByYear[];
 }
 
