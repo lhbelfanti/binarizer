@@ -2,7 +2,14 @@ import { DragEvent } from 'react';
 
 import { Trans } from 'react-i18next';
 
-import { LinksFunction, LoaderFunction, LoaderFunctionArgs, redirect } from '@remix-run/node';
+import {
+  ActionFunction,
+  ActionFunctionArgs,
+  LinksFunction,
+  LoaderFunction,
+  LoaderFunctionArgs,
+  redirect,
+} from '@remix-run/node';
 
 import example from 'app/data/tweet_examples.json';
 import variables from 'app/data/variables.json';
@@ -21,6 +28,22 @@ export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) =>
     log.redirection('/app', '/login');
     return redirect('/login');
   }
+
+  const url = new URL(request.url);
+  const criteriaID: string = url.searchParams.get('criteria') as string;
+  const year: string = url.searchParams.get('year') as string;
+  const month: string = url.searchParams.get('month') as string;
+  if (!criteriaID || !year || !month) {
+    console.log(criteriaID, year, month);
+    log.redirection('/app', '/selection');
+    return redirect('/selection');
+  }
+
+  log.loader('app._index.tsx', 'called with parameters', {
+    queryParams: { criteria: criteriaID, year: year, month: month },
+  });
+
+  // Add API call to obtain the tweets that matches the query params
 
   return null;
 };

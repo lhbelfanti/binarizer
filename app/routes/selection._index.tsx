@@ -18,7 +18,15 @@ export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) =>
   return null;
 };
 
-export const action: ActionFunction = async ({ request }: ActionFunctionArgs) => {};
+export const action: ActionFunction = async ({ request }: ActionFunctionArgs) => {
+  const formData: FormData = await request.formData();
+  const criteriaID: string = formData.get('criteria') as string;
+  const year: string = formData.get('year') as string;
+  const month: string = formData.get('month') as string;
+
+  log.redirection('/app', '/selection', { queryParams: { criteria: criteriaID, year: year, month: month } });
+  return redirect(`/app?criteria=${criteriaID}&year=${year}&month=${month}`);
+};
 
 const SelectionPage = () => {
   return (

@@ -14,22 +14,17 @@ const Button = (props: ButtonProps) => {
     rounded-md 
     bg-[linear-gradient(to_right,#3b82f6,#8b5cf6)] 
     bg-[100%_100%]
-    
     transition-[background-position] 
     duration-[0.3s,transform] 
     delay-[0.3s] 
-    
     hover:bg-[100%_50%] 
     hover:scale-105 
     hover:button-animate
     hover:bg-blue-700
-    
     active:scale-95;
-    
     focus:outline-none 
     focus:ring-2 
     focus:ring-blue-400
-    
     disabled:bg-none
     disabled:bg-gray-400
     disabled:hover:scale-100
@@ -49,7 +44,7 @@ const Button = (props: ButtonProps) => {
   }
 
   return (
-    <button type={type} className={buttonClass} disabled={disabled}>
+    <button type={type} className={buttonClass} disabled={disabled} onClick={props?.onClick}>
       {children}
     </button>
   );
