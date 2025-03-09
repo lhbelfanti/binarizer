@@ -15,7 +15,7 @@ const AnalysisOverview = (props: AnalysisOverviewProps) => {
         analyzed={criteriaAnalyzed}
       />
 
-      <div className="flex flex-col items-center text-white text-sm border-l border-r border-gray-400 pl-10 pr-10 border-dashed">
+      <div className="flex flex-col items-center text-white text-sm border-l border-r border-gray-600 pl-10 pr-10 border-dashed">
         <span>
           <Trans i18nKey="top_bar_analysis_overview_search_criteria_in_analysis" />
         </span>

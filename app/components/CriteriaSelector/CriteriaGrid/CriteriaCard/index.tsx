@@ -44,6 +44,11 @@ const CriteriaCard = (props: CriteriaCardProps) => {
   const stats: CriteriaStats = calculateStats();
   const isCompleted: boolean = stats.totalTweets == stats.analyzedTweets;
 
+  if (stats.totalTweets === 0) {
+    // if it is loading do not render to avoid unnecessary flickering
+    return null;
+  }
+
   if (isCompleted) {
     return (
       <div className="border border-[#3b82f6] flex flex-col items-center rounded-lg p-4 space-y-2 bg-[linear-gradient(to_right,#3b82f6,#8b5cf6)]">
