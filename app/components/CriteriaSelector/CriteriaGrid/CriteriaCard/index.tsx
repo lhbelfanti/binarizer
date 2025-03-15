@@ -10,10 +10,12 @@ import { CriteriaCardProps, CriteriaStats } from './types';
 
 const CriteriaCard = (props: CriteriaCardProps) => {
   const { criteria, selectedYear, selectedMonth } = props;
+
   const submit = useSubmit();
 
   const onCriteriaSelected = (): void => {
     const formData: FormData = new FormData();
+    formData.append('flow', 'criteria_selected');
     formData.append('criteria', `${criteria.id}`);
     formData.append('year', `${selectedYear}`);
     formData.append('month', `${selectedMonth}`);
