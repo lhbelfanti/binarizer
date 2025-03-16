@@ -35,7 +35,7 @@ export const fetchTweets = async (requestBody: FetchTweetsBodyDTO) => {
     tweets: {
       data: [example.tweet1, example.tweet2, example.tweet3, example.tweet4], // TODO: Convert TweetDTO to Tweet
       total: 100,
-      analyzed: 40,
+      analyzed: 93,
     },
   };
 

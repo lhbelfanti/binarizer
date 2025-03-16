@@ -1,4 +1,4 @@
-import {DragEvent, useState} from 'react';
+import {DragEvent, useEffect, useState} from 'react';
 
 import { Trans } from 'react-i18next';
 
@@ -9,13 +9,14 @@ import variables from 'app/data/variables.json';
 import Button from '@components/Button';
 import Section from '@components/Section';
 import TweetCard from '@components/TweetCard';
-import { links as XLogoLinks } from '@components/TweetCard/XLogo';
+import { links as XLogoLinks } from '@components/TweetCard/TweetHeader/XLogo';
 
 import { isAuthenticated } from '@services/api/session.server';
 import log from '@services/utils/logger';
 
 import { useCriteriaContext } from '../context/CriteriaContext';
 import {Tweet} from "@components/TweetCard/types";
+import NoMoreTweets from "@components/NoMoreTweets";
 
 export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
   const { request } = args;
@@ -31,13 +32,10 @@ export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
 
 const AppPage = () => {
   const sections = variables.page.app.sections;
-  const { tweets, increaseAnalyzedTweets } = useCriteriaContext();
+  const { tweets, analyzedTweets, totalTweets, increaseAnalyzedTweets } = useCriteriaContext();
 
   const [currentTweetIndex, setCurrentTweetIndex] = useState<number>(0);
-
-  const getTweet = () => {
-    return tweets[currentTweetIndex] || null;
-  }
+  const [currentTweet, setCurrentTweet] = useState<Tweet | null>(tweets[0] || null);
 
   const handleOnDrop = (event: DragEvent<HTMLDivElement>, section: string) => {
     event.preventDefault();
@@ -62,6 +60,10 @@ const AppPage = () => {
     increaseAnalyzedTweets();
     setCurrentTweetIndex((prevState: number) => prevState + 1);
   };
+
+  useEffect(() => {
+    setCurrentTweet(tweets[currentTweetIndex] || null);
+  }, [currentTweetIndex, tweets]);
 
   return (
     <div className="flex gap-4 p-1 h-[90vh]">
@@ -91,9 +93,12 @@ const AppPage = () => {
         />
 
         <div className="flex flex-col items-center justify-center h-[350px] w-[700px]">
-          <TweetCard tweet={getTweet()} />
+          { currentTweet ?
+            <TweetCard tweet={currentTweet} /> :
+            <NoMoreTweets isCriteriaCompleted={totalTweets === analyzedTweets}/>
+          }
         </div>
-        <Button disabled={false}>
+        <Button disabled={false} to={totalTweets === analyzedTweets ? '/selection' : undefined}>
           <Trans i18nKey="app_get_more_tweets_button" />
         </Button>
       </div>
