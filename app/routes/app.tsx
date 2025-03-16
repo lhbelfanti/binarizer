@@ -24,7 +24,6 @@ export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
   const year: string = url.searchParams.get('year') as string;
   const month: string = url.searchParams.get('month') as string;
   if (!criteriaID || !year || !month) {
-    console.log(criteriaID, year, month);
     log.redirection('/app', '/selection');
     return redirect('/selection');
   }

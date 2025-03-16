@@ -32,8 +32,6 @@ const AppPage = () => {
   const sections = variables.page.app.sections;
   const { tweets, increaseAnalyzedTweets } = useCriteriaContext();
 
-  log.info('app.tsx', 'useLoader', { tweets: tweets });
-
   const handleOnDrop = (event: DragEvent<HTMLDivElement>, section: string) => {
     event.preventDefault();
 
