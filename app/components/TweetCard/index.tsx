@@ -6,9 +6,15 @@ import TweetHeader from '@components/TweetCard/TweetHeader';
 import TweetQuote from '@components/TweetCard/TweetQuote';
 
 import { TweetProps } from './types';
+import NoMoreTweets from "@components/TweetCard/NoMoreTweets";
 
 const TweetCard = (props: TweetProps) => {
   const { tweet } = props;
+
+  if (!tweet) {
+    return <NoMoreTweets />
+  }
+
   const { id, author, avatar, postedAt, isAReply, content, images, quote } = tweet;
 
   return (

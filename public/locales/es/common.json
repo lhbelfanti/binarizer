@@ -45,6 +45,7 @@
   "selection_all": "Todos",
   "selection_search_criteria_title": "Selecciona el criterio de búsqueda que contenga los tweets que le gustaría analizar",
   "selection_criteria_card_select_button": "Seleccionar",
+  "app_tweet_card_no_more_tweets": "Se procesaron todos los tweets, obtén más tweets usando el botón de abajo",
   "app_tweet_card_tweet_is_a_reply": "Este tweet es una respuesta a otro tweet",
   "app_tweet_card_quote": "Cita >",
   "app_tweet_card_quote_is_a_reply": "Este tweet citado es una respuesta a otro tweet",

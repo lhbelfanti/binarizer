@@ -1,4 +1,4 @@
-import { DragEvent } from 'react';
+import {DragEvent, useState} from 'react';
 
 import { Trans } from 'react-i18next';
 
@@ -15,6 +15,7 @@ import { isAuthenticated } from '@services/api/session.server';
 import log from '@services/utils/logger';
 
 import { useCriteriaContext } from '../context/CriteriaContext';
+import {Tweet} from "@components/TweetCard/types";
 
 export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
   const { request } = args;
@@ -31,6 +32,12 @@ export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
 const AppPage = () => {
   const sections = variables.page.app.sections;
   const { tweets, increaseAnalyzedTweets } = useCriteriaContext();
+
+  const [currentTweetIndex, setCurrentTweetIndex] = useState<number>(0);
+
+  const getTweet = () => {
+    return tweets[currentTweetIndex] || null;
+  }
 
   const handleOnDrop = (event: DragEvent<HTMLDivElement>, section: string) => {
     event.preventDefault();
@@ -53,6 +60,7 @@ const AppPage = () => {
     }
 
     increaseAnalyzedTweets();
+    setCurrentTweetIndex((prevState: number) => prevState + 1);
   };
 
   return (
@@ -83,7 +91,7 @@ const AppPage = () => {
         />
 
         <div className="flex flex-col items-center justify-center h-[350px] w-[700px]">
-          <TweetCard tweet={tweets[0]} />
+          <TweetCard tweet={getTweet()} />
         </div>
         <Button disabled={false}>
           <Trans i18nKey="app_get_more_tweets_button" />

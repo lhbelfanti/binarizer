@@ -45,6 +45,7 @@
   "selection_all": "All",
   "selection_search_criteria_title": "Select the search criteria that contains the tweets you would like to analyze",
   "selection_criteria_card_select_button": "Select",
+  "app_tweet_card_no_more_tweets": "All the tweets were processed, obtain more tweets using the button below",
   "app_tweet_card_tweet_is_a_reply": "This tweet is a reply to another tweet",
   "app_tweet_card_quote": "Quotes >",
   "app_tweet_card_quote_is_a_reply": "This quoted tweet is a reply to another tweet",
