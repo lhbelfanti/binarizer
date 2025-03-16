@@ -39,7 +39,7 @@
     "id": "15884570210",
     "author": "@test",
     "avatar": "https://pbs.twimg.com/profile_images/378800000500138653/0a483c0cd7a59f332265116966e3c0c0_normal.jpeg",
-    "posted_at": "2010-06-10 19:58:00.000 -0300",
+    "postedAt": "2010-06-10 19:58:00.000 -0300",
     "isAReply": false,
     "content": "Vamos a tomar una linea — Tomar\uD83E\uDD14 https://t/438317775?1524990439…",
     "images": ["https://pbs.twimg.com/media/DnP4OjKWwAAZCJv?format=jpg&name=small"]
@@ -48,7 +48,7 @@
     "id": "15884570210",
     "author": "@test",
     "avatar": "https://pbs.twimg.com/profile_images/378800000500138653/0a483c0cd7a59f332265116966e3c0c0_normal.jpeg",
-    "posted_at": "2010-06-10 19:58:00.000 -0300",
+    "postedAt": "2010-06-10 19:58:00.000 -0300",
     "isAReply": true,
     "content": "#PorElTarifazoTuveQue acordarme qué colectivo tomé, para tomar una línea distinta y que la @SUBE me haga el descuento.",
     "images": []
@@ -57,7 +57,7 @@
     "id": "15884570210",
     "author": "@test",
     "avatar": "https://pbs.twimg.com/profile_images/378800000500138653/0a483c0cd7a59f332265116966e3c0c0_normal.jpeg",
-    "posted_at": "2010-06-10 19:58:00.000 -0300",
+    "postedAt": "2010-06-10 19:58:00.000 -0300",
     "isAReply": false,
     "content": "ahora quieren normalizar tomar merca tambien",
     "images": [
