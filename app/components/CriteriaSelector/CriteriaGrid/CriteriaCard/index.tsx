@@ -53,7 +53,7 @@ const CriteriaCard = (props: CriteriaCardProps) => {
 
   if (isCompleted) {
     return (
-      <div className="border border-[#3b82f6] flex flex-col items-center rounded-lg p-4 space-y-2 bg-[linear-gradient(to_right,#3b82f6,#8b5cf6)]">
+      <div className="border border-[#3b82f6] flex flex-col items-center rounded-lg p-4 space-y-2 bg-blue-purple-gradient">
         <h4 className="font-semibold">{criteria.name}</h4>
         <div className="h-full flex flex-col justify-center">
           <p className="text-lg font-medium text-white cursor-default">100%</p>

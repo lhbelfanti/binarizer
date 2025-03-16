@@ -18,7 +18,7 @@ const ProgressBar = (props: ProgressBarProps) => {
 
   const progressBarStyle: string = `
     h-full 
-    bg-[linear-gradient(to_right,#3b82f6,#8b5cf6)] 
+    bg-blue-purple-gradient 
     bg-[length:200%_100%] 
     transition-all 
     duration-500 

@@ -12,7 +12,7 @@ const Button = (props: ButtonProps) => {
     text-white 
     ${style?.textSize ? style?.textSize : 'text-xl'} 
     rounded-md 
-    bg-[linear-gradient(to_right,#3b82f6,#8b5cf6)] 
+    bg-blue-purple-gradient 
     bg-[100%_100%]
     transition-[background-position] 
     duration-[0.3s,transform] 

@@ -10,7 +10,7 @@ const MainPage = () => {
           <div className="h-[150px] w-[150px]">
             <img src="/binarizer-logo.png" alt="Binarizer" className="w-full block" />
           </div>
-          <h1 className="leading-tight text-7xl font-bold text-transparent bg-clip-text bg-title-gradient">
+          <h1 className="leading-tight text-7xl font-bold text-transparent bg-clip-text bg-green-pink-gradient">
             <Trans i18nKey="landing_title" components={{ 1: <br /> }} />
           </h1>
         </header>

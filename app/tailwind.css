@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  /* Act as a border */
+  .card-wrapper {
+    @apply relative rounded-2xl bg-gradient-to-b overflow-hidden ;
+  }
+
+  /* Gradient */
+  .card-wrapper::before {
+    background: conic-gradient(
+      rgb(138, 92, 246) 100deg,
+      rgb(59, 131, 246) 200deg, transparent 0deg
+    );
+
+    @apply absolute h-[300%] w-[300%] left-[-100%] top-[-100%] animate-border-spin content-[''];
+  }
+
+  /* Body */
+  .card-content {
+    @apply absolute left-[1px] top-[1px] h-[calc(100%-2px)] w-[calc(100%-2px)] rounded-2xl bg-gray-800;
+  }
+}
+
 html,
 body {
   @apply bg-gray-800;
