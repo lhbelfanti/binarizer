@@ -5,7 +5,9 @@ import { Link, useLocation, useSubmit } from '@remix-run/react';
 
 import variables from 'app/data/variables.json';
 
-import AnalysisOverview from '@components/AnalysisOverview';
+import ProgressBar from '@components/ProgressBar';
+
+import { useCriteriaContext } from '../../context/CriteriaContext';
 
 const Header = (props: HeaderProps) => {
   const { isLoggedIn } = props;
@@ -13,6 +15,7 @@ const Header = (props: HeaderProps) => {
 
   const submit = useSubmit();
   const location = useLocation();
+  const { totalTweets, analyzedTweets } = useCriteriaContext();
 
   const showLogInButton: boolean = location.pathname !== '/login';
   const showAnalysisOverview: boolean = location.pathname !== '/selection';
@@ -38,13 +41,12 @@ const Header = (props: HeaderProps) => {
       </Link>
 
       {isLoggedIn && showAnalysisOverview && (
-        <AnalysisOverview
-          currentCriteria="Criteria Name"
-          totalCriteria={10}
-          criteriaAnalyzed={5}
-          totalTweets={200}
-          tweetsAnalyzed={100}
-        />
+        <div className="flex items-center justify-center gap-8 w-[905px]">
+          <div className="flex flex-col items-center gap-2 text-white text-sm pl-10 pr-10 border-dashed">
+            <span className="font-semibold">{'Cocaine Search Criteria A'}</span>
+            <ProgressBar total={totalTweets} currentValue={analyzedTweets} />
+          </div>
+        </div>
       )}
       <nav className="flex items-center gap-4">
         {!isLoggedIn && showLogInButton && (

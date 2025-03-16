@@ -2,16 +2,8 @@ import { DragEvent } from 'react';
 
 import { Trans } from 'react-i18next';
 
-import {
-  ActionFunction,
-  ActionFunctionArgs,
-  LinksFunction,
-  LoaderFunction,
-  LoaderFunctionArgs,
-  redirect,
-} from '@remix-run/node';
+import { LinksFunction, LoaderFunction, LoaderFunctionArgs, redirect } from '@remix-run/node';
 
-import example from 'app/data/tweet_examples.json';
 import variables from 'app/data/variables.json';
 
 import Button from '@components/Button';
@@ -22,34 +14,25 @@ import { links as XLogoLinks } from '@components/TweetCard/XLogo';
 import { isAuthenticated } from '@services/api/session.server';
 import log from '@services/utils/logger';
 
-export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) => {
+import { useCriteriaContext } from '../context/CriteriaContext';
+
+export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
+  const { request } = args;
+
   const authenticated: boolean = await isAuthenticated(request, 'app._index.tsx');
   if (!authenticated) {
     log.redirection('/app', '/login');
     return redirect('/login');
   }
 
-  const url = new URL(request.url);
-  const criteriaID: string = url.searchParams.get('criteria') as string;
-  const year: string = url.searchParams.get('year') as string;
-  const month: string = url.searchParams.get('month') as string;
-  if (!criteriaID || !year || !month) {
-    console.log(criteriaID, year, month);
-    log.redirection('/app', '/selection');
-    return redirect('/selection');
-  }
-
-  log.loader('app._index.tsx', 'called with parameters', {
-    queryParams: { criteria: criteriaID, year: year, month: month },
-  });
-
-  // Add API call to obtain the tweets that matches the query params
-
   return null;
 };
 
 const AppPage = () => {
   const sections = variables.page.app.sections;
+  const { tweets, increaseAnalyzedTweets } = useCriteriaContext();
+
+  log.info('app.tsx', 'useLoader', { tweets: tweets });
 
   const handleOnDrop = (event: DragEvent<HTMLDivElement>, section: string) => {
     event.preventDefault();
@@ -70,6 +53,8 @@ const AppPage = () => {
         console.log(`Right handler: tweet: ${tweetID}`);
         break;
     }
+
+    increaseAnalyzedTweets();
   };
 
   return (
@@ -100,7 +85,7 @@ const AppPage = () => {
         />
 
         <div className="flex flex-col items-center justify-center h-[350px] w-[700px]">
-          <TweetCard tweet={example.tweet1} />
+          <TweetCard tweet={tweets[0]} />
         </div>
         <Button disabled={false}>
           <Trans i18nKey="app_get_more_tweets_button" />

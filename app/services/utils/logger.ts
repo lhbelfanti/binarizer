@@ -54,7 +54,7 @@ class Logger {
         console.error('[Error] ', logEntry);
         this.isError = false;
       } else {
-        console.log(logEntry);
+        console.log(JSON.stringify(logEntry));
       }
     }
   }

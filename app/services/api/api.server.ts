@@ -1,4 +1,4 @@
-import { APIResponse } from './types.server';
+import { APIResponse } from './types.api.server';
 
 export const API_BASE_URL = process.env.AHBCC_API_URL ?? 'http://localhost:3000';
 
