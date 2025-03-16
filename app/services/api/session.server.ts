@@ -1,6 +1,6 @@
 import { createCookieSessionStorage } from '@remix-run/node';
 
-import { SessionData } from '@services/api/types.server';
+import { SessionData } from '@services/api/types.auth.server';
 import log from '@services/utils/logger';
 
 const SESSION_SECRET = process.env.SESSION_SECRET as string;
