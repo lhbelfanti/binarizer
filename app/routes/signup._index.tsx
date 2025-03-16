@@ -20,7 +20,9 @@ import { isAuthenticated } from '@services/api/session.server';
 import { validateCredentials } from '@services/api/validation.server';
 import log from '@services/utils/logger';
 
-export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) => {
+export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
+  const { request } = args;
+
   const authenticated: boolean = await isAuthenticated(request, 'signup._index.tsx');
   if (authenticated) {
     log.redirection('/signup', '/login');
@@ -30,7 +32,9 @@ export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) =>
   return null;
 };
 
-export const action: ActionFunction = async ({ request }: ActionFunctionArgs) => {
+export const action: ActionFunction = async (args: ActionFunctionArgs) => {
+  const { request } = args;
+
   const formData: FormData = await request.formData();
   const flow: string = formData.get('flow') as string;
 

@@ -4,6 +4,7 @@ import { ProgressBarProps } from '@components/ProgressBar/types';
 
 const ProgressBar = (props: ProgressBarProps) => {
   const { total, currentValue, style } = props;
+
   const [animatedProgress, setAnimatedProgress] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 

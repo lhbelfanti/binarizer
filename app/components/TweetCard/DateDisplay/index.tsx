@@ -6,6 +6,7 @@ import { DateDisplayProps } from './types';
 
 const DateDisplay = (props: DateDisplayProps) => {
   const { postedAt } = props;
+
   const { i18n } = useTranslation();
 
   const formattedDate = useMemo(() => {

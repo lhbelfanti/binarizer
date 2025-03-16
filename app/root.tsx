@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import { LinksFunction, LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
+import { LinksFunction, LoaderFunction, LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData, useMatches } from '@remix-run/react';
 
 import { useChangeLanguage } from 'remix-i18next/react';
@@ -40,11 +40,11 @@ export const handle = {
   i18n: 'common',
 };
 
-const Document = ({ title, children }: DocumentProps) => {
+const Document = (props: DocumentProps) => {
+  const { title, children } = props;
+
   const matches = useMatches() as Array<{ handle?: RouteHandle }>;
-
   const disableJS = matches.some((match) => match.handle?.disableJS);
-
   const { locale } = useLoaderData<typeof loader>();
   const { i18n } = useTranslation();
   useChangeLanguage(locale);
@@ -91,7 +91,9 @@ export const links: LinksFunction = () => [
   },
 ];
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
+  const { request } = args;
+
   const locale = await i18next.getLocale(request);
   return { locale };
-}
+};

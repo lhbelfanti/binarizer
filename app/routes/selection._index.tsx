@@ -8,7 +8,9 @@ import searchCriteria from 'app/data/search_criteria_examples.json';
 import { isAuthenticated } from '@services/api/session.server';
 import log from '@services/utils/logger';
 
-export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) => {
+export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
+  const { request } = args;
+
   const authenticated: boolean = await isAuthenticated(request, 'selection._index.tsx');
   if (!authenticated) {
     log.redirection('/selection', '/login');
@@ -18,7 +20,9 @@ export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) =>
   return null;
 };
 
-export const action: ActionFunction = async ({ request }: ActionFunctionArgs) => {
+export const action: ActionFunction = async (args: ActionFunctionArgs) => {
+  const { request } = args;
+
   const formData: FormData = await request.formData();
   const criteriaID: string = formData.get('criteria') as string;
   const year: string = formData.get('year') as string;

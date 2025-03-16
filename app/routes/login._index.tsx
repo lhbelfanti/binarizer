@@ -16,10 +16,12 @@ import i18next from '@localization/i18n.server';
 import { APIError } from '@services/api/api.server';
 import { login } from '@services/api/auth.server';
 import { isAuthenticated } from '@services/api/session.server';
-import { LogInResponseDTO } from '@services/api/types.server';
+import { LogInResponseDTO } from '@services/api/types.auth.server';
 import log from '@services/utils/logger';
 
-export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) => {
+export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
+  const { request } = args;
+
   const authenticated: boolean = await isAuthenticated(request, 'login._index.tsx');
   if (authenticated) {
     log.redirection('/login', '/selection');
@@ -29,7 +31,9 @@ export const loader: LoaderFunction = async ({ request }: LoaderFunctionArgs) =>
   return null;
 };
 
-export const action: ActionFunction = async ({ request }: ActionFunctionArgs) => {
+export const action: ActionFunction = async (args: ActionFunctionArgs) => {
+  const { request } = args;
+
   const formData: FormData = await request.formData();
   const flow: string = formData.get('flow') as string;
 
