@@ -1,13 +1,13 @@
 import { APIError } from '@services/api/api';
 import { serverFetch } from '@services/api/api.server';
 import { createAuthSession, destroyAuthSession } from '@services/api/auth/session.server';
-import { APIResponse } from '@services/api/types.api';
 import {
   LogInRequestBodyDTO,
   LogInResponse,
   LogInResponseDTO,
   SignUpRequestBodyDTO,
 } from '@services/api/auth/types.auth.server';
+import { APIResponse } from '@services/api/types.api';
 import { recursiveToCamel } from '@services/utils/camelize';
 import log from '@services/utils/logger';
 

@@ -1,9 +1,4 @@
-import {
-  LoaderFunction,
-  LoaderFunctionArgs,
-  data,
-  redirect,
-} from '@remix-run/node';
+import { LoaderFunction, LoaderFunctionArgs, data, redirect } from '@remix-run/node';
 import { Outlet, useLoaderData } from '@remix-run/react';
 
 import Header from '@components/Header';
