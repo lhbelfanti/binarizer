@@ -5,15 +5,12 @@
 @layer utilities {
   /* Act as a border */
   .card-wrapper {
-    @apply relative rounded-2xl bg-gradient-to-b overflow-hidden ;
+    @apply relative rounded-2xl bg-gradient-to-b overflow-hidden;
   }
 
   /* Gradient */
   .card-wrapper::before {
-    background: conic-gradient(
-      rgb(138, 92, 246) 100deg,
-      rgb(59, 131, 246) 200deg, transparent 0deg
-    );
+    background: conic-gradient(rgb(138, 92, 246) 100deg, rgb(59, 131, 246) 200deg, transparent 0deg);
 
     @apply absolute h-[300%] w-[300%] left-[-100%] top-[-100%] animate-border-spin content-[''];
   }

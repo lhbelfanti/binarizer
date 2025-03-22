@@ -1,40 +1,9 @@
-import { APIResponse } from './types.api.server';
+import { fetchFromAPI } from '@services/api/api';
 
-export const API_BASE_URL = process.env.AHBCC_API_URL ?? 'http://localhost:3000';
+import { APIResponse } from './types.api';
 
-export async function fetchFromAPI<T = unknown>(endpoint: string, options: RequestInit): Promise<APIResponse<T>> {
-  const response = await fetch(`${API_BASE_URL}/${endpoint}`, options);
-  const clonedResponse = response.clone(); // Clone the response to avoid the consumption of the body
-  const responseText = await clonedResponse.text();
+const API_BASE_URL = process.env.VITE_AHBCC_API_URL ?? 'http://localhost:3000';
 
-  let responseBody: APIResponse<T>;
-  try {
-    responseBody = await response.json();
-  } catch (error) {
-    throw new APIError({
-      code: response.status,
-      message: `Invalid JSON response: ${responseText}`,
-    });
-  }
-
-  if (!response.ok) {
-    throw new APIError(responseBody);
-  }
-
-  return responseBody;
-}
-
-export class APIError extends Error {
-  public code: number;
-  public details: string | undefined;
-
-  constructor(response: APIResponse) {
-    super(response.message);
-    this.code = response.code;
-    this.details = response.error;
-
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, this.constructor);
-    }
-  }
+export async function serverFetch<T = unknown>(endpoint: string, options: RequestInit): Promise<APIResponse<T>> {
+  return fetchFromAPI<T>(`${API_BASE_URL}/${endpoint}`, options);
 }

@@ -11,13 +11,13 @@ export default {
           },
         },
         point: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(10px)" },
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(10px)' },
         },
       },
       animation: {
         'border-spin': 'border-spin 7s linear infinite',
-        point: "point 1s ease-in-out infinite",
+        point: 'point 1s ease-in-out infinite',
       },
       fontFamily: {
         sans: [

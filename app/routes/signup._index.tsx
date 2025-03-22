@@ -14,10 +14,10 @@ import { AuthFormActionResult, AuthFormCredentials } from '@components/AuthForm/
 
 import i18next from '@localization/i18n.server';
 
-import { APIError } from '@services/api/api.server';
-import { signup } from '@services/api/auth.server';
-import { isAuthenticated } from '@services/api/session.server';
-import { validateCredentials } from '@services/api/validation.server';
+import { APIError } from '@services/api/api';
+import { signup } from '@services/api/auth/auth.server';
+import { isAuthenticated } from '@services/api/auth/session.server';
+import { validateCredentials } from '@services/api/auth/validation.server';
 import log from '@services/utils/logger';
 
 export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {

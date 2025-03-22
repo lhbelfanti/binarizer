@@ -5,7 +5,7 @@ import { ActionFunction, ActionFunctionArgs, LoaderFunction, LoaderFunctionArgs,
 import CriteriaSelector from 'app/components/CriteriaSelector';
 import searchCriteria from 'app/data/search_criteria_examples.json';
 
-import { isAuthenticated } from '@services/api/session.server';
+import { isAuthenticated } from '@services/api/auth/session.server';
 import log from '@services/utils/logger';
 
 export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {

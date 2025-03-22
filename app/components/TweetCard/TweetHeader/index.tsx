@@ -1,7 +1,7 @@
+import DateDisplay from '@components/TweetCard/TweetHeader/DateDisplay';
 import XLogo from '@components/TweetCard/TweetHeader/XLogo';
 
 import { TweetHeaderProps } from './types';
-import DateDisplay from "@components/TweetCard/TweetHeader/DateDisplay";
 
 const TweetHeader = (props: TweetHeaderProps) => {
   const { user, author, avatar, postedAt } = props;

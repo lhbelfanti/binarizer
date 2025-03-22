@@ -1,6 +1,7 @@
-import {Trans} from "react-i18next";
-import {FaRegArrowAltCircleDown} from "react-icons/fa";
-import {NoMoreTweetsProps} from "./types";
+import { Trans } from 'react-i18next';
+import { FaRegArrowAltCircleDown } from 'react-icons/fa';
+
+import { NoMoreTweetsProps } from './types';
 
 const NoMoreTweets = (props: NoMoreTweetsProps) => {
   const { isCriteriaCompleted } = props;
@@ -12,12 +13,13 @@ const NoMoreTweets = (props: NoMoreTweetsProps) => {
           <div className="text-2xl">
             <Trans
               i18nKey={
-                isCriteriaCompleted
-                  ? "app_tweet_card_no_more_tweets"
-                  : "app_tweet_card_no_more_tweets_retrieve_more"
+                isCriteriaCompleted ? 'app_tweet_card_no_more_tweets' : 'app_tweet_card_no_more_tweets_retrieve_more'
               }
               components={[
-                <span key="selection-page" className="leading-tight font-bold text-transparent bg-clip-text bg-blue-purple-gradient" />,
+                <span
+                  key="selection-page"
+                  className="leading-tight font-bold text-transparent bg-clip-text bg-blue-purple-gradient"
+                />,
               ]}
             />
           </div>
@@ -28,6 +30,6 @@ const NoMoreTweets = (props: NoMoreTweetsProps) => {
       </div>
     </div>
   );
-}
+};
 
 export default NoMoreTweets;

@@ -1,4 +1,4 @@
-import {DragEvent, useEffect, useState} from 'react';
+import { DragEvent, useEffect, useState } from 'react';
 
 import { Trans } from 'react-i18next';
 
@@ -7,16 +7,16 @@ import { LinksFunction, LoaderFunction, LoaderFunctionArgs, redirect } from '@re
 import variables from 'app/data/variables.json';
 
 import Button from '@components/Button';
+import NoMoreTweets from '@components/NoMoreTweets';
 import Section from '@components/Section';
 import TweetCard from '@components/TweetCard';
 import { links as XLogoLinks } from '@components/TweetCard/TweetHeader/XLogo';
+import { Tweet } from '@components/TweetCard/types';
 
-import { isAuthenticated } from '@services/api/session.server';
+import { isAuthenticated } from '@services/api/auth/session.server';
 import log from '@services/utils/logger';
 
 import { useCriteriaContext } from '../context/CriteriaContext';
-import {Tweet} from "@components/TweetCard/types";
-import NoMoreTweets from "@components/NoMoreTweets";
 
 export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
   const { request } = args;
@@ -93,10 +93,11 @@ const AppPage = () => {
         />
 
         <div className="flex flex-col items-center justify-center h-[350px] w-[700px]">
-          { currentTweet ?
-            <TweetCard tweet={currentTweet} /> :
-            <NoMoreTweets isCriteriaCompleted={totalTweets === analyzedTweets}/>
-          }
+          {currentTweet ? (
+            <TweetCard tweet={currentTweet} />
+          ) : (
+            <NoMoreTweets isCriteriaCompleted={totalTweets === analyzedTweets} />
+          )}
         </div>
         <Button disabled={false} to={totalTweets === analyzedTweets ? '/selection' : undefined}>
           <Trans i18nKey="app_get_more_tweets_button" />

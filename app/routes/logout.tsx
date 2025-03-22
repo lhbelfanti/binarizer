@@ -1,8 +1,8 @@
 import { ActionFunction, ActionFunctionArgs, redirect } from '@remix-run/node';
 
-import { logout } from '@services/api/auth.server';
-import { getDataFromSession } from '@services/api/session.server';
-import { SessionData } from '@services/api/types.auth.server';
+import { logout } from '@services/api/auth/auth.server';
+import { getDataFromSession } from '@services/api/auth/session.server';
+import { SessionData } from '@services/api/auth/types.auth.server';
 import log from '@services/utils/logger';
 
 export const action: ActionFunction = async (args: ActionFunctionArgs) => {

@@ -1,12 +1,13 @@
-import { APIError, fetchFromAPI } from '@services/api/api.server';
-import { createAuthSession, destroyAuthSession } from '@services/api/session.server';
-import { APIResponse } from '@services/api/types.api.server';
+import { APIError } from '@services/api/api';
+import { serverFetch } from '@services/api/api.server';
+import { createAuthSession, destroyAuthSession } from '@services/api/auth/session.server';
+import { APIResponse } from '@services/api/types.api';
 import {
   LogInRequestBodyDTO,
   LogInResponse,
   LogInResponseDTO,
   SignUpRequestBodyDTO,
-} from '@services/api/types.auth.server';
+} from '@services/api/auth/types.auth.server';
 import { recursiveToCamel } from '@services/utils/camelize';
 import log from '@services/utils/logger';
 
@@ -19,7 +20,7 @@ export const signup = async (requestBody: SignUpRequestBodyDTO) => {
   };
   log.api('signup', 'called', { endpoint: endpoint, requestOptions: requestOptions });
 
-  const signUpAPIResponse: APIResponse = await fetchFromAPI(endpoint, requestOptions);
+  const signUpAPIResponse: APIResponse = await serverFetch(endpoint, requestOptions);
   if (signUpAPIResponse.code >= 400) {
     throw new APIError(signUpAPIResponse);
   }
@@ -38,10 +39,7 @@ export const login = async (requestBody: LogInRequestBodyDTO): Promise<LogInResp
   };
   log.api('login', 'called', { endpoint: endpoint, requestOptions: requestOptions });
 
-  const logInAPIResponse: APIResponse<LogInResponseDTO> = await fetchFromAPI<LogInResponseDTO>(
-    endpoint,
-    requestOptions
-  );
+  const logInAPIResponse: APIResponse<LogInResponseDTO> = await serverFetch<LogInResponseDTO>(endpoint, requestOptions);
 
   if (logInAPIResponse.code >= 400 || !logInAPIResponse.data) {
     throw new APIError(logInAPIResponse);
@@ -72,7 +70,7 @@ export const logout = async (request: Request, authToken: string) => {
   };
   log.api('logout', 'called', { endpoint: endpoint, requestOptions: requestOptions });
 
-  const logOutResponse: APIResponse = await fetchFromAPI(endpoint, requestOptions);
+  const logOutResponse: APIResponse = await serverFetch(endpoint, requestOptions);
   if (logOutResponse.code >= 400) {
     throw new APIError(logOutResponse);
   }

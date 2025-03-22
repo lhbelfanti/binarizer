@@ -3,7 +3,7 @@ import log from "@services/utils/logger";
 import {APIError, fetchFromAPI} from "@services/api/api.server";*/
 import example from 'app/data/tweet_examples.json';
 
-import { FetchTweetsBodyDTO, FetchTweetsResponse } from '@services/api/types.tweets.server';
+import { FetchTweetsBodyDTO, FetchTweetsResponse } from '@services/api/tweets/types.tweets.server';
 
 export const fetchTweets = async (requestBody: FetchTweetsBodyDTO) => {
   // TODO: implement api call
