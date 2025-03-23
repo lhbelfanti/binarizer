@@ -12,6 +12,13 @@ import { links as XLogoLinks } from '@components/TweetCard/TweetHeader/XLogo';
 import { Tweet } from '@components/TweetCard/types';
 
 import { isAuthenticated } from '@services/api/auth/session.server';
+import { fetchMoreTweets } from '@services/api/tweets/tweets.client';
+import {
+  FetchMoreTweetsBodyDTO,
+  FetchMoreTweetsResponse,
+  FetchTweetsBodyDTO,
+  FetchTweetsResponse,
+} from '@services/api/tweets/types.tweets';
 import log from '@services/utils/logger';
 
 import { useCriteriaContext } from '../context/CriteriaContext';
@@ -29,10 +36,21 @@ export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
 };
 
 const AppPage = () => {
-  const { tweets, analyzedTweets, totalTweets, increaseAnalyzedTweets } = useCriteriaContext();
+  const { criteriaID, month, year, totalTweets, analyzedTweets, increaseAnalyzedTweets, tweets, setTweets } =
+    useCriteriaContext();
 
   const [currentTweetIndex, setCurrentTweetIndex] = useState<number>(0);
   const [currentTweet, setCurrentTweet] = useState<Tweet | null>(tweets[0] || null);
+  const [isCriteriaCompleted, setIsCriteriaCompleted] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setCurrentTweet(tweets[currentTweetIndex] || null);
+  }, [currentTweetIndex, tweets]);
+
+  useEffect(() => {
+    setIsCriteriaCompleted(totalTweets === analyzedTweets);
+  }, [totalTweets, analyzedTweets]);
 
   const handleOnDrop = (event: DragEvent<HTMLDivElement>, section: string) => {
     event.preventDefault();
@@ -58,9 +76,31 @@ const AppPage = () => {
     setCurrentTweetIndex((prevState: number) => prevState + 1);
   };
 
-  useEffect(() => {
-    setCurrentTweet(tweets[currentTweetIndex] || null);
-  }, [currentTweetIndex, tweets]);
+  const retrieveMoreTweets = async () => {
+    setIsLoading(true);
+
+    const fetchMoreTweetsBodyDTO: FetchMoreTweetsBodyDTO = {
+      criteria_id: Number(criteriaID),
+      month: Number(month),
+      year: Number(year),
+    };
+
+    try {
+      const fetchMoreTweetsResponse: FetchMoreTweetsResponse = await fetchMoreTweets(fetchMoreTweetsBodyDTO);
+      setTweets(fetchMoreTweetsResponse.tweets);
+      setCurrentTweetIndex(0);
+    } catch (error) {
+      log.info('FetchMoreTweetsResponse', 'Error getting more tweets');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const buttonText: string = isLoading
+    ? 'app_get_more_tweets_button_loading'
+    : isCriteriaCompleted
+      ? 'app_get_more_tweets_button_go_back'
+      : 'app_get_more_tweets_button';
 
   return (
     <Sections handleOnDrop={handleOnDrop}>
@@ -71,8 +111,11 @@ const AppPage = () => {
           <NoMoreTweets isCriteriaCompleted={totalTweets === analyzedTweets} />
         )}
       </div>
-      <Button disabled={false} to={totalTweets === analyzedTweets ? '/selection' : undefined}>
-        <Trans i18nKey="app_get_more_tweets_button" />
+      <Button
+        disabled={isLoading || (!!currentTweet && !isCriteriaCompleted)}
+        to={isCriteriaCompleted ? '/selection' : undefined}
+        onClick={!isCriteriaCompleted ? retrieveMoreTweets : undefined}>
+        <Trans i18nKey={buttonText} />
       </Button>
     </Sections>
   );

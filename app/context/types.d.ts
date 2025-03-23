@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 import { Tweet } from '@components/TweetCard/types';
 
-import { CriteriaData, TweetsData } from '@services/api/tweets/types.tweets.server';
+import { CriteriaData, TweetsData } from '@services/api/tweets/types.tweets';
 
 export interface CriteriaContextData {
   criteriaID: number;

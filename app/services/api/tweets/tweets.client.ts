@@ -1,8 +1,8 @@
 import example from 'app/data/tweet_examples.json';
 
-import { FetchTweetsBodyDTO, FetchTweetsResponse } from '@services/api/tweets/types.tweets.server';
+import { FetchMoreTweetsBodyDTO, FetchMoreTweetsResponse } from '@services/api/tweets/types.tweets';
 
-export const fetchMoreTweets = async (requestBody: FetchTweetsBodyDTO) => {
+export const fetchMoreTweets = async (requestBody: FetchMoreTweetsBodyDTO) => {
   // TODO: implement api call
   /*const endpoint = 'tweets/criteria/v1';
   const requestOptions = {
@@ -22,19 +22,14 @@ export const fetchMoreTweets = async (requestBody: FetchTweetsBodyDTO) => {
   return apiResponse;
   */
 
-  const response: FetchTweetsResponse = {
-    criteria: {
-      id: requestBody.criteria_id,
-      name: 'Search Criteria Test',
-      month: requestBody.month,
-      year: requestBody.year,
-    },
-    tweets: {
-      data: [example.tweet1, example.tweet2, example.tweet3, example.tweet4], // TODO: Convert TweetDTO to Tweet
-      total: 100,
-      analyzed: 93,
-    },
+  // Simulate API call with 200ms of response time
+  await new Promise((r) => setTimeout(r, 2000));
+
+  const response: FetchMoreTweetsResponse = {
+    tweets: [example.tweet1, example.tweet2, example.tweet3, example.tweet4], // TODO: Convert TweetDTO to Tweet
   };
+
+  console.log('Response', response);
 
   return response;
 };

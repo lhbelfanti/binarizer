@@ -30,3 +30,13 @@ export type TweetsData = {
   total: number;
   analyzed: number;
 };
+
+export type FetchMoreTweetsBodyDTO = {
+  criteria_id: number;
+  month?: number;
+  year?: number;
+};
+
+export type FetchMoreTweetsResponse = {
+  tweets: Tweet[];
+};

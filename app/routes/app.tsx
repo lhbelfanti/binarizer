@@ -4,7 +4,7 @@ import { Outlet, useLoaderData } from '@remix-run/react';
 import Header from '@components/Header';
 
 import { fetchTweets } from '@services/api/tweets/tweets.server';
-import { FetchTweetsBodyDTO, FetchTweetsResponse } from '@services/api/tweets/types.tweets.server';
+import { FetchTweetsBodyDTO, FetchTweetsResponse } from '@services/api/tweets/types.tweets';
 import log from '@services/utils/logger';
 
 import CriteriaProvider from '../context/CriteriaContext';

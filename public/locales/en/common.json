@@ -51,5 +51,7 @@
   "app_tweet_card_quote": "Quotes >",
   "app_tweet_card_quote_is_a_reply": "This quoted tweet is a reply to another tweet",
   "app_tweet_card_quoted_tweet": "Quoted tweet",
-  "app_get_more_tweets_button": "Get more tweets"
+  "app_get_more_tweets_button": "Get more tweets",
+  "app_get_more_tweets_button_go_back": "Select another criteria",
+  "app_get_more_tweets_button_loading": "Getting tweets..."
 }

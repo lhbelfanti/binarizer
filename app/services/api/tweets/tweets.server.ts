@@ -3,7 +3,7 @@ import log from "@services/utils/logger";
 import {APIError, fetchFromAPI} from "@services/api/api.server";*/
 import example from 'app/data/tweet_examples.json';
 
-import { FetchTweetsBodyDTO, FetchTweetsResponse } from '@services/api/tweets/types.tweets.server';
+import { FetchTweetsBodyDTO, FetchTweetsResponse } from '@services/api/tweets/types.tweets';
 
 export const fetchTweets = async (requestBody: FetchTweetsBodyDTO) => {
   // TODO: implement api call
@@ -35,7 +35,7 @@ export const fetchTweets = async (requestBody: FetchTweetsBodyDTO) => {
     tweets: {
       data: [example.tweet1, example.tweet2, example.tweet3, example.tweet4], // TODO: Convert TweetDTO to Tweet
       total: 100,
-      analyzed: 93,
+      analyzed: 92,
     },
   };
 

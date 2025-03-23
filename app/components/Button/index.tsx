@@ -36,7 +36,7 @@ const Button = (props: ButtonProps) => {
   if (to) {
     return (
       <Link to={to}>
-        <button className={buttonClass} disabled={disabled}>
+        <button className={buttonClass} disabled={disabled} onClick={props?.onClick}>
           {children}
         </button>
       </Link>
