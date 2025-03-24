@@ -13,12 +13,7 @@ import { Tweet } from '@components/TweetCard/types';
 
 import { isAuthenticated } from '@services/api/auth/session.server';
 import { fetchMoreTweets } from '@services/api/tweets/tweets.client';
-import {
-  FetchMoreTweetsBodyDTO,
-  FetchMoreTweetsResponse,
-  FetchTweetsBodyDTO,
-  FetchTweetsResponse,
-} from '@services/api/tweets/types.tweets';
+import { FetchMoreTweetsBodyDTO, FetchMoreTweetsResponse } from '@services/api/tweets/types.tweets';
 import log from '@services/utils/logger';
 
 import { useCriteriaContext } from '../context/CriteriaContext';

@@ -1,6 +1,6 @@
 import { Trans } from 'react-i18next';
 
-import { useSubmit } from '@remix-run/react';
+import { Form } from '@remix-run/react';
 
 import Button from '@components/Button';
 import { CriteriaByMonth, CriteriaByYear } from '@components/CriteriaSelector/types';
@@ -10,17 +10,6 @@ import { CriteriaCardProps, CriteriaStats } from './types';
 
 const CriteriaCard = (props: CriteriaCardProps) => {
   const { criteria, selectedYear, selectedMonth } = props;
-
-  const submit = useSubmit();
-
-  const onCriteriaSelected = (): void => {
-    const formData: FormData = new FormData();
-    formData.append('flow', 'criteria_selected');
-    formData.append('criteria', `${criteria.id}`);
-    formData.append('year', `${selectedYear}`);
-    formData.append('month', `${selectedMonth}`);
-    submit(formData, { method: 'post', action: '/selection?index' });
-  };
 
   const calculateStats = (): CriteriaStats => {
     let totalTweets: number = 0;
@@ -63,13 +52,19 @@ const CriteriaCard = (props: CriteriaCardProps) => {
   }
 
   return (
-    <div className="border border-[#3b82f6] flex flex-col items-center rounded-lg p-4 space-y-2">
-      <h4 className="font-semibold">{criteria.name}</h4>
-      <ProgressBar total={stats.totalTweets} currentValue={stats.analyzedTweets} style={{ width: 'w-40' }} />
-      <Button type="button" style={{ width: 'w-40', padding: 'p-1', textSize: 'text-m' }} onClick={onCriteriaSelected}>
-        <Trans i18nKey="selection_criteria_card_select_button" />
-      </Button>
-    </div>
+    <Form method="post" action="/selection?index" className="w-full">
+      <input type="hidden" name="criteria" value={criteria.id} />
+      <input type="hidden" name="year" value={selectedYear} />
+      <input type="hidden" name="month" value={selectedMonth} />
+
+      <div className="border border-[#3b82f6] flex flex-col items-center rounded-lg p-4 space-y-2">
+        <h4 className="font-semibold">{criteria.name}</h4>
+        <ProgressBar total={stats.totalTweets} currentValue={stats.analyzedTweets} style={{ width: 'w-40' }} />
+        <Button type="submit" style={{ width: 'w-40', padding: 'p-1', textSize: 'text-m' }}>
+          <Trans i18nKey="selection_criteria_card_select_button" />
+        </Button>
+      </div>
+    </Form>
   );
 };
 
