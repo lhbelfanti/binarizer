@@ -1,11 +1,24 @@
 import { Trans } from 'react-i18next';
 
-import { ActionFunction, ActionFunctionArgs, LoaderFunction, LoaderFunctionArgs, redirect } from '@remix-run/node';
+import {
+  ActionFunction,
+  ActionFunctionArgs,
+  LoaderFunction,
+  LoaderFunctionArgs,
+  data,
+  redirect,
+} from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
 
 import CriteriaSelector from 'app/components/CriteriaSelector';
-import searchCriteria from 'app/data/search_criteria_examples.json';
 
-import { isAuthenticated } from '@services/api/auth/session.server';
+import { Criteria } from '@components/CriteriaSelector/types';
+
+import { getDataFromSession, isAuthenticated } from '@services/api/auth/session.server';
+import { SessionData } from '@services/api/auth/types.auth.server';
+import { createCriteria } from '@services/api/criteria/create';
+import { fetchCriteria } from '@services/api/criteria/criteria.server';
+import { FetchCriteriaResponse } from '@services/api/criteria/types.criteria';
 import log from '@services/utils/logger';
 
 export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
@@ -17,7 +30,18 @@ export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
     return redirect('/login');
   }
 
-  return null;
+  const sessionData: SessionData | null = await getDataFromSession(request);
+  const authToken: string = sessionData?.token ?? '';
+
+  let fetchCriteriaResponse: FetchCriteriaResponse = [];
+  try {
+    log.loader('selection._index.tsx', 'fetchCriteria endpoint called');
+    fetchCriteriaResponse = await fetchCriteria(authToken);
+  } catch (error) {
+    log.withError().loader('selection._index.tsx', 'api error', { statusCode: 500 });
+  }
+
+  return data(createCriteria(fetchCriteriaResponse));
 };
 
 export const action: ActionFunction = async (args: ActionFunctionArgs) => {
@@ -33,6 +57,8 @@ export const action: ActionFunction = async (args: ActionFunctionArgs) => {
 };
 
 const SelectionPage = () => {
+  const criteria: Criteria[] = useLoaderData<typeof loader>();
+
   return (
     <div className="flex items-center justify-center mt-16">
       <div className="flex flex-col">
@@ -46,7 +72,7 @@ const SelectionPage = () => {
             </p>
             <div className="mt-8" />
           </div>
-          <CriteriaSelector criteria={searchCriteria} />
+          <CriteriaSelector criteria={criteria} />
         </div>
       </div>
     </div>

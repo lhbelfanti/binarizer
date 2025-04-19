@@ -1,3 +1,5 @@
+import { CamelizeKeys } from '@services/utils/camelize';
+
 // SessionData represents the information saved in the cookies
 export interface SessionData {
   token: string;
@@ -17,7 +19,7 @@ export type LogInResponseDTO = {
   headers: Record<string, string>;
 };
 
-export type LogInResponse = Camelize<LogInResponseDTO>;
+export type LogInResponse = CamelizeKeys<LogInResponseDTO>;
 
 // SignUpRequestBodyDTO represents the request body sent to the signup endpoint
 export type SignUpRequestBodyDTO = {

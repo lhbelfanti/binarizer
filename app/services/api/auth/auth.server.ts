@@ -30,7 +30,7 @@ export const signup = async (requestBody: SignUpRequestBodyDTO) => {
   return signUpAPIResponse;
 };
 
-export const login = async (requestBody: LogInRequestBodyDTO): Promise<LogInResponseDTO> => {
+export const login = async (requestBody: LogInRequestBodyDTO): Promise<LogInResponse> => {
   const endpoint = 'auth/login/v1';
   const requestOptions = {
     method: 'POST',
@@ -40,7 +40,6 @@ export const login = async (requestBody: LogInRequestBodyDTO): Promise<LogInResp
   log.api('login', 'called', { endpoint: endpoint, requestOptions: requestOptions });
 
   const logInAPIResponse: APIResponse<LogInResponseDTO> = await serverFetch<LogInResponseDTO>(endpoint, requestOptions);
-
   if (logInAPIResponse.code >= 400 || !logInAPIResponse.data) {
     throw new APIError(logInAPIResponse);
   }

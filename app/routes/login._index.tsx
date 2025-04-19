@@ -16,7 +16,7 @@ import i18next from '@localization/i18n.server';
 import { APIError } from '@services/api/api';
 import { login } from '@services/api/auth/auth.server';
 import { isAuthenticated } from '@services/api/auth/session.server';
-import { LogInResponseDTO } from '@services/api/auth/types.auth.server';
+import { LogInResponse } from '@services/api/auth/types.auth.server';
 import log from '@services/utils/logger';
 
 export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
@@ -56,7 +56,7 @@ export const action: ActionFunction = async (args: ActionFunctionArgs) => {
 
       try {
         log.action('login._index.tsx', 'login endpoint called');
-        const logInResponse: LogInResponseDTO = await login(credentials);
+        const logInResponse: LogInResponse = await login(credentials);
         log.action('login._index.tsx', 'return data', {
           actionResponse: actionResponse,
           logInResponse: JSON.stringify(logInResponse),
