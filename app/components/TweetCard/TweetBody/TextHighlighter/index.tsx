@@ -4,6 +4,10 @@ const TextHighlighter = (props: TextHighlighterProps) => {
   const { text } = props;
 
   const parseText = (text: string) => {
+    if (!text) {
+      return text;
+    }
+
     const regex = /(\bhttps?:\/\/\S+\b|#\w+|@\w+)/g;
 
     return text.split(regex).map((part, index) => {

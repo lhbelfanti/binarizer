@@ -2,18 +2,19 @@ import { DragEvent, useEffect, useState } from 'react';
 
 import { Trans } from 'react-i18next';
 
-import { LinksFunction, LoaderFunction, LoaderFunctionArgs, redirect } from '@remix-run/node';
+import { LinksFunction, LoaderFunction, LoaderFunctionArgs, data, redirect } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
 
 import Button from '@components/Button';
 import NoMoreTweets from '@components/NoMoreTweets';
 import Sections from '@components/Sections';
 import TweetCard from '@components/TweetCard';
 import { links as XLogoLinks } from '@components/TweetCard/TweetHeader/XLogo';
-import { Tweet } from '@components/TweetCard/types';
 
-import { isAuthenticated } from '@services/api/auth/session.server';
+import { getDataFromSession, isAuthenticated } from '@services/api/auth/session.server';
+import { SessionData } from '@services/api/auth/types.auth.server';
 import { fetchMoreTweets } from '@services/api/tweets/tweets.client';
-import { FetchMoreTweetsBodyDTO, FetchMoreTweetsResponse } from '@services/api/tweets/types.tweets';
+import { FetchTweetsResponse, Tweet } from '@services/api/tweets/types';
 import log from '@services/utils/logger';
 
 import { useCriteriaContext } from '../context/CriteriaContext';
@@ -27,12 +28,16 @@ export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
     return redirect('/login');
   }
 
-  return null;
+  const sessionData: SessionData | null = await getDataFromSession(request);
+  const authToken: string = sessionData?.token ?? '';
+
+  return data({ authToken });
 };
 
 const AppPage = () => {
   const { criteriaID, month, year, totalTweets, analyzedTweets, increaseAnalyzedTweets, tweets, setTweets } =
     useCriteriaContext();
+  const { authToken } = useLoaderData<typeof loader>();
 
   const [currentTweetIndex, setCurrentTweetIndex] = useState<number>(0);
   const [currentTweet, setCurrentTweet] = useState<Tweet | null>(tweets[0] || null);
@@ -74,18 +79,12 @@ const AppPage = () => {
   const retrieveMoreTweets = async () => {
     setIsLoading(true);
 
-    const fetchMoreTweetsBodyDTO: FetchMoreTweetsBodyDTO = {
-      criteria_id: Number(criteriaID),
-      month: Number(month),
-      year: Number(year),
-    };
-
     try {
-      const fetchMoreTweetsResponse: FetchMoreTweetsResponse = await fetchMoreTweets(fetchMoreTweetsBodyDTO);
-      setTweets(fetchMoreTweetsResponse.tweets);
+      const fetchMoreTweetsResponse: FetchTweetsResponse = await fetchMoreTweets(criteriaID, year, month, authToken);
+      setTweets(fetchMoreTweetsResponse);
       setCurrentTweetIndex(0);
     } catch (error) {
-      log.info('FetchMoreTweetsResponse', 'Error getting more tweets');
+      log.info('fetchMoreTweets', 'Error getting more tweets');
     } finally {
       setIsLoading(false);
     }

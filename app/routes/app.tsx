@@ -3,8 +3,10 @@ import { Outlet, useLoaderData } from '@remix-run/react';
 
 import Header from '@components/Header';
 
+import { getDataFromSession } from '@services/api/auth/session.server';
+import { SessionData } from '@services/api/auth/types.auth.server';
 import { fetchTweets } from '@services/api/tweets/tweets.server';
-import { FetchTweetsBodyDTO, FetchTweetsResponse } from '@services/api/tweets/types.tweets';
+import { FetchTweetsExtendedResponse, FetchTweetsResponse } from '@services/api/tweets/types';
 import log from '@services/utils/logger';
 
 import CriteriaProvider from '../context/CriteriaContext';
@@ -25,14 +27,32 @@ export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
     queryParams: { criteria: criteriaID, year: year, month: month },
   });
 
-  const fetchTweetsBodyDTO: FetchTweetsBodyDTO = {
-    criteria_id: Number(criteriaID),
-    month: Number(month),
-    year: Number(year),
-  };
-  const fetchTweetsResponse: FetchTweetsResponse = await fetchTweets(fetchTweetsBodyDTO);
+  const sessionData: SessionData | null = await getDataFromSession(request);
+  const authToken: string = sessionData?.token ?? '';
 
-  return data(fetchTweetsResponse);
+  let fetchTweetsResponse: FetchTweetsResponse = [];
+  try {
+    log.loader('app.tsx', 'fetchTweets endpoint called');
+    fetchTweetsResponse = await fetchTweets(criteriaID, year, month, authToken);
+  } catch (error) {
+    log.withError().loader('selection._index.tsx', 'api error', { statusCode: 500 });
+  }
+
+  const fetchTweetsExtendedResponse: FetchTweetsExtendedResponse = {
+    criteria: {
+      id: 1,
+      name: 'test',
+      month: 0,
+      year: 0,
+    },
+    tweets: {
+      data: fetchTweetsResponse,
+      total: 100,
+      analyzed: 2,
+    },
+  };
+
+  return data(fetchTweetsExtendedResponse);
 };
 
 const AppLayout = () => {

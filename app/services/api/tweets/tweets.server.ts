@@ -1,43 +1,36 @@
-/*import {APIResponse} from "@services/api/types.api.server";
-import log from "@services/utils/logger";
-import {APIError, fetchFromAPI} from "@services/api/api.server";*/
-import example from 'app/data/tweet_examples.json';
+import { APIError } from '@services/api/api';
+import { serverFetch } from '@services/api/api.server';
+import { TWEETS_QUANTITY } from '@services/api/tweets/constants';
+import { FetchTweetsResponse, FetchTweetsResponseDTO } from '@services/api/tweets/types';
+import { convertToCamel } from '@services/api/tweets/utils';
+import { APIResponse } from '@services/api/types.api';
+import log from '@services/utils/logger';
 
-import { FetchTweetsBodyDTO, FetchTweetsResponse } from '@services/api/tweets/types.tweets';
+export const fetchTweets = async (
+  criteriaID: string,
+  year: string,
+  month: string,
+  authToken: string
+): Promise<FetchTweetsResponse> => {
+  const endpoint = `criteria/${criteriaID}/tweets/v1?year=${year}&month=${month}&limit=${TWEETS_QUANTITY}`;
 
-export const fetchTweets = async (requestBody: FetchTweetsBodyDTO) => {
-  // TODO: implement api call
-  /*const endpoint = 'tweets/criteria/v1';
   const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(requestBody),
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Session-Token': authToken,
+    },
   };
-  log.api('fetchTweetsFromCriteria', 'called', { endpoint: endpoint, requestOptions: requestOptions });
+  log.api('fetchTweets', 'called', { endpoint: endpoint, requestOptions: requestOptions });
 
-  const apiResponse: APIResponse = await fetchFromAPI(endpoint, requestOptions);
-  if (apiResponse.code >= 400) {
-    throw new APIError(apiResponse);
+  const fetchTweetsAPIResponse: APIResponse<FetchTweetsResponseDTO> = await serverFetch(endpoint, requestOptions);
+  if (fetchTweetsAPIResponse.code >= 400 || !fetchTweetsAPIResponse.data) {
+    throw new APIError(fetchTweetsAPIResponse);
   }
 
-  log.api('fetchTweetsFromCriteria', 'response', { response: apiResponse });
+  const fetchTweetsResponse: FetchTweetsResponse = convertToCamel(fetchTweetsAPIResponse.data!);
 
-  return apiResponse;
-  */
+  log.api('fetchTweets', 'response', { response: fetchTweetsResponse });
 
-  const response: FetchTweetsResponse = {
-    criteria: {
-      id: requestBody.criteria_id,
-      name: 'Search Criteria Test',
-      month: requestBody.month,
-      year: requestBody.year,
-    },
-    tweets: {
-      data: [example.tweet1, example.tweet2, example.tweet3, example.tweet4], // TODO: Convert TweetDTO to Tweet
-      total: 100,
-      analyzed: 92,
-    },
-  };
-
-  return response;
+  return fetchTweetsResponse;
 };

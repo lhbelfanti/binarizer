@@ -1,35 +1,36 @@
-import example from 'app/data/tweet_examples.json';
+import { APIError } from '@services/api/api';
+import { clientFetch } from '@services/api/api.client';
+import { TWEETS_QUANTITY } from '@services/api/tweets/constants';
+import { FetchTweetsResponse, FetchTweetsResponseDTO } from '@services/api/tweets/types';
+import { convertToCamel } from '@services/api/tweets/utils';
+import { APIResponse } from '@services/api/types.api';
+import log from '@services/utils/logger';
 
-import { FetchMoreTweetsBodyDTO, FetchMoreTweetsResponse } from '@services/api/tweets/types.tweets';
+export const fetchMoreTweets = async (
+  criteriaID: number,
+  year: number,
+  month: number,
+  authToken: string
+): Promise<FetchTweetsResponse> => {
+  const endpoint = `criteria/${criteriaID}/tweets/v1?year=${year}&month=${month}&limit=${TWEETS_QUANTITY}`;
 
-export const fetchMoreTweets = async (requestBody: FetchMoreTweetsBodyDTO) => {
-  // TODO: implement api call
-  /*const endpoint = 'tweets/criteria/v1';
   const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(requestBody),
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Session-Token': authToken,
+    },
   };
-  log.api('fetchTweetsFromCriteria', 'called', { endpoint: endpoint, requestOptions: requestOptions });
+  log.api('fetchMoreTweets', 'called', { endpoint: endpoint, requestOptions: requestOptions });
 
-  const apiResponse: APIResponse = await fetchFromAPI(endpoint, requestOptions);
-  if (apiResponse.code >= 400) {
-    throw new APIError(apiResponse);
+  const fetchTweetsAPIResponse: APIResponse<FetchTweetsResponseDTO> = await clientFetch(endpoint, requestOptions);
+  if (fetchTweetsAPIResponse.code >= 400 || !fetchTweetsAPIResponse.data) {
+    throw new APIError(fetchTweetsAPIResponse);
   }
 
-  log.api('fetchTweetsFromCriteria', 'response', { response: apiResponse });
+  const fetchTweetsResponse: FetchTweetsResponse = convertToCamel(fetchTweetsAPIResponse.data!);
 
-  return apiResponse;
-  */
+  log.api('fetchMoreTweets', 'response', { response: fetchTweetsResponse });
 
-  // Simulate API call with 200ms of response time
-  await new Promise((r) => setTimeout(r, 2000));
-
-  const response: FetchMoreTweetsResponse = {
-    tweets: [example.tweet1, example.tweet2, example.tweet3, example.tweet4], // TODO: Convert TweetDTO to Tweet
-  };
-
-  console.log('Response', response);
-
-  return response;
+  return fetchTweetsResponse;
 };

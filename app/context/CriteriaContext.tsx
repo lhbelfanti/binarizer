@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 
-import { Tweet } from '@components/TweetCard/types';
+import { Tweet } from '@services/api/tweets/types';
 
 import { CriteriaContextData, CriteriaProviderProps } from './types';
 
