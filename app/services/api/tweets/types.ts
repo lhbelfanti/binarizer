@@ -45,8 +45,8 @@ export type FetchTweetsResponse = Tweet[];
 export type CriteriaData = {
   id: number;
   name: string;
-  month?: number;
   year?: number;
+  month?: number;
 };
 
 export type TweetsData = {

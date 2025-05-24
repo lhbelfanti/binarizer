@@ -21,13 +21,13 @@ export const useCriteriaContext = (): CriteriaContextData => useContext(Criteria
 const CriteriaProvider = (props: CriteriaProviderProps) => {
   const { children, criteriaData, tweetsData } = props;
 
-  const [criteriaID] = useState<number>(criteriaData.id || -1);
-  const [criteriaName] = useState<string>(criteriaData.name || '');
-  const [month] = useState<number>(criteriaData.month || -1);
-  const [year] = useState<number>(criteriaData.year || -1);
-  const [totalTweets] = useState<number>(tweetsData.total || 0);
-  const [analyzedTweets, setAnalyzedTweets] = useState<number>(tweetsData.analyzed || 0);
-  const [tweets, setTweets] = useState<Tweet[]>(tweetsData.data || []);
+  const [criteriaID] = useState<number>(criteriaData.id ?? -1);
+  const [criteriaName] = useState<string>(criteriaData.name ?? '');
+  const [month] = useState<number>(criteriaData.month ?? -1);
+  const [year] = useState<number>(criteriaData.year ?? -1);
+  const [totalTweets] = useState<number>(tweetsData.total ?? 0);
+  const [analyzedTweets, setAnalyzedTweets] = useState<number>(tweetsData.analyzed ?? 0);
+  const [tweets, setTweets] = useState<Tweet[]>(tweetsData.data ?? []);
 
   const increaseAnalyzedTweets = () => {
     setAnalyzedTweets((prev) => prev + 1);

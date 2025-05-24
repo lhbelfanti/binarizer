@@ -18,7 +18,7 @@ import { getDataFromSession, isAuthenticated } from '@services/api/auth/session.
 import { SessionData } from '@services/api/auth/types.auth.server';
 import { createCriteria } from '@services/api/criteria/create';
 import { fetchCriteria } from '@services/api/criteria/criteria.server';
-import { FetchCriteriaResponse } from '@services/api/criteria/types.criteria';
+import { FetchCriteriaResponse } from '@services/api/criteria/types';
 import log from '@services/utils/logger';
 
 export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {

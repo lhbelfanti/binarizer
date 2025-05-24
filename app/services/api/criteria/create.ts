@@ -1,6 +1,6 @@
 import { Criteria } from '@components/CriteriaSelector/types';
 
-import { FetchCriteriaResponse, SearchCriteria } from '@services/api/criteria/types.criteria';
+import { FetchCriteriaResponse, SearchCriteria } from '@services/api/criteria/types';
 
 export const createCriteria = (fetchCriteriaResponse: FetchCriteriaResponse): Criteria[] => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -26,26 +26,3 @@ export const createCriteria = (fetchCriteriaResponse: FetchCriteriaResponse): Cr
     };
   });
 };
-
-/*
-export interface CriteriaSelectorProps {
-  criteria: Criteria[];
-}
-
-export interface Criteria {
-  name: string;
-  id: number;
-  years: CriteriaByYear[];
-}
-
-export interface CriteriaByYear {
-  year: number;
-  months: CriteriaByMonth[];
-}
-
-export interface CriteriaByMonth {
-  month: number;
-  analyzedTweets: number;
-  totalTweets: number;
-}
- */

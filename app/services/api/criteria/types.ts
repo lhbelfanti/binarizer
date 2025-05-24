@@ -20,3 +20,14 @@ export type SearchCriteria = {
 export type FetchCriteriaResponseDTO = SearchCriteria[];
 
 export type FetchCriteriaResponse = CamelizeKeys<FetchCriteriaResponseDTO>;
+
+export type FetchCriteriaInfoResponseDTO = {
+  id: number;
+  name: string;
+  year: number;
+  month: number;
+  analyzed_tweets: number;
+  total_tweets: number;
+};
+
+export type FetchCriteriaInfoResponse = CamelizeKeys<FetchCriteriaInfoResponseDTO>;

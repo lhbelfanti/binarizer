@@ -5,6 +5,8 @@ import Header from '@components/Header';
 
 import { getDataFromSession } from '@services/api/auth/session.server';
 import { SessionData } from '@services/api/auth/types.auth.server';
+import { fetchCriteriaInfo } from '@services/api/criteria/criteria.server';
+import { FetchCriteriaInfoResponse } from '@services/api/criteria/types';
 import { fetchTweets } from '@services/api/tweets/tweets.server';
 import { FetchTweetsExtendedResponse, FetchTweetsResponse } from '@services/api/tweets/types';
 import log from '@services/utils/logger';
@@ -31,24 +33,35 @@ export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
   const authToken: string = sessionData?.token ?? '';
 
   let fetchTweetsResponse: FetchTweetsResponse = [];
+  let fetchCriteriaInfoResponse: FetchCriteriaInfoResponse = {
+    id: 0,
+    name: '',
+    year: 0,
+    month: 0,
+    analyzedTweets: 0,
+    totalTweets: 0,
+  };
   try {
     log.loader('app.tsx', 'fetchTweets endpoint called');
     fetchTweetsResponse = await fetchTweets(criteriaID, year, month, authToken);
+
+    log.loader('app.tsx', 'fetchCriteriaInfo endpoint called');
+    fetchCriteriaInfoResponse = await fetchCriteriaInfo(criteriaID, year, month, authToken);
   } catch (error) {
-    log.withError().loader('selection._index.tsx', 'api error', { statusCode: 500 });
+    log.withError().loader('app.tsx', 'api error', { statusCode: 500 });
   }
 
   const fetchTweetsExtendedResponse: FetchTweetsExtendedResponse = {
     criteria: {
-      id: 1,
-      name: 'test',
-      month: 0,
-      year: 0,
+      id: fetchCriteriaInfoResponse.id,
+      name: fetchCriteriaInfoResponse.name,
+      year: fetchCriteriaInfoResponse.year,
+      month: fetchCriteriaInfoResponse.month,
     },
     tweets: {
       data: fetchTweetsResponse,
-      total: 100,
-      analyzed: 2,
+      total: fetchCriteriaInfoResponse.totalTweets,
+      analyzed: fetchCriteriaInfoResponse.analyzedTweets,
     },
   };
 
