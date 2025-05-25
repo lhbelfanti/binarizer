@@ -13,8 +13,9 @@ import { links as XLogoLinks } from '@components/TweetCard/TweetHeader/XLogo';
 
 import { getDataFromSession, isAuthenticated } from '@services/api/auth/session.server';
 import { SessionData } from '@services/api/auth/types.auth.server';
-import { fetchMoreTweets } from '@services/api/tweets/tweets.client';
-import { FetchTweetsResponse, Tweet } from '@services/api/tweets/types';
+import { VERDICTS } from '@services/api/tweets/constants';
+import { categorizeTweet, fetchMoreTweets } from '@services/api/tweets/tweets.client';
+import { FetchTweetsResponse, Tweet, TweetVerdict } from '@services/api/tweets/types';
 import log from '@services/utils/logger';
 
 import { useCriteriaContext } from '../context/CriteriaContext';
@@ -52,28 +53,33 @@ const AppPage = () => {
     setIsCriteriaCompleted(totalTweets === analyzedTweets);
   }, [totalTweets, analyzedTweets]);
 
-  const handleOnDrop = (event: DragEvent<HTMLDivElement>, section: string) => {
+  const handleOnDrop = async (event: DragEvent<HTMLDivElement>, section: string) => {
     event.preventDefault();
 
     const tweetID = event.dataTransfer.getData('id');
 
     switch (section) {
       case 'left':
-        // call left section handler
-        console.log(`Left handler: tweet: ${tweetID}`);
+        await categorizeCurrentTweet(tweetID, VERDICTS.NEGATIVE);
         break;
       case 'middle':
-        // call middle section handler
-        console.log(`Middle handler: tweet: ${tweetID}`);
+        await categorizeCurrentTweet(tweetID, VERDICTS.INDETERMINATE);
         break;
       case 'right':
-        // call right section handler
-        console.log(`Right handler: tweet: ${tweetID}`);
+        await categorizeCurrentTweet(tweetID, VERDICTS.POSITIVE);
         break;
     }
 
     increaseAnalyzedTweets();
     setCurrentTweetIndex((prevState: number) => prevState + 1);
+  };
+
+  const categorizeCurrentTweet = async (tweetID: string, verdict: TweetVerdict) => {
+    try {
+      await categorizeTweet(tweetID, verdict, authToken);
+    } catch (error) {
+      log.info('categorizeTweet', 'Error categorizing tweet');
+    }
   };
 
   const retrieveMoreTweets = async () => {

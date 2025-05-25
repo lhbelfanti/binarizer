@@ -1,7 +1,12 @@
 import { APIError } from '@services/api/api';
 import { clientFetch } from '@services/api/api.client';
 import { TWEETS_QUANTITY } from '@services/api/tweets/constants';
-import { FetchTweetsResponse, FetchTweetsResponseDTO } from '@services/api/tweets/types';
+import {
+  CategorizeTweetBody,
+  FetchTweetsResponse,
+  FetchTweetsResponseDTO,
+  TweetVerdict,
+} from '@services/api/tweets/types';
 import { convertToCamel } from '@services/api/tweets/utils';
 import { APIResponse } from '@services/api/types.api';
 import log from '@services/utils/logger';
@@ -33,4 +38,32 @@ export const fetchMoreTweets = async (
   log.api('fetchMoreTweets', 'response', { response: fetchTweetsResponse });
 
   return fetchTweetsResponse;
+};
+
+export const categorizeTweet = async (
+  tweetID: string,
+  verdict: TweetVerdict,
+  authToken: string
+): Promise<APIResponse> => {
+  const endpoint = `tweets/${tweetID}/categorize/v1`;
+  const body: CategorizeTweetBody = {
+    categorization: verdict,
+  };
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Session-Token': authToken,
+    },
+    body: JSON.stringify(body),
+  };
+  log.api('categorizeTweet', 'called', { endpoint: endpoint, requestOptions: requestOptions });
+
+  const categorizeTweetAPIResponse: APIResponse = await clientFetch(endpoint, requestOptions);
+  if (categorizeTweetAPIResponse.code >= 400 || !categorizeTweetAPIResponse.data) {
+    throw new APIError(categorizeTweetAPIResponse);
+  }
+  log.api('categorizeTweet', 'response', { response: categorizeTweetAPIResponse });
+
+  return categorizeTweetAPIResponse;
 };

@@ -1,3 +1,5 @@
+import { VERDICTS } from '@services/api/tweets/constants';
+
 export type TweetDTO = {
   id: string;
   author: string;
@@ -58,4 +60,10 @@ export type TweetsData = {
 export type FetchTweetsExtendedResponse = {
   criteria: CriteriaData;
   tweets: TweetsData;
+};
+
+export type TweetVerdict = (typeof VERDICTS)[keyof typeof VERDICTS];
+
+export type CategorizeTweetBody = {
+  categorization: TweetVerdict;
 };
