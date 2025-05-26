@@ -1,0 +1,26 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile_app
+    container_name: web
+    ports:
+      - "${BINARIZER_EXPOSED_PORT}:${BINARIZER_INTERNAL_PORT}"
+    environment:
+      API_PORT: ${BINARIZER_INTERNAL_PORT:-2001}
+      SESSION_SECRET: ${SESSION_SECRET}
+      VITE_CORPUS_CREATOR_API_URL: ${VITE_CORPUS_CREATOR_API_URL}
+    env_file:
+      - .env
+    networks:
+      - shared_network
+    restart: on-failure
+    healthcheck:
+      test: [ "CMD-SHELL", "sh -c 'curl -sSf http://localhost:${BINARIZER_INTERNAL_PORT}/health || exit 1'" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+networks:
+  shared_network:
+    external: true

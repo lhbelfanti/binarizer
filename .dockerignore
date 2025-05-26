@@ -1,0 +1,32 @@
+# Exclude version control directories
+.git
+.gitignore
+
+# Exclude node_modules - will be installed in the image
+node_modules
+
+# Exclude build outputs - rebuilt in container
+build
+dist
+.cache
+
+
+# Exclude temporary files and directories, and editor files
+*.log
+*.swp
+*.swo
+.vscode
+.idea
+
+# Exclude env files
+.env
+.env.*
+
+# Exclude documentation files
+*.md
+LICENSE
+
+# Exclude Dockerfile_app and docker-compose.yml
+Dockerfile_app
+docker-compose.yml
+.dockerignore

@@ -1,0 +1,65 @@
+# Build Stage
+FROM node:22-alpine AS builder
+
+# Maintainer
+LABEL maintainer="Lucas Belfanti"
+
+# Install necessary dependencies
+RUN apk update && apk add --no-cache  \
+    curl  \
+    tzdata \
+    && rm -rf /var/cache/apk/*
+
+# Set timezone
+ENV TZ=America/Argentina/Buenos_Aires
+
+# Create the application directory and set it as the working directory
+WORKDIR /root
+
+# Copy the necessary folders and files
+COPY app/ ./app
+COPY media/ ./media
+COPY public ./public
+COPY package.json ./
+COPY package-lock.json ./
+COPY postcss.config.js ./
+COPY tailwind.config.ts ./
+COPY tsconfig.json ./
+COPY vite.config.ts ./
+COPY remix.config.ts ./
+
+# Install npm dependencies
+RUN npm install
+
+# Build the application
+RUN npm run build
+
+RUN ls -la ./build
+
+
+# Run Stage
+FROM node:22-alpine AS runner
+
+# Install necessary dependencies
+RUN apk update && apk add --no-cache  \
+    curl  \
+    tzdata \
+    && rm -rf /var/cache/apk/*
+
+# Set timezone
+ENV TZ=America/Argentina/Buenos_Aires
+
+# Set production env variable
+ENV NODE_ENV=production
+
+# Create the application directory and set it as the working directory
+WORKDIR /root
+
+# Copy build folder from builder stage
+COPY --from=builder /root ./
+
+# Expose port
+EXPOSE ${API_PORT}
+
+# Run application
+CMD [ "npm", "start" ]
