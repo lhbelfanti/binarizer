@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile_app
+      args:
+        VITE_CORPUS_CREATOR_API_URL: ${VITE_CORPUS_CREATOR_API_URL}
     container_name: web
     ports:
       - "${BINARIZER_EXPOSED_PORT}:${BINARIZER_INTERNAL_PORT}"

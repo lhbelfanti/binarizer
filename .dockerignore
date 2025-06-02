@@ -18,10 +18,6 @@ dist
 .vscode
 .idea
 
-# Exclude env files
-.env
-.env.*
-
 # Exclude documentation files
 *.md
 LICENSE

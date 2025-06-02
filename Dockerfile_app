@@ -27,11 +27,16 @@ COPY tailwind.config.ts ./
 COPY tsconfig.json ./
 COPY vite.config.ts ./
 COPY remix.config.ts ./
+COPY .env ./
+
+# Accept build arg and inject it as ENV
+ARG VITE_CORPUS_CREATOR_API_URL
+ENV VITE_CORPUS_CREATOR_API_URL=$VITE_CORPUS_CREATOR_API_URL
 
 # Install npm dependencies
 RUN npm install
 
-# Build the application
+# Build the application (Vite uses the env var VITE_CORPUS_CREATOR_API_URL here)
 RUN npm run build
 
 RUN ls -la ./build

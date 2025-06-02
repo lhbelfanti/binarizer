@@ -10,7 +10,7 @@ const COOKIE_SESSION_STORAGE_MAX_AGE: number = 30 * 24 * 60 * 60; // 30 days
 const sessionStorage = createCookieSessionStorage({
   cookie: {
     name: 'binarizer_session',
-    secure: process.env.NODE_ENV === 'production',
+    secure: false,
     secrets: [SESSION_SECRET], // Secrets with which my cookies will be signed to avoid showing
     // them as plain text in the frontend
     sameSite: 'lax', // Add protection against potential attacks where malicious requests from third-party
