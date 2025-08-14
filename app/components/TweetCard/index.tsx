@@ -9,7 +9,7 @@ import { TweetProps } from './types';
 
 const TweetCard = (props: TweetProps) => {
   const { tweet } = props;
-  const { id, author, avatar, postedAt, isAReply, content, images, quote } = tweet;
+  const { id, statusID, author, avatar, postedAt, isAReply, content, images, quote } = tweet;
 
   return (
     <DraggableElement id={id}>
@@ -21,7 +21,7 @@ const TweetCard = (props: TweetProps) => {
             </div>
           )}
 
-          <TweetHeader user="User" author={author} avatar={avatar} postedAt={postedAt} />
+          <TweetHeader user="Tweet Author" statusID={statusID} author={author} avatar={avatar} postedAt={postedAt} />
 
           <div className="m-8" />
 

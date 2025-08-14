@@ -4,6 +4,7 @@ export const convertToCamel = (tweetsDTO: TweetDTO[]): Tweet[] => {
   return tweetsDTO.map(
     (tweetDTO: TweetDTO): Tweet => ({
       id: tweetDTO.id,
+      statusID: tweetDTO.status_id,
       author: tweetDTO.author,
       avatar: tweetDTO.avatar,
       postedAt: tweetDTO.posted_at,

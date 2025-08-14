@@ -2,6 +2,7 @@ import { VERDICTS } from '@services/api/tweets/constants';
 
 export type TweetDTO = {
   id: string;
+  status_id: string;
   author: string;
   avatar: string;
   posted_at: string;
@@ -22,6 +23,7 @@ export type QuoteDTO = {
 
 export type Tweet = {
   id: string;
+  statusID: string;
   author: string;
   avatar: string;
   postedAt: string;

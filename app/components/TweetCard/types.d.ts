@@ -6,6 +6,7 @@ export interface TweetProps {
 
 export interface Tweet {
   id: string;
+  statusID: string;
   author: string;
   avatar: string;
   postedAt: string;
