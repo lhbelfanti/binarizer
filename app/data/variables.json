@@ -6,31 +6,35 @@
     "app": {
       "sections": {
         "left": {
-          "description": "El tweet no expresa que el usuario consuma drogas ilícitas.",
-          "extra": "Esta sección también contempla:",
+          "description": "Tweets que no expresan consumo de drogas ilícitas por parte del autor",
+          "extra": "Ejemplos de casos incluidos:",
           "points": [
-            "Noticias respecto a drogas ilícitas",
-            "Noticias con información sobre las drogas ilícitas",
-            "Tweets que hablan de otra cosa que no sean el tópico en cuestión",
-            "Tweets que expresen ironía fácilmente identificable"
+            "Noticias relacionadas con drogas ilícitas",
+            "Información general sobre drogas ilícitas",
+            "Contenido sobre temas distintos al consumo de drogas ilícitas",
+            "Expresiones de ironía claramente identificables",
+            "Referencias a otras personas y no al autor",
+            "Mensajes donde el autor incita a otros a consumir drogas ilícitas sin manifestar un consumo personal"
           ]
         },
         "middle": {
-          "description": "No se puede definir de que habla el tweet, o es inentendible.",
+          "description": "Tweets que resultan inentendibles o no se pueden categorizar por falta de contexto",
           "extra": null,
           "points": [
-            "Tweets sin sentido",
-            "Tweets en otros idiomas que no sean español",
-            "Tweets en los que falte contexto, ya sea por respuesta a otro tweet o por ser parte de algún hilo (thread)"
+            "Contenido sin sentido o ilegible por mala escritura",
+            "Mensajes escritos en idiomas distintos al español",
+            "Mensajes sin suficiente contexto, ya sea por ser respuesta a otro tweet o por pertenecer a un hilo"
           ]
         },
         "right": {
-          "description": "El tweet expresa un consumo de drogas ilícitas por parte del usuario.",
-          "extra": "Esta sección contempla:",
+          "description": "Tweets que expresan consumo problemático de drogas ilícitas por parte del autor",
+          "extra": "Ejemplos de casos incluidos:",
           "points": [
-            "Usuarios que hablen de cómo o qué tipo de drogas ilícitas están consumiendo",
-            "Usuarios que expresen una necesidad de consumir drogas ilícitas, ya sea por abstinencia o gusto",
-            "Usuarios que añoren consumir drogas ilícitas"
+            "Relatos de consumo frecuente o habitual de drogas ilícitas",
+            "Expresiones de dependencia o necesidad de consumir drogas ilícitas",
+            "Manifestaciones de dificultad para dejar de consumir drogas ilícitas",
+            "Referencias al impacto negativo del consumo en la vida del autor",
+            "Expresiones de deseo, gusto o añoranza por consumir drogas ilícitas"
           ]
         }
       }
