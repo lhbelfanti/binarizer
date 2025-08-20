@@ -27,7 +27,7 @@
           ]
         },
         "right": {
-          "description": "Tweets que expresan consumo problemático de drogas ilícitas por parte del autor",
+          "description": "Tweets que expresan consumo de drogas ilícitas por parte del autor",
           "extra": "Ejemplos de casos incluidos:",
           "points": [
             "Relatos de consumo frecuente o habitual de drogas ilícitas",
