@@ -4,14 +4,15 @@ services:
       context: .
       dockerfile: Dockerfile_app
       args:
-        VITE_CORPUS_CREATOR_API_URL: ${VITE_CORPUS_CREATOR_API_URL}
-    container_name: web
+        VITE_PUBLIC_CORPUS_CREATOR_API_URL: ${VITE_PUBLIC_CORPUS_CREATOR_API_URL}
+    container_name: binarizer
     ports:
       - "${BINARIZER_EXPOSED_PORT}:${BINARIZER_INTERNAL_PORT}"
     environment:
       API_PORT: ${BINARIZER_INTERNAL_PORT:-2001}
       SESSION_SECRET: ${SESSION_SECRET}
-      VITE_CORPUS_CREATOR_API_URL: ${VITE_CORPUS_CREATOR_API_URL}
+      VITE_PUBLIC_CORPUS_CREATOR_API_URL: ${VITE_PUBLIC_CORPUS_CREATOR_API_URL}
+      INTERNAL_CORPUS_CREATOR_API_URL: ${INTERNAL_CORPUS_CREATOR_API_URL}
     env_file:
       - .env
     networks:

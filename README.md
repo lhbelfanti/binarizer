@@ -37,8 +37,11 @@ BINARIZER_INTERNAL_PORT=<Binarizer Container Port>
 # Web
 SESSION_SECRET=<Secret key used for signing and verifying HMAC-based tokens>
 
-# External APIs URLs
-VITE_CORPUS_CREATOR_API_URL=<URL of the web page>
+# Used by the Browser (Client-side fetch)
+VITE_PUBLIC_CORPUS_CREATOR_API_URL=<URL of the API called from the browser>
+
+# Used by Remix Loaders/Actions (Server-side fetch)
+INTERNAL_CORPUS_CREATOR_API_URL=<URL of the API called from inside the container>
 ```
 
 Replace the `< ... >` by the correct value. For example: `BINARIZER_EXPOSED_PORT=<Binarizer Host Port>` --> `BINARIZER_EXPOSED_PORT=3100`.
