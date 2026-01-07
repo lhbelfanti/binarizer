@@ -22,7 +22,8 @@
           "points": [
             "Contenido sin sentido o ilegible por mala escritura",
             "Mensajes escritos en idiomas distintos al español",
-            "Mensajes sin suficiente contexto, ya sea por ser respuesta a otro tweet o por pertenecer a un hilo"
+            "Mensajes sin suficiente contexto, ya sea por ser respuesta a otro tweet o por pertenecer a un hilo",
+            "Contenido sumamente ofensivo"
           ]
         },
         "right": {
