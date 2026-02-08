@@ -24,10 +24,10 @@ interface RouteHandle {
 export const meta: MetaFunction = () => {
   return [
     { title: 'Binarizer' },
-    { property: 'og:title', content: 'Binarizer: binary dataset creator' },
+    { property: 'og:title', content: 'Binarizer: binary labeler for tweets' },
     {
       name: 'description',
-      content: 'Tool for manual creation of a dataset to be used in a binary classification algorithm.',
+      content: 'Tool for manually label tweets of a dataset to be used later in a binary classification algorithm.',
     },
   ];
 };

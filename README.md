@@ -2,11 +2,11 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="media/binarizer-logo-dark.png" width="100">
     <source media="(prefers-color-scheme: light)" srcset="media/binarizer-logo-light.png" width="100">
-    <img alt="Binarizer - Tool for manual classification of tweets to build a binary classification dataset" src="media/binarizer-logo-dark.png" width="100">
+    <img alt="Binarizer - Tool for manually label tweets of a dataset to be used later in a binary classification algorithm" src="media/binarizer-logo-dark.png" width="100">
   </picture>
 </p>
 <h3 align="center">Binarizer</h3>
-<p align="center">Tool for manual classification of tweets to build a binary classification dataset<p>
+<p align="center">Tool for manually label tweets of a dataset to be used later in a binary classification algorithm<p>
 <p align="center">
     <img src="https://img.shields.io/github/repo-size/lhbelfanti/binarizer?label=Repo%20size" alt="Repo size" />
     <img src="https://img.shields.io/github/license/lhbelfanti/binarizer?label=License" alt="License" />
@@ -16,9 +16,9 @@
 
 # Binarizer
 
-Tool for manual classification of tweets to build a binary classification dataset using [AHBCC](https://github.com/lhbelfanti/ahbcc).
+Tool for manually label tweets of a dataset to be used in a corpus created by [Corpus Creator](https://github.com/lhbelfanti/corpus-creator), and later in a binary classification algorithm
 
-It was mainly developed for binary classification of whether a tweet discusses 'illicit drug use' (one of the Adverse Human Behaviors, see more [here](https://github.com/lhbelfanti/ahbcc/blob/main/README.md)).
+It was mainly developed for binary classification of whether a tweet discusses 'illicit drug use' (for my Master's thesis), but it can be used for other topics.
 
 ## Preview
 <img src="./media/binarizer.gif" width="500" alt="Binarizer project preview" />
